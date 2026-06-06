@@ -1,0 +1,57 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  meta={{
+    slug: "/",
+    title: "Yushi Cui — AI-Native Full Stack Engineer",
+    description:
+      "AI-Native Full Stack Engineer based in Auckland, NZ. I build AI-native products, end to end.",
+  }}
+>
+  <main class="min-h-screen flex flex-col">
+    <!-- Hero -->
+    <section class="flex-1 flex flex-col justify-center px-6 py-24 md:px-12 lg:px-24 max-w-5xl mx-auto w-full">
+      <!-- Eyebrow -->
+      <p class="font-mono text-xs md:text-sm tracking-widest text-muted uppercase mb-6">
+        YUSHI CUI&ensp;·&ensp;AI-NATIVE FULL STACK ENGINEER&ensp;·&ensp;AUCKLAND NZ
+      </p>
+
+      <!-- Headline -->
+      <h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight max-w-3xl">
+        I build AI-native products, end to end.
+      </h1>
+
+      <!-- Subline -->
+      <p class="mt-6 text-lg md:text-xl text-muted max-w-2xl leading-relaxed">
+        Full-stack engineer specializing in RAG pipelines, LLM tooling, and agent-powered products — from prototype to production.
+      </p>
+
+      <!-- CTA -->
+      <div class="mt-10 flex flex-wrap gap-4 items-center">
+        <a
+          href="mailto:realYushi@gmail.com"
+          class="inline-block bg-ink text-canvas px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-sm hover:bg-teal transition-colors"
+        >
+          Get in touch
+        </a>
+      </div>
+
+      <!-- Social links -->
+      <nav class="mt-10 font-mono text-xs md:text-sm tracking-widest text-muted uppercase flex gap-6 md:gap-8">
+        <a href="https://github.com/realYushi" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">
+          GitHub
+        </a>
+        <span class="text-hairline">·</span>
+        <a href="https://www.linkedin.com/in/yushi-cui/" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">
+          LinkedIn
+        </a>
+        <span class="text-hairline">·</span>
+        <a href="https://blog.yushi91.com" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">
+          Blog
+        </a>
+      </nav>
+    </section>
+  </main>
+</Base>

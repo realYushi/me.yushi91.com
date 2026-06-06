@@ -1,0 +1,47 @@
+---
+import "../styles/global.css";
+import { buildHeadMetadata } from "../lib/metadata";
+import type { PageMeta } from "../lib/metadata";
+
+interface Props {
+  meta: PageMeta;
+}
+
+const { meta } = Astro.props;
+const head = buildHeadMetadata(meta);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{meta.title}</title>
+    <link rel="canonical" href={head.canonical} />
+    {meta.description && <meta name="description" content={meta.description} />}
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={head.og.title} />
+    <meta property="og:url" content={head.og.url} />
+    <meta property="og:type" content={head.og.type} />
+    {head.og.description && <meta property="og:description" content={head.og.description} />}
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content={head.twitter.card} />
+    <meta name="twitter:title" content={head.twitter.title} />
+
+    <!-- JSON-LD -->
+    {head.jsonLd && <script is:inline type="application/ld+json" set:html={head.jsonLd} />}
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-canvas text-ink font-body antialiased">
+    <slot />
+  </body>
+</html>

@@ -1,8 +1,35 @@
 {
   "devDependencies": {
-    "@ai-hero/sandcastle": "^0.7.0"
+    "@ai-hero/sandcastle": "^0.7.0",
+    "@astrojs/check": "^0.9.9",
+    "@tailwindcss/postcss": "^4.3.0",
+    "postcss": "^8.5.15",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.8"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "@tailwindcss/vite": "^4.3.0",
+    "astro": "^6.4.4",
+    "tailwindcss": "^4.3.0",
     "zod": "^4.4.3"
-  }
+  },
+  "name": "sandcastle-issue-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "astro check",
+    "test": "vitest run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
 }
