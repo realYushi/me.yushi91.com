@@ -5,6 +5,26 @@ import Base from "../layouts/Base.astro";
 const projects = (await getCollection("projects")).sort(
   (left, right) => left.data.ordering - right.data.ordering,
 );
+
+const experience = (await getCollection("experience")).sort(
+  (left, right) => left.data.ordering - right.data.ordering,
+);
+
+const formatExperienceDate = (entry: (typeof experience)[number]) => {
+  if (entry.data.kind === "education") {
+    return entry.data.dates;
+  }
+
+  return `${entry.data.start}–${entry.data.end ?? "Present"}`;
+};
+
+const formatExperienceTitle = (entry: (typeof experience)[number]) => {
+  if (entry.data.kind === "education") {
+    return `${entry.data.degree} · ${entry.data.institution}`;
+  }
+
+  return `${entry.data.role} · ${entry.data.org}`;
+};
 ---
 
 <Base
@@ -115,6 +135,40 @@ const projects = (await getCollection("projects")).sort(
               </article>
             );
           })}
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="px-6 pb-24 md:px-12 lg:px-24 max-w-5xl mx-auto w-full" aria-labelledby="experience-heading">
+      <div class="border-t border-hairline">
+        <div class="py-6 md:py-8 border-b border-hairline flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p class="font-mono text-xs tracking-widest text-muted uppercase mb-3">
+              Experience
+            </p>
+            <h2 id="experience-heading" class="font-display text-3xl md:text-4xl font-semibold tracking-tight">
+              Product engineering, internships, and CS foundations.
+            </h2>
+          </div>
+        </div>
+
+        <div>
+          {experience.map((entry) => (
+            <article class="py-5 md:py-6 border-b border-hairline grid gap-2 md:grid-cols-[10rem_minmax(0,1fr)] md:items-baseline">
+              <p class="font-mono text-xs tracking-widest text-muted uppercase">
+                {formatExperienceDate(entry)}
+              </p>
+              <div>
+                <h3 class="font-display text-xl md:text-2xl font-semibold tracking-tight">
+                  {formatExperienceTitle(entry)}
+                </h3>
+                <p class="mt-2 text-muted leading-relaxed">
+                  {entry.data.summary}
+                </p>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
