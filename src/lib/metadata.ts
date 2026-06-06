@@ -1,4 +1,18 @@
-const SITE_URL = "https://yushi91.com";
+export const SITE_URL = "https://yushi91.com";
+
+const HOME_SLUG = "/";
+const PERSON_JSON_LD = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Yushi Cui",
+  url: SITE_URL,
+  jobTitle: "AI-Native Full Stack Engineer",
+  sameAs: [
+    "https://github.com/realYushi",
+    "https://www.linkedin.com/in/yushi-cui/",
+    "https://blog.yushi91.com",
+  ],
+});
 
 export interface PageMeta {
   slug: string;
@@ -24,23 +38,7 @@ export interface HeadMetadata {
 export function buildHeadMetadata(page: PageMeta): HeadMetadata {
   const canonical = SITE_URL + page.slug;
   const description = page.description;
-
-  const isHome = page.slug === "/";
-
-  const jsonLd = isHome
-    ? JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Person",
-        name: "Yushi Cui",
-        url: SITE_URL,
-        jobTitle: "AI-Native Full Stack Engineer",
-        sameAs: [
-          "https://github.com/realYushi",
-          "https://www.linkedin.com/in/yushi-cui/",
-          "https://blog.yushi91.com",
-        ],
-      })
-    : null;
+  const jsonLd = page.slug === HOME_SLUG ? PERSON_JSON_LD : null;
 
   return {
     canonical,

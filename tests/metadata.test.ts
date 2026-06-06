@@ -1,7 +1,13 @@
 import { describe, it, expect } from "vitest";
-import { buildHeadMetadata } from "../src/lib/metadata";
+import { SITE_URL, buildHeadMetadata } from "../src/lib/metadata";
 
-const SITE_URL = "https://yushi91.com";
+function parseJsonLd(jsonLd: string | null) {
+  if (jsonLd === null) {
+    throw new Error("Expected JSON-LD metadata to be present");
+  }
+
+  return JSON.parse(jsonLd);
+}
 
 describe("buildHeadMetadata", () => {
   it("produces a canonical URL from the page slug", () => {
@@ -40,8 +46,8 @@ describe("buildHeadMetadata", () => {
 
   it("produces Person JSON-LD identifying Yushi Cui on the homepage", () => {
     const meta = buildHeadMetadata({ slug: "/", title: "Home" });
-    expect(meta.jsonLd).not.toBeNull();
-    const ld = JSON.parse(meta.jsonLd!);
+    const ld = parseJsonLd(meta.jsonLd);
+
     expect(ld["@type"]).toBe("Person");
     expect(ld.name).toBe("Yushi Cui");
     expect(ld.url).toBe(SITE_URL);
@@ -58,8 +64,8 @@ describe("buildHeadMetadata", () => {
 
   it("fails if Person JSON-LD stops identifying Yushi Cui", () => {
     const meta = buildHeadMetadata({ slug: "/", title: "Home" });
-    const ld = JSON.parse(meta.jsonLd!);
-    // This assertion is the acceptance-criteria gatekeeper
+    const ld = parseJsonLd(meta.jsonLd);
+
     expect(ld.name).toContain("Yushi Cui");
   });
 });
