@@ -18,6 +18,9 @@ const head = buildHeadMetadata(meta);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{meta.title}</title>
     <link rel="canonical" href={head.canonical} />
+    <link rel="icon" type="image/svg+xml" href={head.favicons.svg} />
+    <link rel="shortcut icon" href={head.favicons.shortcut} />
+    <link rel="apple-touch-icon" href={head.favicons.appleTouchIcon} />
     {meta.description && <meta name="description" content={meta.description} />}
 
     <!-- Open Graph -->
@@ -29,6 +32,7 @@ const head = buildHeadMetadata(meta);
     <!-- Twitter -->
     <meta name="twitter:card" content={head.twitter.card} />
     <meta name="twitter:title" content={head.twitter.title} />
+    {head.twitter.description && <meta name="twitter:description" content={head.twitter.description} />}
 
     <!-- JSON-LD -->
     {head.jsonLd && <script is:inline type="application/ld+json" set:html={head.jsonLd} />}

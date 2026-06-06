@@ -39,9 +39,19 @@ describe("buildHeadMetadata", () => {
     const meta = buildHeadMetadata({
       slug: "/",
       title: "Yushi Cui — AI-Native Full Stack Engineer",
+      description: "Personal site for Yushi Cui.",
     });
     expect(meta.twitter.card).toBe("summary_large_image");
     expect(meta.twitter.title).toBe("Yushi Cui — AI-Native Full Stack Engineer");
+    expect(meta.twitter.description).toBe("Personal site for Yushi Cui.");
+  });
+
+  it("includes favicon metadata", () => {
+    const meta = buildHeadMetadata({ slug: "/", title: "Home" });
+
+    expect(meta.favicons.svg).toBe("/favicon.svg");
+    expect(meta.favicons.shortcut).toBe("/favicon.svg");
+    expect(meta.favicons.appleTouchIcon).toBe("/apple-touch-icon.svg");
   });
 
   it("produces Person JSON-LD identifying Yushi Cui on the homepage", () => {

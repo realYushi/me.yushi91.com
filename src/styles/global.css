@@ -12,6 +12,17 @@
   /* Radii */
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+
+  /* Spacing scale */
+  --spacing-page-x: clamp(1.5rem, 5vw, 6rem);
+  --spacing-section-y: clamp(6rem, 14vw, 10rem);
+  --spacing-content: 64rem;
+
+  /* Type scale */
+  --text-eyebrow: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-lede: clamp(1.125rem, 1rem + 0.45vw, 1.25rem);
+  --text-hero: clamp(2.75rem, 11vw, 5rem);
 
   /* Font families */
   --font-display: "Space Grotesk", sans-serif;

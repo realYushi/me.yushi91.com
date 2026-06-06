@@ -22,6 +22,11 @@ export interface PageMeta {
 
 export interface HeadMetadata {
   canonical: string;
+  favicons: {
+    svg: string;
+    shortcut: string;
+    appleTouchIcon: string;
+  };
   og: {
     title: string;
     url: string;
@@ -31,6 +36,7 @@ export interface HeadMetadata {
   twitter: {
     card: string;
     title: string;
+    description?: string;
   };
   jsonLd: string | null;
 }
@@ -42,6 +48,11 @@ export function buildHeadMetadata(page: PageMeta): HeadMetadata {
 
   return {
     canonical,
+    favicons: {
+      svg: "/favicon.svg",
+      shortcut: "/favicon.svg",
+      appleTouchIcon: "/apple-touch-icon.svg",
+    },
     og: {
       title: page.title,
       url: canonical,
@@ -51,6 +62,7 @@ export function buildHeadMetadata(page: PageMeta): HeadMetadata {
     twitter: {
       card: "summary_large_image",
       title: page.title,
+      description,
     },
     jsonLd,
   };
