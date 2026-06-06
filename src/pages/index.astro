@@ -123,15 +123,26 @@ const formatExperienceTitle = (entry: (typeof experience)[number]) => {
                   </ul>
                 </div>
 
-                <a
-                  href={primaryLink.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="font-mono text-xs tracking-widest uppercase text-ink hover:text-teal transition-colors md:pt-2"
-                  aria-label={`View ${project.data.title}`}
-                >
-                  View ↗
-                </a>
+                <div class="flex gap-4 font-mono text-xs tracking-widest uppercase md:pt-2 md:flex-col md:items-end">
+                  {project.data.flagship && (
+                    <a
+                      href={`/projects/${project.id}`}
+                      class="text-ink hover:text-teal transition-colors"
+                      aria-label={`Read ${project.data.title} case study`}
+                    >
+                      Case study
+                    </a>
+                  )}
+                  <a
+                    href={primaryLink.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-ink hover:text-teal transition-colors"
+                    aria-label={`View ${project.data.title}`}
+                  >
+                    Live ↗
+                  </a>
+                </div>
               </article>
             );
           })}
