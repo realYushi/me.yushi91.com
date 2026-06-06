@@ -25,8 +25,6 @@ import * as sandcastle from "@ai-hero/sandcastle";
 import { noSandbox } from "@ai-hero/sandcastle/sandboxes/no-sandbox";
 import { z } from "zod";
 
-const sandboxProvider = noSandbox();
-
 // The planner emits its plan as JSON inside <plan> tags; Output.object extracts
 // and validates it against this schema. We use Zod here, but any Standard
 // Schema validator works just as well — Valibot, ArkType, etc. See
@@ -45,11 +43,16 @@ const planSchema = z.object({
 // Raise this if your backlog is large; lower it for a quick smoke-test run.
 const MAX_ITERATIONS = 10;
 
-// Hooks run before each agent starts. With noSandbox(), these run on the host
-// worktree instead of inside a Docker container.
+// Hooks run inside the sandbox before the agent starts each iteration.
+// npm install ensures the sandbox always has fresh dependencies.
 const hooks = {
   sandbox: { onSandboxReady: [{ command: "npm install" }] },
 };
+
+// Copy node_modules from the host into the worktree before each sandbox
+// starts. Avoids a full npm install from scratch; the hook above handles
+// platform-specific binaries and any packages added since the last copy.
+const copyToWorktree = ["node_modules"];
 
 // ---------------------------------------------------------------------------
 // Main loop
@@ -69,7 +72,7 @@ for (let iteration = 1; iteration <= MAX_ITERATIONS; iteration++) {
   // -------------------------------------------------------------------------
   const plan = await sandcastle.run({
     hooks,
-    sandbox: sandboxProvider,
+    sandbox: noSandbox(),
     name: "planner",
     // One iteration is enough: the planner just needs to read and reason,
     // not write code. (Structured output requires maxIterations: 1.)
@@ -113,9 +116,9 @@ for (let iteration = 1; iteration <= MAX_ITERATIONS; iteration++) {
     issues.map(async (issue) => {
       const sandbox = await sandcastle.createSandbox({
         branch: issue.branch,
-        sandbox: sandboxProvider,
+        sandbox: noSandbox(),
         hooks,
-        copyToWorktree: ["package.json", ".sandcastle/CODING_STANDARDS.md"],
+        copyToWorktree,
       });
 
       try {
@@ -141,7 +144,6 @@ for (let iteration = 1; iteration <= MAX_ITERATIONS; iteration++) {
             promptFile: "./.sandcastle/review-prompt.md",
             promptArgs: {
               BRANCH: issue.branch,
-              TARGET_BRANCH: "main",
             },
           });
 
@@ -206,7 +208,7 @@ for (let iteration = 1; iteration <= MAX_ITERATIONS; iteration++) {
   // -------------------------------------------------------------------------
   await sandcastle.run({
     hooks,
-    sandbox: sandboxProvider,
+    sandbox: noSandbox(),
     name: "merger",
     maxIterations: 1,
     agent: sandcastle.pi("cpa/GLM-5.1"),
