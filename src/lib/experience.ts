@@ -29,3 +29,19 @@ export const experienceSchema = z.discriminatedUnion("kind", [
 ]);
 
 export type Experience = z.infer<typeof experienceSchema>;
+
+export function formatExperienceDate(experience: Experience): string {
+  if (experience.kind === "education") {
+    return experience.dates;
+  }
+
+  return `${experience.start}–${experience.end ?? "Present"}`;
+}
+
+export function formatExperienceTitle(experience: Experience): string {
+  if (experience.kind === "education") {
+    return `${experience.degree} · ${experience.institution}`;
+  }
+
+  return `${experience.role} · ${experience.org}`;
+}

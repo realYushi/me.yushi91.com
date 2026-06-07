@@ -1,6 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
+import { formatExperienceDate, formatExperienceTitle } from "../lib/experience";
+import { primaryLink } from "../lib/project";
 
 const projects = (await getCollection("projects")).sort(
   (left, right) => left.data.ordering - right.data.ordering,
@@ -9,22 +11,6 @@ const projects = (await getCollection("projects")).sort(
 const experience = (await getCollection("experience")).sort(
   (left, right) => left.data.ordering - right.data.ordering,
 );
-
-const formatExperienceDate = (entry: (typeof experience)[number]) => {
-  if (entry.data.kind === "education") {
-    return entry.data.dates;
-  }
-
-  return `${entry.data.start}–${entry.data.end ?? "Present"}`;
-};
-
-const formatExperienceTitle = (entry: (typeof experience)[number]) => {
-  if (entry.data.kind === "education") {
-    return `${entry.data.degree} · ${entry.data.institution}`;
-  }
-
-  return `${entry.data.role} · ${entry.data.org}`;
-};
 ---
 
 <Base
@@ -98,7 +84,7 @@ const formatExperienceTitle = (entry: (typeof experience)[number]) => {
 
         <div>
           {projects.map((project) => {
-            const primaryLink = project.data.links[0];
+            const live = primaryLink(project.data);
 
             return (
               <article class="py-6 md:py-8 border-b border-hairline grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-start">
@@ -134,13 +120,13 @@ const formatExperienceTitle = (entry: (typeof experience)[number]) => {
                     </a>
                   )}
                   <a
-                    href={primaryLink.url}
+                    href={live.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     class="text-ink hover:text-teal transition-colors"
-                    aria-label={`View ${project.data.title}`}
+                    aria-label={`View ${project.data.title} (${live.label})`}
                   >
-                    Live ↗
+                    {live.label} ↗
                   </a>
                 </div>
               </article>
@@ -168,11 +154,11 @@ const formatExperienceTitle = (entry: (typeof experience)[number]) => {
           {experience.map((entry) => (
             <article class="py-5 md:py-6 border-b border-hairline grid gap-2 md:grid-cols-[10rem_minmax(0,1fr)] md:items-baseline">
               <p class="font-mono text-xs tracking-widest text-muted uppercase">
-                {formatExperienceDate(entry)}
+                {formatExperienceDate(entry.data)}
               </p>
               <div>
                 <h3 class="font-display text-xl md:text-2xl font-semibold tracking-tight">
-                  {formatExperienceTitle(entry)}
+                  {formatExperienceTitle(entry.data)}
                 </h3>
                 <p class="mt-2 text-muted leading-relaxed">
                   {entry.data.summary}
