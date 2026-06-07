@@ -7,7 +7,7 @@ stack:
   - TypeScript
   - RAG
   - Keystatic
-year: 2025
+year: 2026
 links:
   - label: Live
     url: https://www.trusshouse.org/
