@@ -10,7 +10,15 @@ the Cloudflare account and live DNS and must be done by a human.
 
 ## 1. Create the Pages project (git integration → auto-deploy)
 
-In the Cloudflare dashboard → **Workers & Pages → Create → Pages → Connect to Git**:
+In the Cloudflare dashboard → **Workers & Pages → Create → the `Pages` tab →
+Connect to Git**.
+
+> **Do _not_ use "Import a repository" / the Workers flow.** That creates a
+> **Worker**, whose `wrangler deploy` auto-config detects Astro, tries to
+> codemod in the `@astrojs/cloudflare` adapter, and crashes a static build with
+> `require_dist is not a function` (seen as `[@astrojs/cloudflare] Enabling …
+> Cloudflare Images / KV sessions` followed by a wrangler stack trace). This
+> site is pure static — it needs no adapter, no Worker runtime. Use **Pages**.
 
 - Repository: `realYushi/me.yushi91.com`
 - Production branch: `main` (pushes to `main` auto-deploy)
