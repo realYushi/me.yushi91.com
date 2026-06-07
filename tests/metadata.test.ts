@@ -61,7 +61,7 @@ describe("buildHeadMetadata", () => {
     expect(ld["@type"]).toBe("Person");
     expect(ld.name).toBe("Yushi Cui");
     expect(ld.url).toBe(SITE_URL);
-    expect(ld.jobTitle).toBe("AI-Native Full Stack Engineer");
+    expect(ld.jobTitle).toBe("Full-Stack Product Engineer");
   });
 
   it("does not produce Person JSON-LD on non-homepage slugs", () => {

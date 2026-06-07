@@ -8,7 +8,7 @@ A **lookup destination**: a credibility/personal-brand site for visitors who alr
 
 Its only SEO mandate: be the canonical #1 result for the name "Yushi Cui" and direct authority outward (blog, GitHub, LinkedIn).
 
-**Positioning:** Yushi's canonical self-label is **"AI-Native Full Stack Engineer"** — full-stack (TypeScript/React/Node/Python), but AI-native: building 0→1 products with RAG, agents, and LLM tooling. Not a generic full-stack dev. Every showcased project is AI/agent-powered. The site leads with this thread; a visitor should grasp it within seconds.
+**Positioning:** Yushi's canonical self-label is **"Full-Stack Product Engineer"** — an early-career engineer who builds whole products end to end (TypeScript/React/Node/Python), with a product-maker's bias for shipping and a long-term founder track. AI (RAG, agents, LLM tooling) is the **sharpest tool in the kit, not the identity**: it shows up as evidence in the projects, not as a claim in the headline. Not a generic full-stack dev — the differentiator is product judgment and end-to-end ownership. The site leads with this thread; a visitor should grasp it within seconds.
 
 ## Terms
 

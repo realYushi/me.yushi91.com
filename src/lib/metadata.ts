@@ -6,7 +6,7 @@ const PERSON_JSON_LD = JSON.stringify({
   "@type": "Person",
   name: "Yushi Cui",
   url: SITE_URL,
-  jobTitle: "AI-Native Full Stack Engineer",
+  jobTitle: "Full-Stack Product Engineer",
   sameAs: [
     "https://github.com/realYushi",
     "https://www.linkedin.com/in/yushi-cui/",
