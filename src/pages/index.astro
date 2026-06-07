@@ -11,148 +11,185 @@ const projects = (await getCollection("projects")).sort(
 const experience = (await getCollection("experience")).sort(
   (left, right) => left.data.ordering - right.data.ordering,
 );
+
+// Current role drives the hero "at a glance" panel, so the headline fact stays
+// in sync with the experience content instead of being retyped here.
+const current = experience.find(
+  (entry) => entry.data.kind === "role" && entry.data.end === null,
+);
+
+// Asymmetric bento rhythm: alternating wide/narrow spans, never three equal
+// cards. Indexed by position so the grid stays varied as projects are added.
+const cardSpans = ["lg:col-span-7", "lg:col-span-5", "lg:col-span-5", "lg:col-span-7"];
 ---
 
 <Base
   meta={{
     slug: "/",
-    title: "Yushi Cui — AI-Native Full Stack Engineer",
+    title: "Yushi Cui - AI-Native Full Stack Engineer",
     description:
       "AI-Native Full Stack Engineer based in Auckland, NZ. I build AI-native products, end to end.",
   }}
 >
-  <main class="min-h-screen flex flex-col">
-    <!-- Hero -->
-    <section class="flex-1 flex flex-col justify-center px-6 py-24 md:px-12 lg:px-24 max-w-5xl mx-auto w-full">
-      <!-- Eyebrow -->
-      <p class="font-mono text-xs md:text-sm tracking-widest text-muted uppercase mb-6">
-        YUSHI CUI&ensp;·&ensp;AI-NATIVE FULL STACK ENGINEER&ensp;·&ensp;AUCKLAND NZ
-      </p>
+  <main>
+    <!-- Hero: asymmetric split, aurora backdrop, at-a-glance fact panel -->
+    <section class="relative overflow-hidden min-h-[100dvh] flex items-center">
+      <div class="hero-aurora"></div>
 
-      <!-- Headline -->
-      <h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight max-w-3xl">
-        I build AI-native products, end to end.
-      </h1>
-
-      <!-- Subline -->
-      <p class="mt-6 text-lg md:text-xl text-muted max-w-2xl leading-relaxed">
-        I take a vague idea to a working prototype fast, then harden the best one or two into production — agents, RAG pipelines, and the TypeScript/Node products around them.
-      </p>
-
-      <!-- CTA -->
-      <div class="mt-10 flex flex-wrap gap-4 items-center">
-        <a
-          href="mailto:realYushi@gmail.com"
-          class="inline-block bg-ink text-canvas px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-sm hover:bg-teal transition-colors"
-        >
-          Get in touch
-        </a>
-      </div>
-
-      <!-- Social links -->
-      <nav class="mt-10 font-mono text-xs md:text-sm tracking-widest text-muted uppercase flex gap-6 md:gap-8">
-        <a href="https://github.com/realYushi" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">
-          GitHub
-        </a>
-        <span class="text-hairline">·</span>
-        <a href="https://www.linkedin.com/in/yushi-cui/" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">
-          LinkedIn
-        </a>
-        <span class="text-hairline">·</span>
-        <a href="https://blog.yushi91.com" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">
-          Blog
-        </a>
-      </nav>
-    </section>
-
-    <!-- Selected projects -->
-    <section class="px-6 pb-24 md:px-12 lg:px-24 max-w-5xl mx-auto w-full" aria-labelledby="selected-projects-heading">
-      <div class="border-t border-hairline">
-        <div class="py-6 md:py-8 border-b border-hairline flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p class="font-mono text-xs tracking-widest text-muted uppercase mb-3">
-              Selected projects
-            </p>
-            <h2 id="selected-projects-heading" class="font-display text-3xl md:text-4xl font-semibold tracking-tight">
-              AI-native work in production and prototype.
-            </h2>
-          </div>
-          <p class="text-muted max-w-xl leading-relaxed">
-            A curated list of agent-powered products and workflows. Each row links to the live project or source.
+      <div class="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 lg:px-20 py-28 lg:py-24 grid gap-14 lg:grid-cols-12 lg:gap-12 lg:items-center">
+        <div class="lg:col-span-7">
+          <p data-rise class="font-mono text-xs md:text-sm tracking-[0.22em] text-teal uppercase">
+            AI-Native Full Stack Engineer
           </p>
+
+          <h1 data-rise="2" class="mt-6 font-display text-[clamp(2.25rem,4.6vw,3.5rem)] font-bold leading-[1.05] tracking-tight text-balance">
+            I build <span class="text-teal">AI-native</span> products, end to end.
+          </h1>
+
+          <p data-rise="3" class="mt-7 text-lg md:text-xl text-muted max-w-2xl leading-relaxed">
+            I turn vague ideas into working prototypes fast, then harden the best into production: agents, RAG, and full-stack TypeScript.
+          </p>
+
+          <div data-rise="4" class="mt-10 flex flex-wrap gap-3">
+            <a
+              href="mailto:realYushi@gmail.com"
+              class="inline-flex items-center bg-ink text-canvas px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-all duration-200 hover:bg-teal hover:text-canvas active:scale-[0.98]"
+            >
+              Get in touch
+            </a>
+            <a
+              href="#projects"
+              class="inline-flex items-center border border-hairline text-ink px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-all duration-200 hover:border-teal hover:text-teal active:scale-[0.98]"
+            >
+              See projects
+            </a>
+          </div>
+
+          <nav data-rise="5" class="mt-10 font-mono text-xs tracking-[0.18em] text-muted uppercase flex gap-6 md:gap-8">
+            <a href="https://github.com/realYushi" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/yushi-cui/" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">
+              LinkedIn
+            </a>
+            <a href="https://blog.yushi91.com" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">
+              Blog
+            </a>
+          </nav>
         </div>
 
-        <div>
-          {projects.map((project) => {
-            const live = primaryLink(project.data);
-
-            return (
-              <article class="py-6 md:py-8 border-b border-hairline grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-start">
-                <div>
-                  <div class="flex flex-wrap items-baseline gap-x-4 gap-y-2">
-                    <h3 class="font-display text-2xl md:text-3xl font-semibold tracking-tight">
-                      {project.data.title}
-                    </h3>
-                    <p class="font-mono text-xs tracking-widest text-muted uppercase">
-                      {project.data.role} · {project.data.year}
-                    </p>
-                  </div>
-                  <p class="mt-3 text-muted leading-relaxed max-w-2xl">
-                    {project.data.summary}
-                  </p>
-                  <ul class="mt-4 flex flex-wrap gap-x-3 gap-y-2" aria-label={`${project.data.title} stack`}>
-                    {project.data.stack.map((item) => (
-                      <li class="font-mono text-[0.6875rem] tracking-widest text-muted uppercase">
-                        {item.toUpperCase()}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div class="flex gap-4 font-mono text-xs tracking-widest uppercase md:pt-2 md:flex-col md:items-end">
-                  {project.data.flagship && (
-                    <a
-                      href={`/projects/${project.id}`}
-                      class="text-ink hover:text-teal transition-colors"
-                      aria-label={`Read ${project.data.title} case study`}
-                    >
-                      Case study
-                    </a>
-                  )}
-                  <a
-                    href={live.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-ink hover:text-teal transition-colors"
-                    aria-label={`View ${project.data.title} (${live.label})`}
-                  >
-                    {live.label} ↗
-                  </a>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+        <!-- At a glance: real recruiter-facing facts, anchors the asymmetric hero -->
+        <aside data-rise="4" class="lg:col-span-5">
+          <dl class="rounded-[var(--radius-card)] border border-hairline bg-surface/60 backdrop-blur-sm p-7 md:p-8 grid gap-6">
+            {current && current.data.kind === "role" && (
+              <div class="grid gap-1.5">
+                <dt class="font-mono text-[0.625rem] tracking-[0.2em] text-muted uppercase">Currently</dt>
+                <dd class="font-display text-lg font-semibold tracking-tight">{current.data.org}</dd>
+              </div>
+            )}
+            <div class="grid gap-1.5">
+              <dt class="font-mono text-[0.625rem] tracking-[0.2em] text-muted uppercase">Based in</dt>
+              <dd class="font-display text-lg font-semibold tracking-tight">Auckland, New Zealand</dd>
+            </div>
+            <div class="grid gap-2.5">
+              <dt class="font-mono text-[0.625rem] tracking-[0.2em] text-muted uppercase">Focus</dt>
+              <dd class="flex flex-wrap gap-2">
+                {["Agents", "RAG", "Full-stack TypeScript"].map((tag) => (
+                  <span class="rounded-full border border-hairline bg-teal-soft px-3 py-1 font-mono text-[0.625rem] tracking-widest text-teal uppercase">
+                    {tag}
+                  </span>
+                ))}
+              </dd>
+            </div>
+          </dl>
+        </aside>
       </div>
     </section>
 
-    <!-- Experience -->
-    <section class="px-6 pb-24 md:px-12 lg:px-24 max-w-5xl mx-auto w-full" aria-labelledby="experience-heading">
-      <div class="border-t border-hairline">
-        <div class="py-6 md:py-8 border-b border-hairline flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p class="font-mono text-xs tracking-widest text-muted uppercase mb-3">
-              Experience
-            </p>
-            <h2 id="experience-heading" class="font-display text-3xl md:text-4xl font-semibold tracking-tight">
-              Product engineering, internships, and CS foundations.
-            </h2>
-          </div>
-        </div>
+    <!-- Selected projects: asymmetric bento, one cell per project -->
+    <section id="projects" class="px-6 md:px-12 lg:px-20 py-24 md:py-32 max-w-6xl mx-auto w-full" aria-labelledby="projects-heading">
+      <div data-reveal class="max-w-3xl">
+        <h2 id="projects-heading" class="font-display text-3xl md:text-5xl font-semibold tracking-tight">
+          AI-native work, in production and prototype.
+        </h2>
+        <p class="mt-4 text-muted leading-relaxed">
+          Agent-powered products and workflows. Each tile links to the live build or its source.
+        </p>
+      </div>
 
-        <div>
-          {experience.map((entry) => (
-            <article class="py-5 md:py-6 border-b border-hairline grid gap-2 md:grid-cols-[10rem_minmax(0,1fr)] md:items-baseline">
+      <div class="mt-12 grid gap-5 lg:grid-cols-12">
+        {projects.map((project, index) => {
+          const live = primaryLink(project.data);
+
+          return (
+            <article
+              data-reveal
+              class:list={[
+                cardSpans[index % cardSpans.length],
+                "group flex flex-col rounded-[var(--radius-card)] border border-hairline p-7 md:p-9 transition-all duration-300 hover:-translate-y-1 hover:border-teal",
+                project.data.flagship ? "bg-gradient-to-br from-teal-soft to-transparent" : "bg-surface/50",
+              ]}
+            >
+              <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
+                <h3 class="font-display text-2xl md:text-3xl font-semibold tracking-tight group-hover:text-teal transition-colors">
+                  {project.data.title}
+                </h3>
+                <p class="font-mono text-[0.6875rem] tracking-widest text-muted uppercase">
+                  {project.data.role} · {project.data.year}
+                </p>
+              </div>
+
+              <p class="mt-4 text-muted leading-relaxed max-w-2xl flex-1">
+                {project.data.summary}
+              </p>
+
+              <ul class="mt-6 flex flex-wrap gap-2" aria-label={`${project.data.title} stack`}>
+                {project.data.stack.map((item) => (
+                  <li class="rounded-full border border-hairline px-2.5 py-1 font-mono text-[0.625rem] tracking-widest text-muted uppercase">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <div class="mt-7 pt-5 border-t border-hairline flex gap-6 font-mono text-xs tracking-widest uppercase">
+                {project.data.flagship && (
+                  <a
+                    href={`/projects/${project.id}`}
+                    class="text-teal hover:text-ink transition-colors"
+                    aria-label={`Read ${project.data.title} case study`}
+                  >
+                    Case study
+                  </a>
+                )}
+                <a
+                  href={live.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-ink hover:text-teal transition-colors"
+                  aria-label={`View ${project.data.title} (${live.label})`}
+                >
+                  {live.label} ↗
+                </a>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- Experience: vertical timeline ledger (distinct layout family) -->
+    <section class="px-6 md:px-12 lg:px-20 pb-24 md:pb-32 max-w-6xl mx-auto w-full" aria-labelledby="experience-heading">
+      <div data-reveal class="max-w-3xl">
+        <h2 id="experience-heading" class="font-display text-3xl md:text-5xl font-semibold tracking-tight">
+          Product engineering, internships, and CS foundations.
+        </h2>
+      </div>
+
+      <ol class="timeline-track mt-12 relative border-l border-hairline pl-6 md:pl-10">
+        {experience.map((entry) => (
+          <li data-reveal class="relative pb-10 last:pb-0">
+            <span class="absolute -left-[calc(1.5rem+5px)] md:-left-[calc(2.5rem+5px)] top-2 h-2.5 w-2.5 rounded-full bg-canvas border-2 border-teal"></span>
+            <div class="grid gap-2 md:grid-cols-[9rem_minmax(0,1fr)] md:items-baseline">
               <p class="font-mono text-xs tracking-widest text-muted uppercase">
                 {formatExperienceDate(entry.data)}
               </p>
@@ -164,43 +201,42 @@ const experience = (await getCollection("experience")).sort(
                   {entry.data.summary}
                 </p>
               </div>
-            </article>
-          ))}
-        </div>
-      </div>
+            </div>
+          </li>
+        ))}
+      </ol>
     </section>
   </main>
 
-  <!-- Contact band -->
-  <footer class="bg-dark-band text-canvas" aria-labelledby="contact-heading">
-    <div class="px-6 py-24 md:px-12 lg:px-24 max-w-5xl mx-auto w-full grid gap-12 md:grid-cols-2 md:gap-16">
-      <!-- Channels -->
-      <div>
-        <p class="font-mono text-xs tracking-widest uppercase text-teal mb-4">
+  <!-- Contact band: always-dark closing panel (bg-dark-band locked by tests) -->
+  <footer class="bg-dark-band text-on-band" aria-labelledby="contact-heading">
+    <div class="px-6 md:px-12 lg:px-20 py-24 md:py-28 max-w-6xl mx-auto w-full grid gap-12 lg:grid-cols-2 lg:gap-20">
+      <div data-reveal>
+        <p class="font-mono text-xs tracking-[0.2em] uppercase text-teal mb-4">
           Contact
         </p>
-        <h2 id="contact-heading" class="font-display text-3xl md:text-4xl font-semibold tracking-tight">
+        <h2 id="contact-heading" class="font-display text-3xl md:text-5xl font-semibold tracking-tight">
           Let's build something AI-native.
         </h2>
-        <p class="mt-4 text-canvas/70 leading-relaxed max-w-md">
+        <p class="mt-5 text-on-band-muted leading-relaxed max-w-md">
           Email me directly, or drop a note with the form. I read everything.
         </p>
 
         <a
           href="mailto:realYushi@gmail.com"
-          class="mt-6 inline-block font-display font-semibold text-lg hover:text-teal transition-colors"
+          class="mt-7 inline-block font-display font-semibold text-xl hover:text-teal transition-colors"
         >
           realYushi@gmail.com
         </a>
 
-        <nav class="mt-8 font-mono text-xs md:text-sm tracking-widest uppercase flex gap-6 md:gap-8 text-canvas/70">
-          <a href="https://github.com/realYushi" target="_blank" rel="noopener noreferrer" class="hover:text-canvas transition-colors">
+        <nav class="mt-10 font-mono text-xs tracking-[0.18em] uppercase flex gap-6 md:gap-8 text-on-band-muted">
+          <a href="https://github.com/realYushi" target="_blank" rel="noopener noreferrer" class="hover:text-on-band transition-colors">
             GitHub
           </a>
-          <a href="https://www.linkedin.com/in/yushi-cui/" target="_blank" rel="noopener noreferrer" class="hover:text-canvas transition-colors">
+          <a href="https://www.linkedin.com/in/yushi-cui/" target="_blank" rel="noopener noreferrer" class="hover:text-on-band transition-colors">
             LinkedIn
           </a>
-          <a href="https://blog.yushi91.com" target="_blank" rel="noopener noreferrer" class="hover:text-canvas transition-colors">
+          <a href="https://blog.yushi91.com" target="_blank" rel="noopener noreferrer" class="hover:text-on-band transition-colors">
             Blog
           </a>
         </nav>
@@ -219,38 +255,38 @@ const experience = (await getCollection("experience")).sort(
         <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
 
         <label class="flex flex-col gap-2">
-          <span class="font-mono text-xs tracking-widest uppercase text-canvas/70">Name</span>
+          <span class="font-mono text-xs tracking-widest uppercase text-on-band-muted">Name</span>
           <input
             type="text"
             name="name"
             required
-            class="bg-canvas/5 border border-canvas/20 rounded-sm px-4 py-3 text-canvas placeholder:text-canvas/40 focus:border-teal focus:outline-none transition-colors"
+            class="bg-white/[0.04] border border-white/15 rounded-[var(--radius-control)] px-4 py-3 text-on-band placeholder:text-on-band-muted focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal transition-colors"
           />
         </label>
 
         <label class="flex flex-col gap-2">
-          <span class="font-mono text-xs tracking-widest uppercase text-canvas/70">Email</span>
+          <span class="font-mono text-xs tracking-widest uppercase text-on-band-muted">Email</span>
           <input
             type="email"
             name="email"
             required
-            class="bg-canvas/5 border border-canvas/20 rounded-sm px-4 py-3 text-canvas placeholder:text-canvas/40 focus:border-teal focus:outline-none transition-colors"
+            class="bg-white/[0.04] border border-white/15 rounded-[var(--radius-control)] px-4 py-3 text-on-band placeholder:text-on-band-muted focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal transition-colors"
           />
         </label>
 
         <label class="flex flex-col gap-2">
-          <span class="font-mono text-xs tracking-widest uppercase text-canvas/70">Message</span>
+          <span class="font-mono text-xs tracking-widest uppercase text-on-band-muted">Message</span>
           <textarea
             name="message"
             rows="4"
             required
-            class="bg-canvas/5 border border-canvas/20 rounded-sm px-4 py-3 text-canvas placeholder:text-canvas/40 focus:border-teal focus:outline-none transition-colors resize-y"
+            class="bg-white/[0.04] border border-white/15 rounded-[var(--radius-control)] px-4 py-3 text-on-band placeholder:text-on-band-muted focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal transition-colors resize-y"
           ></textarea>
         </label>
 
         <button
           type="submit"
-          class="self-start mt-2 bg-canvas text-dark-band px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-sm hover:bg-teal hover:text-canvas transition-colors"
+          class="self-start mt-2 bg-on-band text-dark-band px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-all duration-200 hover:bg-teal hover:text-canvas active:scale-[0.98]"
         >
           Send message
         </button>

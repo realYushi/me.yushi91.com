@@ -26,10 +26,10 @@ describe("buildHeadMetadata", () => {
   it("includes Open Graph tags with title, url, and type", () => {
     const meta = buildHeadMetadata({
       slug: "/",
-      title: "Yushi Cui — AI-Native Full Stack Engineer",
+      title: "Yushi Cui - AI-Native Full Stack Engineer",
       description: "Personal site for Yushi Cui.",
     });
-    expect(meta.og.title).toBe("Yushi Cui — AI-Native Full Stack Engineer");
+    expect(meta.og.title).toBe("Yushi Cui - AI-Native Full Stack Engineer");
     expect(meta.og.url).toBe(SITE_URL + "/");
     expect(meta.og.type).toBe("website");
     expect(meta.og.description).toBe("Personal site for Yushi Cui.");
@@ -38,11 +38,11 @@ describe("buildHeadMetadata", () => {
   it("includes Twitter card tags", () => {
     const meta = buildHeadMetadata({
       slug: "/",
-      title: "Yushi Cui — AI-Native Full Stack Engineer",
+      title: "Yushi Cui - AI-Native Full Stack Engineer",
       description: "Personal site for Yushi Cui.",
     });
     expect(meta.twitter.card).toBe("summary_large_image");
-    expect(meta.twitter.title).toBe("Yushi Cui — AI-Native Full Stack Engineer");
+    expect(meta.twitter.title).toBe("Yushi Cui - AI-Native Full Stack Engineer");
     expect(meta.twitter.description).toBe("Personal site for Yushi Cui.");
   });
 

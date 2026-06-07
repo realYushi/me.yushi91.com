@@ -28,41 +28,67 @@ const stack = project.data.stack.join(" / ");
 <Base
   meta={{
     slug: `/projects/${project.id}`,
-    title: `${project.data.title} — Yushi Cui`,
+    title: `${project.data.title} - Yushi Cui`,
     description: project.data.summary,
   }}
 >
-  <main class="min-h-screen px-6 py-16 md:px-12 lg:px-24 max-w-5xl mx-auto w-full">
-    <a href="/" class="font-mono text-xs tracking-widest uppercase text-muted hover:text-ink transition-colors">
-      ← Home
-    </a>
+  <main>
+    <!-- Header: editorial title block over an aurora wash -->
+    <header class="relative overflow-hidden">
+      <div class="hero-aurora"></div>
 
-    <article class="mt-12">
-      <header class="border-t border-hairline pt-8 pb-10">
-        <p class="font-mono text-xs tracking-widest text-muted uppercase mb-4">
+      <div class="relative z-10 max-w-5xl mx-auto w-full px-6 md:px-12 lg:px-20 pt-14 pb-12 md:pt-20 md:pb-16">
+        <a href="/" class="font-mono text-xs tracking-widest uppercase text-muted hover:text-teal transition-colors">
+          ← Home
+        </a>
+
+        <p data-rise class="mt-12 font-mono text-xs tracking-[0.2em] text-teal uppercase">
           Flagship case study
         </p>
-        <h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight">
+        <h1 data-rise="2" class="mt-5 font-display text-[clamp(2.5rem,7vw,4.75rem)] font-bold leading-[1.02] tracking-tight">
           {project.data.title}
         </h1>
-        <p class="mt-6 text-xl md:text-2xl text-muted leading-relaxed max-w-3xl">
+        <p data-rise="3" class="mt-6 text-xl md:text-2xl text-muted leading-relaxed max-w-3xl">
           {project.data.summary}
         </p>
 
-        <div class="mt-8 grid gap-4 border-y border-hairline py-5 font-mono text-xs tracking-widest uppercase text-muted md:grid-cols-4">
-          <p><span class="text-ink">ROLE</span> · {project.data.role}</p>
-          <p><span class="text-ink">STACK</span> · {stack}</p>
-          <p><span class="text-ink">YEAR</span> · {project.data.year}</p>
-          <p>
-            <a href={live.url} target="_blank" rel="noopener noreferrer" class="text-ink hover:text-teal transition-colors">
-              {live.label.toUpperCase()} ↗
-            </a>
-          </p>
-        </div>
-      </header>
+        <dl data-rise="4" class="mt-10 grid gap-x-8 gap-y-4 border-t border-hairline pt-6 font-mono text-xs tracking-widest uppercase text-muted sm:grid-cols-2 lg:grid-cols-4">
+          <div class="flex flex-col gap-1.5">
+            <dt class="text-ink">ROLE</dt>
+            <dd>{project.data.role}</dd>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <dt class="text-ink">STACK</dt>
+            <dd>{stack}</dd>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <dt class="text-ink">YEAR</dt>
+            <dd>{project.data.year}</dd>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <dt class="text-ink">LINK</dt>
+            <dd>
+              <a href={live.url} target="_blank" rel="noopener noreferrer" class="text-teal hover:text-ink transition-colors">
+                {live.label.toUpperCase()} ↗
+              </a>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </header>
 
-      <div class="case-study">
+    <article class="max-w-5xl mx-auto w-full px-6 md:px-12 lg:px-20 pb-20">
+      <div class="case-study" data-reveal>
         <Content />
+      </div>
+
+      <div class="mt-16 border-t border-hairline pt-10">
+        <a
+          href="/#projects"
+          class="inline-flex items-center font-display font-semibold text-sm tracking-wide text-ink hover:text-teal transition-colors"
+        >
+          ← Back to selected projects
+        </a>
       </div>
     </article>
   </main>
