@@ -83,32 +83,33 @@ export function updateBlogSection(posts: BlogPost[]): void {
   const section = document.querySelector('[aria-labelledby="latest-writing-heading"]');
   if (!section || posts.length === 0) return;
 
-  const articlesContainer = section.querySelector(".mt-12");
+  const articlesContainer = section.querySelector(".mt-10");
   if (!articlesContainer) return;
 
   // Clear existing posts
   articlesContainer.innerHTML = "";
 
-  // Add fresh posts
+  // Add fresh posts. Structure mirrors the server-rendered markup in
+  // index.astro exactly so refreshed posts are visually identical.
   posts.forEach((post) => {
     const article = document.createElement("article");
-    article.className = "py-6 md:py-8 border-t border-hairline grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-start";
+    article.className = "border-t border-hairline last:border-b";
     article.setAttribute("data-reveal", "");
 
     article.innerHTML = `
-      <div>
-        <a href="${post.link}" target="_blank" rel="noopener noreferrer" class="group block">
+      <a href="${post.link}" target="_blank" rel="noopener noreferrer" class="group grid gap-2 py-7 md:py-8 md:grid-cols-[10rem_minmax(0,1fr)] md:gap-8 md:items-baseline">
+        <p class="font-mono text-xs tracking-widest text-muted uppercase">
+          ${formatDate(post.pubDate)}
+        </p>
+        <div>
           <h3 class="font-display text-2xl md:text-3xl font-semibold tracking-tight group-hover:text-teal transition-colors">
             ${post.title}
           </h3>
-        </a>
-        <p class="mt-2 font-mono text-xs tracking-widest text-muted uppercase">
-          ${formatDate(post.pubDate)}
-        </p>
-        <p class="mt-3 text-muted leading-relaxed max-w-2xl">
-          ${formatExcerpt(post.description, 150)}
-        </p>
-      </div>
+          <p class="mt-3 text-muted leading-relaxed max-w-2xl">
+            ${formatExcerpt(post.description, 150)}
+          </p>
+        </div>
+      </a>
     `;
 
     articlesContainer.appendChild(article);

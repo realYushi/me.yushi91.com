@@ -24,9 +24,10 @@ describe("Truss House case-study page", () => {
     const html = readPage();
 
     expect(html).toContain("Client-facing housing platform rebuilt around typed content");
-    expect(html).toContain("ROLE");
-    expect(html).toContain("STACK");
-    expect(html).toContain("YEAR");
+    // Skim-first metadata labels (rendered uppercase via CSS, not literal caps).
+    expect(html).toContain("Role</dt>");
+    expect(html).toContain("Stack</dt>");
+    expect(html).toContain("Year</dt>");
     expect(html).toContain("LIVE ↗");
     expect(html).toContain("HTML-first site");
   });

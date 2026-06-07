@@ -357,9 +357,11 @@ const hasEnoughPosts = latestPosts.length >= 2;
     </div>
   </footer>
 
-  <!-- Client-side scripts -->
-  <script type="module">
-    import { initFreshBlogPosts } from "./lib/client/rss-fetch.ts";
+  <!-- Client-side scripts. No attributes on the tag: Astro bundles and emits
+       this as a hashed module. Adding type="module" (or any attribute) would
+       make Astro ship it inline, leaving the bare import unresolved. -->
+  <script>
+    import { initFreshBlogPosts } from "../lib/client/rss-fetch.ts";
 
     // Initialize fresh blog posts after page load
     initFreshBlogPosts();
