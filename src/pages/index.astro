@@ -170,4 +170,91 @@ const experience = (await getCollection("experience")).sort(
       </div>
     </section>
   </main>
+
+  <!-- Contact band -->
+  <footer class="bg-dark-band text-canvas" aria-labelledby="contact-heading">
+    <div class="px-6 py-24 md:px-12 lg:px-24 max-w-5xl mx-auto w-full grid gap-12 md:grid-cols-2 md:gap-16">
+      <!-- Channels -->
+      <div>
+        <p class="font-mono text-xs tracking-widest uppercase text-teal mb-4">
+          Contact
+        </p>
+        <h2 id="contact-heading" class="font-display text-3xl md:text-4xl font-semibold tracking-tight">
+          Let's build something AI-native.
+        </h2>
+        <p class="mt-4 text-canvas/70 leading-relaxed max-w-md">
+          Email me directly, or drop a note with the form. I read everything.
+        </p>
+
+        <a
+          href="mailto:realYushi@gmail.com"
+          class="mt-6 inline-block font-display font-semibold text-lg hover:text-teal transition-colors"
+        >
+          realYushi@gmail.com
+        </a>
+
+        <nav class="mt-8 font-mono text-xs md:text-sm tracking-widest uppercase flex gap-6 md:gap-8 text-canvas/70">
+          <a href="https://github.com/realYushi" target="_blank" rel="noopener noreferrer" class="hover:text-canvas transition-colors">
+            GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/yushi-cui/" target="_blank" rel="noopener noreferrer" class="hover:text-canvas transition-colors">
+            LinkedIn
+          </a>
+          <a href="https://blog.yushi91.com" target="_blank" rel="noopener noreferrer" class="hover:text-canvas transition-colors">
+            Blog
+          </a>
+        </nav>
+      </div>
+
+      <!-- Web3Forms: static client-side POST, no backend of ours. -->
+      <form
+        action="https://api.web3forms.com/submit"
+        method="POST"
+        class="flex flex-col gap-4"
+      >
+        <input type="hidden" name="access_key" value="3158397c-c2b2-4b0d-86b7-fe441f3f17c1" />
+        <input type="hidden" name="subject" value="New message from yushi91.com" />
+
+        <!-- Honeypot: bots fill this; Web3Forms silently drops those submissions. -->
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+
+        <label class="flex flex-col gap-2">
+          <span class="font-mono text-xs tracking-widest uppercase text-canvas/70">Name</span>
+          <input
+            type="text"
+            name="name"
+            required
+            class="bg-canvas/5 border border-canvas/20 rounded-sm px-4 py-3 text-canvas placeholder:text-canvas/40 focus:border-teal focus:outline-none transition-colors"
+          />
+        </label>
+
+        <label class="flex flex-col gap-2">
+          <span class="font-mono text-xs tracking-widest uppercase text-canvas/70">Email</span>
+          <input
+            type="email"
+            name="email"
+            required
+            class="bg-canvas/5 border border-canvas/20 rounded-sm px-4 py-3 text-canvas placeholder:text-canvas/40 focus:border-teal focus:outline-none transition-colors"
+          />
+        </label>
+
+        <label class="flex flex-col gap-2">
+          <span class="font-mono text-xs tracking-widest uppercase text-canvas/70">Message</span>
+          <textarea
+            name="message"
+            rows="4"
+            required
+            class="bg-canvas/5 border border-canvas/20 rounded-sm px-4 py-3 text-canvas placeholder:text-canvas/40 focus:border-teal focus:outline-none transition-colors resize-y"
+          ></textarea>
+        </label>
+
+        <button
+          type="submit"
+          class="self-start mt-2 bg-canvas text-dark-band px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-sm hover:bg-teal hover:text-canvas transition-colors"
+        >
+          Send message
+        </button>
+      </form>
+    </div>
+  </footer>
 </Base>
