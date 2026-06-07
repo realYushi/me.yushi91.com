@@ -1,9 +1,9 @@
 ---
 kind: role
-role: Intern
+role: Junior Developer
 org: Decoded Venture Studio
-start: "2024"
-end: "2025"
-summary: Supported venture studio product discovery, prototyping, and delivery work.
+start: "Oct 2025"
+end: "Dec 2025"
+summary: Built an AI-powered coding-agent platform from concept to delivery with Spec-Driven Development, architecting the core agent on the OpenAI Agents SDK.
 ordering: 2
 ---

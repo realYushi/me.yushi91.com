@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Yushi Cui — Full-Stack Product Engineer">
+  <!-- Photographic OG cover, LIGHT variant. Paper ground from the generated
+       portrait; ink type and the light-scheme cobalt accent (#2038e6) composited
+       from the design tokens. Subject on the right, negative space on the left. -->
+  <defs>
+    <linearGradient id="scrim-light" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"    stop-color="#f6f7f8" stop-opacity="0.92" />
+      <stop offset="0.45" stop-color="#f6f7f8" stop-opacity="0.78" />
+      <stop offset="0.68" stop-color="#f6f7f8" stop-opacity="0.30" />
+      <stop offset="1"    stop-color="#f6f7f8" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <image href="og-portrait-light.png" x="0" y="0" width="1200" height="630"
+         preserveAspectRatio="xMidYMid slice" />
+
+  <rect width="1200" height="630" fill="url(#scrim-light)" />
+
+  <text x="80" y="168" font-family="JetBrains Mono" font-size="26" font-weight="500"
+        letter-spacing="5.5" fill="#2038e6">FULL-STACK PRODUCT ENGINEER</text>
+
+  <text x="76" y="320" font-family="Space Grotesk" font-size="96" font-weight="700"
+        letter-spacing="-3" fill="#14181d">I build products</text>
+  <text x="76" y="428" font-family="Space Grotesk" font-size="96" font-weight="700"
+        letter-spacing="-3" fill="#2038e6">end to end<tspan fill="#14181d">.</tspan></text>
+</svg>

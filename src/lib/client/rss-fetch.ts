@@ -102,7 +102,7 @@ export function updateBlogSection(posts: BlogPost[]): void {
           ${formatDate(post.pubDate)}
         </p>
         <div>
-          <h3 class="font-display text-2xl md:text-3xl font-semibold tracking-tight group-hover:text-teal transition-colors">
+          <h3 class="font-display text-2xl md:text-3xl font-semibold tracking-tight group-hover:text-cobalt transition-colors">
             ${post.title}
           </h3>
           <p class="mt-3 text-muted leading-relaxed max-w-2xl">

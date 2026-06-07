@@ -1,5 +1,5 @@
 import { describe, expect, it, beforeAll } from "vitest";
-import { getLatestPosts, type BlogPost } from "../src/lib/rss-client";
+import { getLatestPosts } from "../src/lib/rss-client";
 
 describe("getLatestPosts", () => {
   it("fetches and parses RSS feed from blog", { timeout: 10000 }, async () => {

@@ -32,11 +32,13 @@ export interface HeadMetadata {
     url: string;
     type: string;
     description?: string;
+    image: string;
   };
   twitter: {
     card: string;
     title: string;
     description?: string;
+    image: string;
   };
   jsonLd: string | null;
 }
@@ -45,6 +47,8 @@ export function buildHeadMetadata(page: PageMeta): HeadMetadata {
   const canonical = SITE_URL + page.slug;
   const description = page.description;
   const jsonLd = page.slug === HOME_SLUG ? PERSON_JSON_LD : null;
+  // Absolute URL: OG/Twitter crawlers do not resolve relative paths.
+  const image = SITE_URL + "/og-cover.png";
 
   return {
     canonical,
@@ -58,11 +62,13 @@ export function buildHeadMetadata(page: PageMeta): HeadMetadata {
       url: canonical,
       type: "website",
       description,
+      image,
     },
     twitter: {
       card: "summary_large_image",
       title: page.title,
       description,
+      image,
     },
     jsonLd,
   };

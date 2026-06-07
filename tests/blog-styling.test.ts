@@ -54,13 +54,13 @@ describe("Blog section styling matches existing patterns", () => {
     expect(blogSection).toMatch(/font-mono[^>]*text-muted[^>]*uppercase/);
   });
 
-  it("links have teal hover states", () => {
+  it("links have accent hover states", () => {
     const html = readFileSync(dist("index.html"), "utf8");
 
-    // Blog post links should have teal hover color
+    // Blog post links should have the cobalt accent hover color
     const blogSectionMatch = html.match(/<section[^>]*aria-labelledby="latest-writing-heading"[\s\S]*?<\/section>/);
     const blogSection = blogSectionMatch ? blogSectionMatch[0] : "";
-    expect(blogSection).toContain("hover:text-teal");
+    expect(blogSection).toContain("hover:text-cobalt");
   });
 
   it("section spacing matches other sections", () => {

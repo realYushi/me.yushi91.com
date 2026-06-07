@@ -1,9 +1,9 @@
 ---
 kind: role
-role: Intern
-org: HALO Systems / Tag IT
-start: "2023"
-end: "2024"
-summary: Contributed to product engineering work across web systems and internal tooling.
+role: Software Engineer Intern
+org: HALO Systems by Tag IT
+start: "Dec 2024"
+end: "Feb 2025"
+summary: Built a Vue.js and TypeScript HMI dashboard for farm effluent control with real-time Mapbox/GeoJSON visualization, shipping a reusable SVG HMI component now in production.
 ordering: 3
 ---

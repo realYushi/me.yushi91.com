@@ -45,7 +45,7 @@ export function formatExperienceDate(experience: Experience): string {
     return experience.dates;
   }
 
-  return `${experience.start} – ${experience.end ?? "Present"}`;
+  return `${experience.start} - ${experience.end ?? "Present"}`;
 }
 
 /**

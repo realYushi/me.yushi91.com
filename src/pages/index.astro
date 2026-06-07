@@ -35,35 +35,68 @@ const hasEnoughPosts = latestPosts.length >= 2;
   }}
 >
   <main>
-    <!-- Hero: editorial, type-forward, four elements only -->
+    <!-- Hero: type-forward, left-aligned over the blueprint column grid. Four
+         elements only: eyebrow, headline (≤2 lines), one-line subtext, CTAs. -->
     <section class="relative min-h-[calc(100dvh-4rem)] flex items-center">
-      <div class="w-full max-w-6xl mx-auto px-5 md:px-12 lg:px-20 py-16 md:py-20">
-        <div class="max-w-4xl">
-          <p data-rise class="font-mono text-xs md:text-sm tracking-[0.22em] text-teal uppercase">
-            Full-Stack Product Engineer
-          </p>
+      <div class="col-grid w-full max-w-6xl mx-auto px-5 md:px-12 lg:px-20 py-16 md:py-20">
+        <div class="grid items-center gap-10 lg:gap-16 lg:grid-cols-[1fr_auto]">
+          <div class="max-w-4xl order-2 lg:order-1">
+            <p data-rise class="font-mono text-xs md:text-sm tracking-[0.22em] text-cobalt uppercase">
+              Full-Stack Product Engineer
+            </p>
 
-          <h1 data-rise="2" class="mt-6 font-display text-[clamp(2.75rem,6vw,5.25rem)] font-extrabold leading-[1.0] tracking-[-0.02em] text-balance">
-            I build products <span class="text-teal">end to end</span>, from idea to shipped.
-          </h1>
+            <h1 data-rise="2" class="mt-6 font-display text-[clamp(2.75rem,6vw,5rem)] font-bold leading-[1.02] tracking-[-0.025em] text-balance">
+              I build products <span class="text-cobalt">end to end</span>.
+            </h1>
 
-          <p data-rise="3" class="mt-7 text-lg md:text-xl text-muted max-w-2xl leading-relaxed">
-            I turn vague ideas into working products fast, then harden the best into production. Full-stack TypeScript, AI where it earns its place.
-          </p>
+            <p data-rise="3" class="mt-7 text-lg md:text-xl text-muted max-w-xl leading-relaxed">
+              From rough idea to shipped product. I move fast, then harden what earns it.
+            </p>
 
-          <div data-rise="4" class="mt-10 flex flex-wrap gap-3">
-            <a
-              href="mailto:realYushi@gmail.com"
-              class="magnetic-cta inline-flex items-center bg-ink text-canvas px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-colors duration-200 hover:bg-teal active:scale-[0.98]"
-            >
-              Get in touch
-            </a>
-            <a
-              href="#projects"
-              class="inline-flex items-center border border-hairline text-ink px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-all duration-200 hover:border-teal hover:text-teal active:scale-[0.98]"
-            >
-              See work
-            </a>
+            <div data-rise="4" class="mt-10 flex flex-wrap gap-3">
+              <a
+                href="mailto:realYushi@gmail.com"
+                class="magnetic-cta inline-flex items-center bg-ink text-canvas px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-colors duration-200 hover:bg-cobalt active:scale-[0.98]"
+              >
+                Get in touch
+              </a>
+              <a
+                href="#projects"
+                class="inline-flex items-center border border-hairline text-ink px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-all duration-200 hover:border-cobalt hover:text-cobalt active:scale-[0.98]"
+              >
+                See work
+              </a>
+              <a
+                href="/yushi-cui-cv.pdf"
+                download="Yushi-Cui-CV.pdf"
+                class="inline-flex items-center gap-1.5 border border-hairline text-ink px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-all duration-200 hover:border-cobalt hover:text-cobalt active:scale-[0.98]"
+              >
+                Download CV
+                <span aria-hidden="true">↓</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Portrait: transparent cutout, floats over the blueprint grid.
+               Swaps treatment with the active scheme (clear lens in light, tinted
+               in dark); no ground, so it never clashes with the canvas. -->
+          <div data-rise="3" class="order-1 lg:order-2 justify-self-center lg:justify-self-end w-44 sm:w-56 lg:w-72 shrink-0">
+            <img
+              src="/profile-light.png"
+              alt="Portrait of Yushi Cui"
+              width="720"
+              height="960"
+              loading="eager"
+              class="portrait-light w-full h-auto"
+            />
+            <img
+              src="/profile-dark.png"
+              alt="Portrait of Yushi Cui"
+              width="720"
+              height="960"
+              loading="eager"
+              class="portrait-dark w-full h-auto"
+            />
           </div>
         </div>
       </div>
@@ -83,9 +116,9 @@ const hasEnoughPosts = latestPosts.length >= 2;
           <span class="text-ink">Auckland, New Zealand</span>
         </p>
         <nav class="flex gap-5 md:gap-7 md:justify-end" aria-label="Profiles">
-          <a href="https://github.com/realYushi" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-teal transition-colors">GitHub</a>
-          <a href="https://www.linkedin.com/in/yushi-cui/" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-teal transition-colors">LinkedIn</a>
-          <a href="https://blog.yushi91.com" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-teal transition-colors">Blog</a>
+          <a href="https://github.com/realYushi" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-cobalt transition-colors">GitHub</a>
+          <a href="https://www.linkedin.com/in/yushi-cui/" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-cobalt transition-colors">LinkedIn</a>
+          <a href="https://blog.yushi91.com" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-cobalt transition-colors">Blog</a>
         </nav>
       </div>
     </section>
@@ -94,7 +127,7 @@ const hasEnoughPosts = latestPosts.length >= 2;
     <section class="px-5 md:px-12 lg:px-20 py-20 md:py-28 max-w-6xl mx-auto w-full">
       <div data-reveal class="max-w-4xl">
         <h2 class="font-display text-2xl md:text-4xl font-semibold tracking-tight leading-[1.2] text-balance">
-          I ship fast, then iterate. AI tools speed up the <span class="text-teal">0 to 1</span>, but judgment decides what survives.
+          I ship fast, then iterate. AI tools speed up the <span class="text-cobalt">0 to 1</span>, but judgment decides what survives.
         </h2>
         <p class="mt-6 text-muted leading-relaxed max-w-2xl text-lg">
           Every project starts with one question: what is the smallest thing I can build to validate this? Then I ship, learn, and harden the parts that matter.
@@ -123,8 +156,8 @@ const hasEnoughPosts = latestPosts.length >= 2;
               data-reveal
               class:list={[
                 cardSpans[index % cardSpans.length],
-                "group relative flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-hairline p-7 md:p-9 transition-all duration-300 hover:-translate-y-1 hover:border-teal",
-                project.data.flagship ? "bg-gradient-to-br from-teal-soft to-canvas md:flex-row md:gap-10" : "bg-surface/50",
+                "group relative flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-hairline p-7 md:p-9 transition-all duration-300 hover:-translate-y-1 hover:border-cobalt",
+                project.data.flagship ? "bg-cobalt-soft md:flex-row md:gap-10" : "bg-surface/50",
               ]}
             >
               <span
@@ -141,14 +174,14 @@ const hasEnoughPosts = latestPosts.length >= 2;
 
               <div class="relative flex flex-col flex-1">
                 {project.data.flagship && (
-                  <p class="font-mono text-[0.625rem] tracking-[0.2em] text-teal uppercase mb-3">
+                  <p class="font-mono text-[0.625rem] tracking-[0.2em] text-cobalt uppercase mb-3">
                     Flagship
                   </p>
                 )}
 
                 <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1 pr-16">
                   <h3 class:list={[
-                    "font-display font-bold tracking-tight group-hover:text-teal transition-colors",
+                    "font-display font-bold tracking-tight group-hover:text-cobalt transition-colors",
                     project.data.flagship ? "text-3xl md:text-4xl" : "text-2xl md:text-3xl",
                   ]}>
                     {project.data.title}
@@ -168,7 +201,7 @@ const hasEnoughPosts = latestPosts.length >= 2;
 
                 <ul class="mt-6 flex flex-wrap gap-2" aria-label={`${project.data.title} stack`}>
                   {project.data.stack.map((item) => (
-                    <li class="rounded-full bg-canvas border border-hairline px-3 py-1 font-mono text-[0.625rem] tracking-widest text-muted uppercase">
+                    <li class="rounded-[var(--radius-control)] bg-canvas border border-hairline px-3 py-1 font-mono text-[0.625rem] tracking-widest text-muted uppercase">
                       {item}
                     </li>
                   ))}
@@ -178,7 +211,7 @@ const hasEnoughPosts = latestPosts.length >= 2;
                   {project.data.flagship && (
                     <a
                       href={`/projects/${project.id}`}
-                      class="text-teal hover:text-ink transition-colors"
+                      class="text-cobalt hover:text-ink transition-colors"
                       aria-label={`Read ${project.data.title} case study`}
                     >
                       Case study
@@ -188,7 +221,7 @@ const hasEnoughPosts = latestPosts.length >= 2;
                     href={live.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-ink hover:text-teal transition-colors"
+                    class="text-ink hover:text-cobalt transition-colors"
                     aria-label={`View ${project.data.title} (${live.label})`}
                   >
                     {live.label} ↗
@@ -213,9 +246,9 @@ const hasEnoughPosts = latestPosts.length >= 2;
           </p>
         </div>
 
-        <div class="mt-10">
+        <div class="mt-10 border-b border-hairline">
           {latestPosts.map((post) => (
-            <article data-reveal class="border-t border-hairline last:border-b">
+            <article data-reveal class="border-t border-hairline">
               <a
                 href={post.link}
                 target="_blank"
@@ -226,7 +259,7 @@ const hasEnoughPosts = latestPosts.length >= 2;
                   {formatDate(post.pubDate)}
                 </p>
                 <div>
-                  <h3 class="font-display text-2xl md:text-3xl font-semibold tracking-tight group-hover:text-teal transition-colors">
+                  <h3 class="font-display text-2xl md:text-3xl font-semibold tracking-tight group-hover:text-cobalt transition-colors">
                     {post.title}
                   </h3>
                   <p class="mt-3 text-muted leading-relaxed max-w-2xl">
@@ -254,7 +287,7 @@ const hasEnoughPosts = latestPosts.length >= 2;
       <ol class="timeline-track mt-12 relative border-l border-hairline pl-6 md:pl-10">
         {experience.map((entry) => (
           <li data-reveal class="relative pb-12 last:pb-0">
-            <span class="absolute -left-[calc(1.5rem+5px)] md:-left-[calc(2.5rem+5px)] top-2 h-2.5 w-2.5 rounded-full bg-canvas border-2 border-teal"></span>
+            <span class="absolute -left-[calc(1.5rem+5px)] md:-left-[calc(2.5rem+5px)] top-2 h-2.5 w-2.5 rounded-full bg-canvas border-2 border-cobalt"></span>
             <div class="grid gap-2 md:grid-cols-[9rem_minmax(0,1fr)] md:items-baseline">
               <p class="font-mono text-xs tracking-widest text-muted uppercase">
                 {formatExperienceDate(entry.data)}
@@ -276,7 +309,7 @@ const hasEnoughPosts = latestPosts.length >= 2;
 
   <!-- Contact band: always-dark closing panel -->
   <footer id="contact" class="bg-dark-band text-on-band" aria-labelledby="contact-heading">
-    <div class="px-5 md:px-12 lg:px-20 py-24 md:py-28 max-w-6xl mx-auto w-full grid gap-12 lg:grid-cols-2 lg:gap-20">
+    <div class="col-grid on-band-grid px-5 md:px-12 lg:px-20 py-24 md:py-28 max-w-6xl mx-auto w-full grid gap-12 lg:grid-cols-2 lg:gap-20">
       <div data-reveal>
         <h2 id="contact-heading" class="font-display text-3xl md:text-5xl font-bold tracking-tight">
           Let's build something worth shipping.
@@ -287,7 +320,7 @@ const hasEnoughPosts = latestPosts.length >= 2;
 
         <a
           href="mailto:realYushi@gmail.com"
-          class="mt-7 inline-block font-display font-semibold text-xl hover:text-teal transition-colors"
+          class="mt-7 inline-block font-display font-semibold text-xl hover:text-cobalt transition-colors"
         >
           realYushi@gmail.com
         </a>
@@ -323,7 +356,7 @@ const hasEnoughPosts = latestPosts.length >= 2;
             type="text"
             name="name"
             required
-            class="bg-white/[0.04] border border-white/15 rounded-[var(--radius-control)] px-4 py-3 text-on-band placeholder:text-on-band-muted focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal transition-colors"
+            class="bg-white/[0.04] border border-white/15 rounded-[var(--radius-control)] px-4 py-3 text-on-band placeholder:text-on-band-muted focus:border-cobalt focus:outline-none focus:ring-1 focus:ring-cobalt transition-colors"
           />
         </label>
 
@@ -333,7 +366,7 @@ const hasEnoughPosts = latestPosts.length >= 2;
             type="email"
             name="email"
             required
-            class="bg-white/[0.04] border border-white/15 rounded-[var(--radius-control)] px-4 py-3 text-on-band placeholder:text-on-band-muted focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal transition-colors"
+            class="bg-white/[0.04] border border-white/15 rounded-[var(--radius-control)] px-4 py-3 text-on-band placeholder:text-on-band-muted focus:border-cobalt focus:outline-none focus:ring-1 focus:ring-cobalt transition-colors"
           />
         </label>
 
@@ -343,13 +376,13 @@ const hasEnoughPosts = latestPosts.length >= 2;
             name="message"
             rows="4"
             required
-            class="bg-white/[0.04] border border-white/15 rounded-[var(--radius-control)] px-4 py-3 text-on-band placeholder:text-on-band-muted focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal transition-colors resize-y"
+            class="bg-white/[0.04] border border-white/15 rounded-[var(--radius-control)] px-4 py-3 text-on-band placeholder:text-on-band-muted focus:border-cobalt focus:outline-none focus:ring-1 focus:ring-cobalt transition-colors resize-y"
           ></textarea>
         </label>
 
         <button
           type="submit"
-          class="self-start mt-2 bg-on-band text-dark-band px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-all duration-200 hover:bg-teal hover:text-canvas active:scale-[0.98]"
+          class="self-start mt-2 bg-on-band text-dark-band px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-all duration-200 hover:bg-cobalt hover:text-canvas active:scale-[0.98]"
         >
           Send message
         </button>
@@ -374,17 +407,19 @@ const hasEnoughPosts = latestPosts.length >= 2;
 
       const magneticButtons = document.querySelectorAll('.magnetic-cta');
 
-      magneticButtons.forEach(button => {
-        button.addEventListener('mousemove', function(e) {
-          const rect = this.getBoundingClientRect();
+      magneticButtons.forEach((button) => {
+        const el = button as HTMLElement;
+        el.addEventListener('mousemove', (event) => {
+          const e = event as MouseEvent;
+          const rect = el.getBoundingClientRect();
           const x = e.clientX - rect.left - rect.width / 2;
           const y = e.clientY - rect.top - rect.height / 2;
 
-          this.style.transform = 'translate(' + (x * 0.15) + 'px, ' + (y * 0.15) + 'px)';
+          el.style.transform = 'translate(' + (x * 0.15) + 'px, ' + (y * 0.15) + 'px)';
         });
 
-        button.addEventListener('mouseleave', function() {
-          this.style.transform = 'translate(0, 0)';
+        el.addEventListener('mouseleave', () => {
+          el.style.transform = 'translate(0, 0)';
         });
       });
     })();

@@ -36,14 +36,14 @@ const stack = project.data.stack.join(" / ");
     <!-- Header: editorial title block -->
     <header>
       <div class="max-w-5xl mx-auto w-full px-5 md:px-12 lg:px-20 pt-10 pb-10 md:pt-14 md:pb-12">
-        <a href="/#projects" class="font-mono text-xs tracking-widest uppercase text-muted hover:text-teal transition-colors">
+        <a href="/#projects" class="font-mono text-xs tracking-widest uppercase text-muted hover:text-cobalt transition-colors">
           ← Selected work
         </a>
 
-        <p data-rise class="mt-10 font-mono text-xs tracking-[0.2em] text-teal uppercase">
+        <p data-rise class="mt-10 font-mono text-xs tracking-[0.2em] text-cobalt uppercase">
           Case study
         </p>
-        <h1 data-rise="2" class="mt-4 font-display text-[clamp(2.5rem,7vw,4.75rem)] font-extrabold leading-[1.02] tracking-[-0.02em]">
+        <h1 data-rise="2" class="mt-4 font-display text-[clamp(2.5rem,7vw,4.75rem)] font-bold leading-[1.02] tracking-[-0.025em]">
           {project.data.title}
         </h1>
         <p data-rise="3" class="mt-5 text-xl md:text-2xl text-muted leading-relaxed max-w-3xl font-medium">
@@ -66,7 +66,7 @@ const stack = project.data.stack.join(" / ");
           <div class="flex flex-col gap-1.5">
             <dt class="text-ink">Link</dt>
             <dd>
-              <a href={live.url} target="_blank" rel="noopener noreferrer" class="text-teal hover:text-ink transition-colors">
+              <a href={live.url} target="_blank" rel="noopener noreferrer" class="text-cobalt hover:text-ink transition-colors">
                 {live.label.toUpperCase()} ↗
               </a>
             </dd>
@@ -83,7 +83,7 @@ const stack = project.data.stack.join(" / ");
       <div class="mt-16 border-t border-hairline pt-10">
         <a
           href="/#projects"
-          class="inline-flex items-center font-display font-semibold text-sm tracking-wide text-ink hover:text-teal transition-colors"
+          class="inline-flex items-center font-display font-semibold text-sm tracking-wide text-ink hover:text-cobalt transition-colors"
         >
           ← Back to selected projects
         </a>

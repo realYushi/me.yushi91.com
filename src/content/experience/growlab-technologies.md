@@ -1,9 +1,9 @@
 ---
 kind: role
-role: AI-Native Product Engineer & Full-Stack Dev
+role: AI-Native Product Engineer & Full-Stack Developer
 org: GrowLab Technologies
-start: "2025"
-end: null
-summary: Building AI-native product workflows and full-stack tools from prototype to production.
+start: "Mar 2026"
+end: "Jun 2026"
+summary: Driving rapid prototyping and full-stack delivery of internal tools and client apps, orchestrating AI agents with a spec-driven, AI-first workflow.
 ordering: 1
 ---

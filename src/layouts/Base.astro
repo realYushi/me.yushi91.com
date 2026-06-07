@@ -28,11 +28,16 @@ const head = buildHeadMetadata(meta);
     <meta property="og:url" content={head.og.url} />
     <meta property="og:type" content={head.og.type} />
     {head.og.description && <meta property="og:description" content={head.og.description} />}
+    <meta property="og:image" content={head.og.image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Yushi Cui, Full-Stack Product Engineer" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content={head.twitter.card} />
     <meta name="twitter:title" content={head.twitter.title} />
     {head.twitter.description && <meta name="twitter:description" content={head.twitter.description} />}
+    <meta name="twitter:image" content={head.twitter.image} />
 
     <!-- JSON-LD -->
     {head.jsonLd && <script is:inline type="application/ld+json" set:html={head.jsonLd} />}
@@ -41,7 +46,7 @@ const head = buildHeadMetadata(meta);
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -51,7 +56,7 @@ const head = buildHeadMetadata(meta);
     <!-- Masthead: name + wayfinding + theme toggle, one line, sticky -->
     <header class="site-masthead sticky top-0 z-40 border-b border-hairline">
       <div class="max-w-6xl mx-auto px-5 md:px-12 lg:px-20 h-16 flex items-center justify-between gap-6">
-        <a href="/" class="font-display text-base font-bold tracking-tight hover:text-teal transition-colors">
+        <a href="/" class="font-display text-base font-bold tracking-tight hover:text-cobalt transition-colors">
           Yushi Cui
         </a>
         <nav class="flex items-center gap-5 md:gap-8 font-mono text-[0.6875rem] md:text-xs tracking-[0.18em] uppercase">
