@@ -57,24 +57,6 @@ export function decodeHTMLEntitiesRegex(text: string): string {
 }
 
 /**
- * Decode HTML entities with automatic context detection
- *
- * Uses DOM API in browser, falls back to regex on server.
- * Deprecated in favor of explicit context-specific functions.
- *
- * @param text - Text containing HTML entities
- * @returns Decoded text
- * @deprecated Use decodeHTMLEntitiesDOM or decodeHTMLEntitiesRegex
- */
-export function decodeHTMLEntities(text: string): string {
-  try {
-    return decodeHTMLEntitiesDOM(text);
-  } catch {
-    return decodeHTMLEntitiesRegex(text);
-  }
-}
-
-/**
  * Format an excerpt by stripping HTML tags and truncating to max length.
  * Appends "…" ellipsis if content was truncated.
  *

@@ -1,30 +1,30 @@
 import { describe, expect, it } from "vitest";
-import { decodeHTMLEntities, formatExcerpt, formatDate } from "../src/lib/utils";
+import { decodeHTMLEntitiesRegex, formatExcerpt, formatDate } from "../src/lib/utils";
 
-describe("decodeHTMLEntities", () => {
+describe("decodeHTMLEntitiesRegex", () => {
   it("decodes basic HTML entities", () => {
-    expect(decodeHTMLEntities("&lt;p&gt;Hello&lt;/p&gt;")).toBe("<p>Hello</p>");
-    expect(decodeHTMLEntities("&amp;")).toBe("&");
-    expect(decodeHTMLEntities("&quot;")).toBe('"');
-    expect(decodeHTMLEntities("&apos;")).toBe("'");
+    expect(decodeHTMLEntitiesRegex("&lt;p&gt;Hello&lt;/p&gt;")).toBe("<p>Hello</p>");
+    expect(decodeHTMLEntitiesRegex("&amp;")).toBe("&");
+    expect(decodeHTMLEntitiesRegex("&quot;")).toBe('"');
+    expect(decodeHTMLEntitiesRegex("&apos;")).toBe("'");
   });
 
   it("decodes curly quote entities", () => {
-    expect(decodeHTMLEntities("&ldquo;Hello&rdquo;")).toBe('"Hello"');
-    expect(decodeHTMLEntities("&lsquo;Hi&rsquo;")).toBe("'Hi'");
-    expect(decodeHTMLEntities("&rsquo;")).toBe("'");
+    expect(decodeHTMLEntitiesRegex("&ldquo;Hello&rdquo;")).toBe('"Hello"');
+    expect(decodeHTMLEntitiesRegex("&lsquo;Hi&rsquo;")).toBe("'Hi'");
+    expect(decodeHTMLEntitiesRegex("&rsquo;")).toBe("'");
   });
 
   it("decodes nbsp", () => {
-    expect(decodeHTMLEntities("Hello&nbsp;World")).toBe("Hello World");
+    expect(decodeHTMLEntitiesRegex("Hello&nbsp;World")).toBe("Hello World");
   });
 
   it("handles empty string", () => {
-    expect(decodeHTMLEntities("")).toBe("");
+    expect(decodeHTMLEntitiesRegex("")).toBe("");
   });
 
   it("handles text without entities", () => {
-    expect(decodeHTMLEntities("Plain text")).toBe("Plain text");
+    expect(decodeHTMLEntitiesRegex("Plain text")).toBe("Plain text");
   });
 });
 
