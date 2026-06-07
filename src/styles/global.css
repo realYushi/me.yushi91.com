@@ -2,11 +2,11 @@
 
 /* ── Brand tokens ──────────────────────────────────────────────────────────
    One locked accent (teal). Dual theme via prefers-color-scheme: light is the
-   neutral default, dark is the primary expression for the AI-native-engineer
-   feel. Semantic vars swap at runtime; `@theme inline` maps utilities to the
-   vars (not their values) so bg-canvas / text-ink react to the active scheme.
-   `--dark-band` and `--on-band` are intentionally fixed: the contact band is
-   always a dark panel in both themes. */
+   neutral default, dark is the primary expression — the brand feel. Semantic
+   vars swap at runtime; `@theme inline` maps utilities to the vars (not their
+   values) so bg-canvas / text-ink react to the active scheme. `--dark-band`
+   and `--on-band` are intentionally fixed: the contact band is always a dark
+   panel in both themes. */
 @theme inline {
   --color-canvas: var(--canvas);
   --color-surface: var(--surface);
