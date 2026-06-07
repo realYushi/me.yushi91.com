@@ -31,7 +31,9 @@ describe("Blog section styling matches existing patterns", () => {
     expect(blogSectionMatch).toBeTruthy();
 
     const blogSection = blogSectionMatch ? blogSectionMatch[0] : "";
-    expect(blogSection).toContain("border-b border-hairline");
+    // Each post carries a top hairline, which renders as a separator between
+    // stacked items (the last item also closes with a bottom hairline).
+    expect(blogSection).toContain("border-t border-hairline");
   });
 
   it("excerpts use muted text color", () => {
@@ -67,8 +69,8 @@ describe("Blog section styling matches existing patterns", () => {
     // Blog section should use same padding as other sections
     const blogSectionMatch = html.match(/<section[^>]*aria-labelledby="latest-writing-heading"[^>]*>/);
     const blogSection = blogSectionMatch ? blogSectionMatch[0] : "";
-    expect(blogSection).toContain("px-6");
-    // Section padding for articles (py-6 md:py-8)
-    expect(html).toContain("py-6 md:py-8");
+    expect(blogSection).toContain("px-5");
+    // Section padding for articles (py-7 md:py-8)
+    expect(html).toContain("py-7 md:py-8");
   });
 });

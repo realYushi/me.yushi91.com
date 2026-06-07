@@ -14,12 +14,12 @@ const experience = (await getCollection("experience")).sort(
   (left, right) => left.data.ordering - right.data.ordering,
 );
 
-// Current role drives the hero "at a glance" panel
+// Current role drives the status band beneath the hero.
 const current = getCurrentRole(experience.map(e => e.data));
 
-// Asymmetric bento rhythm: alternating wide/narrow spans, never three equal
-// cards. Indexed by position so the grid stays varied as projects are added.
-const cardSpans = ["lg:col-span-7", "lg:col-span-5", "lg:col-span-5", "lg:col-span-7"];
+// Asymmetric rhythm: flagship leads full-width, the rest fall into an uneven
+// grid. Indexed by position so the grid never collapses to equal thirds.
+const cardSpans = ["lg:col-span-12", "lg:col-span-7", "lg:col-span-5", "lg:col-span-12"];
 
 // Fetch latest blog posts at build time
 const latestPosts = await getLatestPosts(3);
@@ -35,31 +35,26 @@ const hasEnoughPosts = latestPosts.length >= 2;
   }}
 >
   <main>
-    <!-- Hero: asymmetric split, layered depth, confident display type -->
-    <section class="relative overflow-hidden min-h-[100dvh] flex items-center">
-      <div class="hero-aurora"></div>
-
-      <!-- Decorative grid overlay - adds technical depth without noise -->
-      <div class="absolute inset-0 z-0 opacity-[0.03]" style="background-image: linear-gradient(var(--hairline) 1px, transparent 1px), linear-gradient(90deg, var(--hairline) 1px, transparent 1px); background-size: 48px 48px;"></div>
-
-      <div class="relative z-10 w-full max-w-6xl mx-auto px-5 md:px-12 lg:px-20 py-16 md:py-20 lg:py-16 grid gap-12 md:gap-16 lg:grid-cols-12 lg:gap-16 lg:items-center">
-        <div class="lg:col-span-7">
+    <!-- Hero: editorial, type-forward, four elements only -->
+    <section class="relative min-h-[calc(100dvh-4rem)] flex items-center">
+      <div class="w-full max-w-6xl mx-auto px-5 md:px-12 lg:px-20 py-16 md:py-20">
+        <div class="max-w-4xl">
           <p data-rise class="font-mono text-xs md:text-sm tracking-[0.22em] text-teal uppercase">
             Full-Stack Product Engineer
           </p>
 
-          <h1 data-rise="2" class="mt-5 font-display text-[clamp(2.75rem,5.5vw,4.5rem)] font-bold leading-[1.02] tracking-tight text-balance">
+          <h1 data-rise="2" class="mt-6 font-display text-[clamp(2.75rem,6vw,5.25rem)] font-extrabold leading-[1.0] tracking-[-0.02em] text-balance">
             I build products <span class="text-teal">end to end</span>, from idea to shipped.
           </h1>
 
-          <p data-rise="3" class="mt-6 text-lg md:text-xl text-muted max-w-xl leading-relaxed">
+          <p data-rise="3" class="mt-7 text-lg md:text-xl text-muted max-w-2xl leading-relaxed">
             I turn vague ideas into working products fast, then harden the best into production. Full-stack TypeScript, AI where it earns its place.
           </p>
 
-          <div data-rise="4" class="mt-9 flex flex-wrap gap-3">
+          <div data-rise="4" class="mt-10 flex flex-wrap gap-3">
             <a
               href="mailto:realYushi@gmail.com"
-              class="magnetic-cta inline-flex items-center bg-ink text-canvas px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-all duration-200 hover:bg-teal hover:text-canvas active:scale-[0.98]"
+              class="magnetic-cta inline-flex items-center bg-ink text-canvas px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-colors duration-200 hover:bg-teal active:scale-[0.98]"
             >
               Get in touch
             </a>
@@ -67,166 +62,138 @@ const hasEnoughPosts = latestPosts.length >= 2;
               href="#projects"
               class="inline-flex items-center border border-hairline text-ink px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-all duration-200 hover:border-teal hover:text-teal active:scale-[0.98]"
             >
-              See projects
+              See work
             </a>
           </div>
-
-          <nav data-rise="5" class="mt-12 font-mono text-xs tracking-[0.18em] text-muted uppercase flex gap-6 md:gap-8">
-            <a href="https://github.com/realYushi" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">
-              GitHub
-            </a>
-            <a href="https://www.linkedin.com/in/yushi-cui/" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">
-              LinkedIn
-            </a>
-            <a href="https://blog.yushi91.com" target="_blank" rel="noopener noreferrer" class="hover:text-ink transition-colors">
-              Blog
-            </a>
-          </nav>
         </div>
-
-        <!-- At a glance: tighter, more confident fact display -->
-        <aside data-rise="4" class="lg:col-span-5 hero-visual">
-          <div class="space-y-6">
-            {current && current.kind === "role" && (
-              <div class="pl-4 border-l-2 border-teal">
-                <p class="font-mono text-[0.625rem] tracking-[0.2em] text-muted uppercase mb-1">Currently</p>
-                <p class="font-display text-2xl font-semibold tracking-tight">{current.org}</p>
-              </div>
-            )}
-            <div class="pl-4 border-l border-hairline">
-              <p class="font-mono text-[0.625rem] tracking-[0.2em] text-muted uppercase mb-1">Based in</p>
-              <p class="font-display text-xl font-semibold tracking-tight">Auckland, New Zealand</p>
-            </div>
-            <div class="flex flex-wrap gap-2 pt-2">
-              {["Product engineering", "Full-stack TypeScript", "AI / agents"].map((tag) => (
-                <span class="rounded-md bg-teal-soft border border-teal/20 px-3 py-1.5 font-mono text-[0.625rem] tracking-widest text-teal uppercase">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        </aside>
       </div>
     </section>
 
-    <!-- Latest writing -->
-    {hasEnoughPosts && (
-      <section class="px-6 md:px-12 lg:px-20 py-24 md:py-32 max-w-6xl mx-auto w-full" aria-labelledby="latest-writing-heading">
-        <div data-reveal class="max-w-3xl">
-          <h2 id="latest-writing-heading" class="font-display text-3xl md:text-5xl font-semibold tracking-tight">
-            Recent writing
-          </h2>
-          <p class="mt-4 text-muted leading-relaxed">
-            Thoughts on engineering, product development, and AI.
+    <!-- Status band: real, current credential facts + outbound authority -->
+    <section class="border-y border-hairline" aria-label="At a glance">
+      <div class="max-w-6xl mx-auto px-5 md:px-12 lg:px-20 py-5 grid gap-4 md:grid-cols-[1fr_1fr_auto] md:items-center font-mono text-xs tracking-[0.12em] uppercase">
+        {current && current.kind === "role" && (
+          <p class="flex items-baseline gap-2">
+            <span class="text-muted">Currently</span>
+            <span class="text-ink truncate">{current.org}</span>
           </p>
-        </div>
-
-        <div class="mt-12">
-          {latestPosts.map((post) => (
-            <article data-reveal class="py-6 md:py-8 border-t border-hairline grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-start">
-              <div>
-                <a
-                  href={post.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="group block"
-                >
-                  <h3 class="font-display text-2xl md:text-3xl font-semibold tracking-tight group-hover:text-teal transition-colors">
-                    {post.title}
-                  </h3>
-                </a>
-                <p class="mt-2 font-mono text-xs tracking-widest text-muted uppercase">
-                  {formatDate(post.pubDate)}
-                </p>
-                <p class="mt-3 text-muted leading-relaxed max-w-2xl">
-                  {formatExcerpt(post.description, 150)}
-                </p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-    )}
-
-    <!-- Philosophy: how I work -->
-    <section class="px-6 md:px-12 lg:px-20 py-16 md:py-20 max-w-6xl mx-auto w-full">
-      <div data-reveal class="max-w-3xl">
-        <p class="font-mono text-xs tracking-[0.22em] text-teal uppercase mb-3">
-          Approach
+        )}
+        <p class="flex items-baseline gap-2">
+          <span class="text-muted">Based in</span>
+          <span class="text-ink">Auckland, New Zealand</span>
         </p>
-        <h2 class="font-display text-2xl md:text-3xl font-semibold tracking-tight text-balance">
-          I ship fast, then iterate. AI tools speed up the 0 to 1, but judgment determines what survives.
+        <nav class="flex gap-5 md:gap-7 md:justify-end" aria-label="Profiles">
+          <a href="https://github.com/realYushi" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-teal transition-colors">GitHub</a>
+          <a href="https://www.linkedin.com/in/yushi-cui/" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-teal transition-colors">LinkedIn</a>
+          <a href="https://blog.yushi91.com" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-teal transition-colors">Blog</a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Approach: single editorial statement, no eyebrow -->
+    <section class="px-5 md:px-12 lg:px-20 py-20 md:py-28 max-w-6xl mx-auto w-full">
+      <div data-reveal class="max-w-4xl">
+        <h2 class="font-display text-2xl md:text-4xl font-semibold tracking-tight leading-[1.2] text-balance">
+          I ship fast, then iterate. AI tools speed up the <span class="text-teal">0 to 1</span>, but judgment decides what survives.
         </h2>
-        <p class="mt-4 text-muted leading-relaxed">
-          Every project starts with a question: what is the smallest thing I can build to validate this? Then I ship, learn, and harden the parts that matter.
+        <p class="mt-6 text-muted leading-relaxed max-w-2xl text-lg">
+          Every project starts with one question: what is the smallest thing I can build to validate this? Then I ship, learn, and harden the parts that matter.
         </p>
       </div>
     </section>
 
-    <!-- Selected projects: asymmetric bento, product thinking foreground -->
-    <section id="projects" class="px-6 md:px-12 lg:px-20 py-24 md:py-32 max-w-6xl mx-auto w-full" aria-labelledby="projects-heading">
+    <!-- Selected work: flagship feature + asymmetric grid, numbered -->
+    <section id="projects" class="px-5 md:px-12 lg:px-20 pb-20 md:pb-28 max-w-6xl mx-auto w-full" aria-labelledby="projects-heading">
       <div data-reveal class="max-w-3xl">
-        <h2 id="projects-heading" class="font-display text-3xl md:text-5xl font-semibold tracking-tight">
+        <h2 id="projects-heading" class="font-display text-3xl md:text-5xl font-bold tracking-tight">
           Selected work
         </h2>
         <p class="mt-4 text-muted leading-relaxed">
-          Products and workflows I have built end to end. Each project links to the live build or source.
+          Products and workflows built end to end. Each links to the live build or source.
         </p>
       </div>
 
       <div class="mt-12 grid gap-5 lg:grid-cols-12">
         {projects.map((project, index) => {
           const live = primaryLink(project.data);
+          const ordinal = String(index + 1).padStart(2, "0");
 
           return (
             <article
               data-reveal
               class:list={[
                 cardSpans[index % cardSpans.length],
-                "group flex flex-col rounded-[var(--radius-card)] border border-hairline p-7 md:p-9 transition-all duration-300 hover:-translate-y-1 hover:border-teal",
-                project.data.flagship ? "bg-gradient-to-br from-teal-soft/80 to-surface/40" : "bg-surface/40",
+                "group relative flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-hairline p-7 md:p-9 transition-all duration-300 hover:-translate-y-1 hover:border-teal",
+                project.data.flagship ? "bg-gradient-to-br from-teal-soft to-canvas md:flex-row md:gap-10" : "bg-surface/50",
               ]}
             >
-              <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
-                <h3 class="font-display text-2xl md:text-3xl font-semibold tracking-tight group-hover:text-teal transition-colors">
-                  {project.data.title}
-                </h3>
-                <p class="font-mono text-[0.6875rem] tracking-widest text-muted uppercase">
-                  {project.data.role} · {project.data.year}
-                </p>
-              </div>
+              <span
+                aria-hidden="true"
+                class:list={[
+                  "card-index pointer-events-none absolute",
+                  project.data.flagship
+                    ? "top-6 right-7 text-[5rem] md:text-[8rem]"
+                    : "top-5 right-6 text-[3.5rem] md:text-[4.5rem]",
+                ]}
+              >
+                {ordinal}
+              </span>
 
-              <p class="mt-4 text-ink leading-relaxed max-w-2xl flex-1 font-medium">
-                {project.data.summary}
-              </p>
-
-              <ul class="mt-6 flex flex-wrap gap-2" aria-label={`${project.data.title} stack`}>
-                {project.data.stack.map((item) => (
-                  <li class="rounded-md bg-canvas border border-hairline px-2.5 py-1 font-mono text-[0.625rem] tracking-widest text-muted uppercase">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-              <div class="mt-7 pt-5 border-t border-hairline flex gap-6 font-mono text-xs tracking-widest uppercase">
+              <div class="relative flex flex-col flex-1">
                 {project.data.flagship && (
-                  <a
-                    href={`/projects/${project.id}`}
-                    class="text-teal hover:text-ink transition-colors"
-                    aria-label={`Read ${project.data.title} case study`}
-                  >
-                    Case study
-                  </a>
+                  <p class="font-mono text-[0.625rem] tracking-[0.2em] text-teal uppercase mb-3">
+                    Flagship
+                  </p>
                 )}
-                <a
-                  href={live.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-ink hover:text-teal transition-colors"
-                  aria-label={`View ${project.data.title} (${live.label})`}
-                >
-                  {live.label} ↗
-                </a>
+
+                <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1 pr-16">
+                  <h3 class:list={[
+                    "font-display font-bold tracking-tight group-hover:text-teal transition-colors",
+                    project.data.flagship ? "text-3xl md:text-4xl" : "text-2xl md:text-3xl",
+                  ]}>
+                    {project.data.title}
+                  </h3>
+                </div>
+
+                <p class="mt-2 font-mono text-[0.6875rem] tracking-widest text-muted uppercase">
+                  {project.data.role} / {project.data.year}
+                </p>
+
+                <p class:list={[
+                  "mt-5 text-ink leading-relaxed flex-1 font-medium",
+                  project.data.flagship ? "text-lg max-w-md" : "max-w-2xl",
+                ]}>
+                  {project.data.summary}
+                </p>
+
+                <ul class="mt-6 flex flex-wrap gap-2" aria-label={`${project.data.title} stack`}>
+                  {project.data.stack.map((item) => (
+                    <li class="rounded-full bg-canvas border border-hairline px-3 py-1 font-mono text-[0.625rem] tracking-widest text-muted uppercase">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                <div class="mt-7 pt-5 border-t border-hairline flex gap-6 font-mono text-xs tracking-widest uppercase">
+                  {project.data.flagship && (
+                    <a
+                      href={`/projects/${project.id}`}
+                      class="text-teal hover:text-ink transition-colors"
+                      aria-label={`Read ${project.data.title} case study`}
+                    >
+                      Case study
+                    </a>
+                  )}
+                  <a
+                    href={live.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-ink hover:text-teal transition-colors"
+                    aria-label={`View ${project.data.title} (${live.label})`}
+                  >
+                    {live.label} ↗
+                  </a>
+                </div>
               </div>
             </article>
           );
@@ -234,10 +201,49 @@ const hasEnoughPosts = latestPosts.length >= 2;
       </div>
     </section>
 
-    <!-- Experience: timeline showing trajectory and growth -->
-    <section class="px-6 md:px-12 lg:px-20 pb-24 md:pb-32 max-w-6xl mx-auto w-full" aria-labelledby="experience-heading">
+    <!-- Latest writing -->
+    {hasEnoughPosts && (
+      <section id="writing" class="px-5 md:px-12 lg:px-20 py-20 md:py-28 max-w-6xl mx-auto w-full border-t border-hairline" aria-labelledby="latest-writing-heading">
+        <div data-reveal class="max-w-3xl">
+          <h2 id="latest-writing-heading" class="font-display text-3xl md:text-5xl font-bold tracking-tight">
+            Recent writing
+          </h2>
+          <p class="mt-4 text-muted leading-relaxed">
+            Notes on engineering, product development, and AI. Full archive on the blog.
+          </p>
+        </div>
+
+        <div class="mt-10">
+          {latestPosts.map((post) => (
+            <article data-reveal class="border-t border-hairline last:border-b">
+              <a
+                href={post.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group grid gap-2 py-7 md:py-8 md:grid-cols-[10rem_minmax(0,1fr)] md:gap-8 md:items-baseline"
+              >
+                <p class="font-mono text-xs tracking-widest text-muted uppercase">
+                  {formatDate(post.pubDate)}
+                </p>
+                <div>
+                  <h3 class="font-display text-2xl md:text-3xl font-semibold tracking-tight group-hover:text-teal transition-colors">
+                    {post.title}
+                  </h3>
+                  <p class="mt-3 text-muted leading-relaxed max-w-2xl">
+                    {formatExcerpt(post.description, 150)}
+                  </p>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Experience: timeline showing trajectory -->
+    <section class="px-5 md:px-12 lg:px-20 py-20 md:py-28 max-w-6xl mx-auto w-full border-t border-hairline" aria-labelledby="experience-heading">
       <div data-reveal class="max-w-3xl">
-        <h2 id="experience-heading" class="font-display text-3xl md:text-5xl font-semibold tracking-tight">
+        <h2 id="experience-heading" class="font-display text-3xl md:text-5xl font-bold tracking-tight">
           Experience
         </h2>
         <p class="mt-4 text-muted leading-relaxed">
@@ -269,10 +275,10 @@ const hasEnoughPosts = latestPosts.length >= 2;
   </main>
 
   <!-- Contact band: always-dark closing panel -->
-  <footer class="bg-dark-band text-on-band" aria-labelledby="contact-heading">
-    <div class="px-6 md:px-12 lg:px-20 py-24 md:py-28 max-w-6xl mx-auto w-full grid gap-12 lg:grid-cols-2 lg:gap-20">
+  <footer id="contact" class="bg-dark-band text-on-band" aria-labelledby="contact-heading">
+    <div class="px-5 md:px-12 lg:px-20 py-24 md:py-28 max-w-6xl mx-auto w-full grid gap-12 lg:grid-cols-2 lg:gap-20">
       <div data-reveal>
-        <h2 id="contact-heading" class="font-display text-3xl md:text-5xl font-semibold tracking-tight">
+        <h2 id="contact-heading" class="font-display text-3xl md:text-5xl font-bold tracking-tight">
           Let's build something worth shipping.
         </h2>
         <p class="mt-5 text-on-band-muted leading-relaxed max-w-md">
@@ -358,8 +364,8 @@ const hasEnoughPosts = latestPosts.length >= 2;
     // Initialize fresh blog posts after page load
     initFreshBlogPosts();
 
-    // Magnetic CTA effect - motivated motion: adds tactile feedback to primary CTA
-    // Only applies on non-touch devices to avoid janky touch behavior
+    // Magnetic CTA effect - motivated motion: tactile feedback on the primary
+    // CTA. Non-touch only, to avoid janky touch behavior.
     (function() {
       const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
       if (isTouch) return;

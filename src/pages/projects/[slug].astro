@@ -34,18 +34,16 @@ const stack = project.data.stack.join(" / ");
 >
   <main>
     <!-- Header: editorial title block -->
-    <header class="relative overflow-hidden">
-      <div class="hero-aurora"></div>
-
-      <div class="relative z-10 max-w-5xl mx-auto w-full px-5 md:px-12 lg:px-20 pt-12 pb-10 md:pt-16 md:pb-12">
-        <a href="/" class="font-mono text-xs tracking-widest uppercase text-muted hover:text-teal transition-colors">
-          ← Home
+    <header>
+      <div class="max-w-5xl mx-auto w-full px-5 md:px-12 lg:px-20 pt-10 pb-10 md:pt-14 md:pb-12">
+        <a href="/#projects" class="font-mono text-xs tracking-widest uppercase text-muted hover:text-teal transition-colors">
+          ← Selected work
         </a>
 
         <p data-rise class="mt-10 font-mono text-xs tracking-[0.2em] text-teal uppercase">
           Case study
         </p>
-        <h1 data-rise="2" class="mt-4 font-display text-[clamp(2.5rem,7vw,4.75rem)] font-bold leading-[1.02] tracking-tight">
+        <h1 data-rise="2" class="mt-4 font-display text-[clamp(2.5rem,7vw,4.75rem)] font-extrabold leading-[1.02] tracking-[-0.02em]">
           {project.data.title}
         </h1>
         <p data-rise="3" class="mt-5 text-xl md:text-2xl text-muted leading-relaxed max-w-3xl font-medium">

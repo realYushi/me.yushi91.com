@@ -23,7 +23,7 @@
   --radius-card: 0.75rem;
   --radius-control: 0.625rem;
 
-  --font-display: "Space Grotesk", sans-serif;
+  --font-display: "Bricolage Grotesque", sans-serif;
   --font-body: "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
@@ -71,67 +71,35 @@
   }
 }
 
-/* ── Hero aurora ───────────────────────────────────────────────────────────
-   Honest layered radial gradients (not an image, not a fake screenshot). Sits
-   behind the hero only, never on a scrolling container, no pointer events. */
-.hero-aurora {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
+/* ── Masthead ──────────────────────────────────────────────────────────────
+   Translucent backdrop so content scrolls under it without a hard seam. Solid
+   fallback where backdrop-filter is unsupported. */
+.site-masthead {
+  background: color-mix(in srgb, var(--canvas) 82%, transparent);
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
 }
 
-.hero-aurora::before,
-.hero-aurora::after {
-  content: "";
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(72px);
-  opacity: 0.5;
+@supports not (backdrop-filter: blur(1px)) {
+  .site-masthead { background: var(--canvas); }
 }
 
-.hero-aurora::before {
-  width: 38rem;
-  height: 38rem;
-  top: -14rem;
-  right: -10rem;
-  background: radial-gradient(circle, var(--teal) 0%, transparent 68%);
+/* ── Project index numeral ─────────────────────────────────────────────────
+   Large outlined ordinal sitting behind each project's header as a graphic
+   element. Carries visual variation without fake screenshots or images. */
+.card-index {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--hairline);
+  user-select: none;
 }
 
-.hero-aurora::after {
-  width: 26rem;
-  height: 26rem;
-  bottom: -12rem;
-  left: -6rem;
-  background: radial-gradient(circle, var(--teal) 0%, transparent 70%);
-  opacity: 0.22;
-}
-
-@media (prefers-color-scheme: dark) {
-  .hero-aurora::before { opacity: 0.28; }
-  .hero-aurora::after { opacity: 0.18; }
-}
-
-/* Subtle aurora drift animation - adds life without distraction */
-@media (prefers-reduced-motion: no-preference) {
-  .hero-aurora::before {
-    animation: aurora-drift-before 20s ease-in-out infinite;
-  }
-  .hero-aurora::after {
-    animation: aurora-drift-after 25s ease-in-out infinite;
-  }
-
-  @keyframes aurora-drift-before {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(-8%, -6%) scale(1.03); }
-  }
-
-  @keyframes aurora-drift-after {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(5%, 3%) scale(1.02); }
-    66% { transform: translate(-3%, 4%) scale(1.01); }
-  }
+.group:hover .card-index {
+  -webkit-text-stroke-color: color-mix(in srgb, var(--teal) 45%, transparent);
+  transition: all 0.3s;
 }
 
 /* ── Theme toggle button ───────────────────────────────────────────────────── */
@@ -222,17 +190,6 @@ html.dark .moon-icon {
     }
   }
 
-  /* Subtle parallax on hero visual - motivated motion: adds depth, draws focus */
-  .hero-visual {
-    animation: subtle-parallax both linear;
-    animation-timeline: view();
-    animation-range: entry 0% exit 40%;
-  }
-
-  @keyframes subtle-parallax {
-    from { transform: translateY(0); }
-    to { transform: translateY(-3%); }
-  }
 }
 
 @keyframes draw-line {
