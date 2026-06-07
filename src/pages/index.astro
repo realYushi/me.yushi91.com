@@ -3,6 +3,8 @@ import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
 import { formatExperienceDate, formatExperienceTitle } from "../lib/experience";
 import { primaryLink } from "../lib/project";
+import { getLatestPosts, type BlogPost, formatExcerpt } from "../lib/blog";
+import { formatDate } from "../lib/utils";
 
 const projects = (await getCollection("projects")).sort(
   (left, right) => left.data.ordering - right.data.ordering,
@@ -21,6 +23,10 @@ const current = experience.find(
 // Asymmetric bento rhythm: alternating wide/narrow spans, never three equal
 // cards. Indexed by position so the grid stays varied as projects are added.
 const cardSpans = ["lg:col-span-7", "lg:col-span-5", "lg:col-span-5", "lg:col-span-7"];
+
+// Fetch latest blog posts at build time
+const latestPosts = await getLatestPosts(3);
+const hasEnoughPosts = latestPosts.length >= 2;
 ---
 
 <Base
@@ -105,6 +111,45 @@ const cardSpans = ["lg:col-span-7", "lg:col-span-5", "lg:col-span-5", "lg:col-sp
         </aside>
       </div>
     </section>
+
+    <!-- Latest writing -->
+    {hasEnoughPosts && (
+      <section class="px-6 md:px-12 lg:px-20 py-24 md:py-32 max-w-6xl mx-auto w-full" aria-labelledby="latest-writing-heading">
+        <div data-reveal class="max-w-3xl">
+          <h2 id="latest-writing-heading" class="font-display text-3xl md:text-5xl font-semibold tracking-tight">
+            Recent posts from my blog.
+          </h2>
+          <p class="mt-4 text-muted leading-relaxed">
+            Thoughts on engineering, product development, and AI.
+          </p>
+        </div>
+
+        <div class="mt-12">
+          {latestPosts.map((post) => (
+            <article data-reveal class="py-6 md:py-8 border-t border-hairline grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-start">
+              <div>
+                <a
+                  href={post.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group block"
+                >
+                  <h3 class="font-display text-2xl md:text-3xl font-semibold tracking-tight group-hover:text-teal transition-colors">
+                    {post.title}
+                  </h3>
+                </a>
+                <p class="mt-2 font-mono text-xs tracking-widest text-muted uppercase">
+                  {formatDate(post.pubDate)}
+                </p>
+                <p class="mt-3 text-muted leading-relaxed max-w-2xl">
+                  {formatExcerpt(post.description, 150)}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
 
     <!-- Selected projects: asymmetric bento, one cell per project -->
     <section id="projects" class="px-6 md:px-12 lg:px-20 py-24 md:py-32 max-w-6xl mx-auto w-full" aria-labelledby="projects-heading">
@@ -293,4 +338,114 @@ const cardSpans = ["lg:col-span-7", "lg:col-span-5", "lg:col-span-5", "lg:col-sp
       </form>
     </div>
   </footer>
+
+  <!-- Client-side script to fetch fresh blog posts -->
+  <script>
+    (function() {
+      const RSS_URL = "https://blog.yushi91.com/index.xml";
+      const POST_COUNT = 3;
+
+      // Decode HTML entities
+      function decodeHTMLEntities(text) {
+        const textarea = document.createElement("textarea");
+        textarea.innerHTML = text;
+        return textarea.value;
+      }
+
+      // Format date
+      function formatDate(date) {
+        return date.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+      }
+
+      // Format excerpt by stripping HTML and truncating
+      function formatExcerpt(html, maxLength) {
+        if (!html) return "";
+        const text = html.replace(/<[^>]*>/g, "").trim();
+        if (text.length <= maxLength) return text;
+        return text.slice(0, maxLength) + "…";
+      }
+
+      // Fetch and parse RSS feed
+      async function fetchFreshPosts() {
+        try {
+          const response = await fetch(RSS_URL);
+          if (!response.ok) return null;
+          const xmlText = await response.text();
+
+          // Parse RSS items
+          const items = xmlText.match(/<item>([\s\S]*?)<\/item>/g) || [];
+          const posts = items.map((item) => {
+            const title = item.match(/<title>(.*?)<\/title>/)?.[1] || "";
+            const link = item.match(/<link>(.*?)<\/link>/)?.[1] || "";
+            const pubDateStr = item.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] || "";
+            const descriptionMatch = item.match(/<description>([\s\S]*?)<\/description>/);
+            const description = descriptionMatch ? descriptionMatch[1] : "";
+
+            return {
+              title: decodeHTMLEntities(title),
+              link,
+              pubDate: new Date(pubDateStr),
+              description: decodeHTMLEntities(description),
+            };
+          })
+          .filter((post) => post.pubDate.getFullYear() !== 1)
+          .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime())
+          .slice(0, POST_COUNT);
+
+          return posts;
+        } catch (error) {
+          return null;
+        }
+      }
+
+      // Update DOM with fresh posts
+      function updateBlogSection(posts) {
+        const section = document.querySelector('[aria-labelledby="latest-writing-heading"]');
+        if (!section || posts.length === 0) return;
+
+        const articlesContainer = section.querySelector(".mt-12");
+        if (!articlesContainer) return;
+
+        // Clear existing posts
+        articlesContainer.innerHTML = "";
+
+        // Add fresh posts
+        posts.forEach((post) => {
+          const article = document.createElement("article");
+          article.className = "py-6 md:py-8 border-t border-hairline grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-start";
+          article.setAttribute("data-reveal", "");
+
+          article.innerHTML = `
+            <div>
+              <a href="${post.link}" target="_blank" rel="noopener noreferrer" class="group block">
+                <h3 class="font-display text-2xl md:text-3xl font-semibold tracking-tight group-hover:text-teal transition-colors">
+                  ${post.title}
+                </h3>
+              </a>
+              <p class="mt-2 font-mono text-xs tracking-widest text-muted uppercase">
+                ${formatDate(post.pubDate)}
+              </p>
+              <p class="mt-3 text-muted leading-relaxed max-w-2xl">
+                ${formatExcerpt(post.description, 150)}
+              </p>
+            </div>
+          `;
+
+          articlesContainer.appendChild(article);
+        });
+      }
+
+      // Fetch fresh posts after page load
+      fetchFreshPosts().then((posts) => {
+        if (posts && posts.length >= 2) {
+          updateBlogSection(posts);
+        }
+        // If fetch fails or returns fewer than 2 posts, build-time posts remain visible
+      });
+    })();
+  </script>
 </Base>

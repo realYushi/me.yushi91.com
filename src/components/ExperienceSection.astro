@@ -1,0 +1,51 @@
+---
+/**
+ * ExperienceSection - displays work experience and education.
+ *
+ * @param experience - Array of experience entries from content collection
+ */
+import { formatExperienceDate, formatExperienceTitle } from "../lib/experience";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  experience: CollectionEntry<"experience">[];
+}
+
+const { experience } = Astro.props;
+---
+
+<section
+  class="px-6 pb-24 md:px-12 lg:px-24 max-w-5xl mx-auto w-full"
+  aria-labelledby="experience-heading"
+>
+  <div class="border-t border-hairline">
+    <div class="py-6 md:py-8 border-b border-hairline flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="font-mono text-xs tracking-widest text-muted uppercase mb-3">
+          Experience
+        </p>
+        <h2 id="experience-heading" class="font-display text-3xl md:text-4xl font-semibold tracking-tight">
+          Product engineering, internships, and CS foundations.
+        </h2>
+      </div>
+    </div>
+
+    <div>
+      {experience.map((entry) => (
+        <article class="py-5 md:py-6 border-b border-hairline grid gap-2 md:grid-cols-[10rem_minmax(0,1fr)] md:items-baseline">
+          <p class="font-mono text-xs tracking-widest text-muted uppercase">
+            {formatExperienceDate(entry.data)}
+          </p>
+          <div>
+            <h3 class="font-display text-xl md:text-2xl font-semibold tracking-tight">
+              {formatExperienceTitle(entry.data)}
+            </h3>
+            <p class="mt-2 text-muted leading-relaxed">
+              {entry.data.summary}
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

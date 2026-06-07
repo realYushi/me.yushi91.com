@@ -19,4 +19,4 @@ A piece of work Yushi showcases. Exists in two tiers:
 - **Flagship project** — a selected project important enough to also have its own deep-dive case-study page (`/projects/<slug>`). A flagship is always also a selected project; the reverse is not true.
 
 ### Blog
-Yushi's *existing* technical blog, built with Hugo and hosted on a **separate domain**. Out of scope for this project. The profile site links out to it but does not contain or replicate it.
+Yushi's *existing* technical blog, built with Hugo and hosted on a **separate domain** (`blog.yushi91.com`). The profile site links out to it and includes a "Latest writing" section showing recent post previews as a recency signal — but does not replicate the full blog content.
