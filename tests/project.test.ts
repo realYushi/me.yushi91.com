@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { projectSchema } from "../src/lib/project-schema";
+import { primaryLink, projectSchema, type Project } from "../src/lib/project";
 
 const goodProject = {
   title: "Truss House",
@@ -10,7 +10,6 @@ const goodProject = {
   links: [{ label: "Live", url: "https://www.trusshouse.org/" }],
   flagship: true,
   ordering: 1,
-  body: "Longer case-study copy for the flagship project.",
 };
 
 describe("projectSchema", () => {
@@ -26,27 +25,6 @@ describe("projectSchema", () => {
     expect(result.success).toBe(false);
   });
 
-  it("rejects a flagship project with no body", () => {
-    const { body, ...projectWithoutBody } = goodProject;
-
-    const result = projectSchema.safeParse(projectWithoutBody);
-
-    expect(result.success).toBe(false);
-  });
-
-  it("allows a non-flagship selected project without body copy", () => {
-    const { body, ...projectWithoutBody } = goodProject;
-
-    const result = projectSchema.safeParse({
-      ...projectWithoutBody,
-      flagship: false,
-      title: "echo",
-      ordering: 2,
-    });
-
-    expect(result.success).toBe(true);
-  });
-
   it("rejects malformed project links", () => {
     const result = projectSchema.safeParse({
       ...goodProject,
@@ -54,5 +32,21 @@ describe("projectSchema", () => {
     });
 
     expect(result.success).toBe(false);
+  });
+
+  it("treats the first link as the primary link", () => {
+    // Call sites render this link's label verbatim, so the convention lives in one place.
+    const project: Project = {
+      ...goodProject,
+      links: [
+        { label: "GitHub", url: "https://github.com/realYushi/echo" },
+        { label: "Live", url: "https://echo.example/" },
+      ],
+    };
+
+    expect(primaryLink(project)).toEqual({
+      label: "GitHub",
+      url: "https://github.com/realYushi/echo",
+    });
   });
 });

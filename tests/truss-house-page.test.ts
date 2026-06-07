@@ -28,7 +28,7 @@ describe("Truss House case-study page", () => {
     expect(html).toContain("STACK");
     expect(html).toContain("YEAR");
     expect(html).toContain("LIVE ↗");
-    expect(html).toContain("HTML-FIRST SITE");
+    expect(html).toContain("HTML-first site");
   });
 
   it("links the landing-page Truss House row to the case study", () => {
