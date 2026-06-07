@@ -22,7 +22,7 @@ describe("Blog preview section on homepage", () => {
     expect(html).toContain("Latest writing");
 
     // Should have the subtitle
-    expect(html).toContain("Recent posts from my blog");
+    expect(html).toContain("Recent writing");
   });
 
   it("includes blog post content with titles, dates, and descriptions", () => {

@@ -1,6 +1,9 @@
 /**
  * RSS client - handles fetching RSS feeds from external sources.
  * Provides a clean interface for network operations with error handling.
+ *
+ * This is the server-side counterpart to src/lib/client/rss-fetch.ts.
+ * Both modules share the same BlogPost interface and INVALID_YEAR constant.
  */
 
 import { RSSParser, type RSSFeed, type RSSItem } from "./rss-parser";
@@ -13,6 +16,12 @@ export interface BlogPost {
 }
 
 const DEFAULT_BLOG_RSS_URL = "https://blog.yushi91.com/index.xml";
+
+/**
+ * Filter posts with invalid dates (year 0001 parsed as 2001 by JS Date).
+ * Shared constant with client/rss-fetch.ts for consistency.
+ */
+const INVALID_YEAR = 2001;
 
 /**
  * Fetch and parse RSS feed from the blog.
@@ -57,14 +66,14 @@ async function fetchRSSFeed(url: string): Promise<RSSFeed> {
 
 /**
  * Filter, sort, and limit posts.
- * - Filters out posts with pubDate year 0001 (e.g., About pages)
+ * - Filters out posts with pubDate year 0001 (parsed as 2001 by JS)
  * - Sorts by pubDate descending (newest first)
  * - Limits to requested count
  * @internal
  */
 function filterAndSortPosts(items: RSSItem[], count: number): BlogPost[] {
   return items
-    .filter((item) => item.pubDate.getFullYear() !== 2001) // Filter out year 0001 (parsed as 2001 by JS)
-    .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime()) // Sort newest first
-    .slice(0, count); // Limit to requested count
+    .filter((item) => item.pubDate.getFullYear() !== INVALID_YEAR)
+    .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime())
+    .slice(0, count);
 }

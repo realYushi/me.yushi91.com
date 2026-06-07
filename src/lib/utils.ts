@@ -4,30 +4,43 @@
  */
 
 /**
- * Decode HTML entities in text.
- * Handles common entities like &lt;, &gt;, &amp;, &nbsp;, etc.
+ * Decode HTML entities using browser DOM API
+ *
+ * Client-side only — requires document and createElement.
+ * More comprehensive than regex-based decoding as it handles all named entities.
+ *
+ * @param text - Text containing HTML entities
+ * @returns Decoded text
+ * @throws Error if called outside browser environment
+ *
+ * @example
+ * decodeHTMLEntitiesDOM("&lt;p&gt;Hello&lt;/p&gt;") // "<p>Hello</p>"
+ * decodeHTMLEntitiesDOM("Yushi's Blog") // "Yushi's Blog"
+ */
+export function decodeHTMLEntitiesDOM(text: string): string {
+  if (typeof document === "undefined") {
+    throw new Error("decodeHTMLEntitiesDOM requires browser environment");
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.innerHTML = text;
+  return textarea.value;
+}
+
+/**
+ * Decode HTML entities using regex replacement
+ *
+ * Server-side or client-safe alternative to DOM-based decoding.
+ * Handles common named entities but may miss some edge cases.
  *
  * @param text - Text containing HTML entities
  * @returns Decoded text
  *
  * @example
- * decodeHTMLEntities("&lt;p&gt;Hello&lt;/p&gt;") // "<p>Hello</p>"
- * decodeHTMLEntities("Yushi's Blog") // "Yushi's Blog"
+ * decodeHTMLEntitiesRegex("&lt;p&gt;Hello&lt;/p&gt;") // "<p>Hello</p>"
+ * decodeHTMLEntitiesRegex("Yushi's Blog") // "Yushi's Blog"
  */
-export function decodeHTMLEntities(text: string): string {
-  const textarea = typeof document !== "undefined"
-    ? (() => {
-        const el = document.createElement("textarea");
-        el.innerHTML = text;
-        return el;
-      })()
-    : null;
-
-  if (textarea) {
-    return textarea.value;
-  }
-
-  // Fallback for server-side: manual entity decoding
+export function decodeHTMLEntitiesRegex(text: string): string {
   return text
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
@@ -41,6 +54,24 @@ export function decodeHTMLEntities(text: string): string {
     .replace(/&rdquo;/g, '"')
     .replace(/&#39;/g, "'")
     .replace(/&#34;/g, '"');
+}
+
+/**
+ * Decode HTML entities with automatic context detection
+ *
+ * Uses DOM API in browser, falls back to regex on server.
+ * Deprecated in favor of explicit context-specific functions.
+ *
+ * @param text - Text containing HTML entities
+ * @returns Decoded text
+ * @deprecated Use decodeHTMLEntitiesDOM or decodeHTMLEntitiesRegex
+ */
+export function decodeHTMLEntities(text: string): string {
+  try {
+    return decodeHTMLEntitiesDOM(text);
+  } catch {
+    return decodeHTMLEntitiesRegex(text);
+  }
 }
 
 /**

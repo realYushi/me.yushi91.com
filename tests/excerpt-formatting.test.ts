@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatExcerpt } from "../src/lib/blog";
+import { formatExcerpt } from "../src/lib/utils";
 
 describe("formatExcerpt", () => {
   it("strips HTML tags from description", () => {

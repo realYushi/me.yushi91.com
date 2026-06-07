@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getLatestPosts } from "../src/lib/blog";
+import { getLatestPosts } from "../src/lib/rss-client";
 
 describe("getLatestPosts", () => {
   it("fetches and parses RSS feed into blog posts", async () => {
