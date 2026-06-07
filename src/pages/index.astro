@@ -40,47 +40,10 @@ const hasEnoughPosts = latestPosts.length >= 2;
     <section class="relative min-h-[calc(100dvh-4rem)] flex items-center">
       <div class="col-grid w-full max-w-6xl mx-auto px-5 md:px-12 lg:px-20 py-16 md:py-20">
         <div class="grid items-center gap-10 lg:gap-16 lg:grid-cols-[1fr_auto]">
-          <div class="max-w-4xl order-2 lg:order-1">
-            <p data-rise class="font-mono text-xs md:text-sm tracking-[0.22em] text-cobalt uppercase">
-              Full-Stack Product Engineer
-            </p>
-
-            <h1 data-rise="2" class="mt-6 font-display text-[clamp(2.75rem,6vw,5rem)] font-bold leading-[1.02] tracking-[-0.025em] text-balance">
-              I build products <span class="text-cobalt">end to end</span>.
-            </h1>
-
-            <p data-rise="3" class="mt-7 text-lg md:text-xl text-muted max-w-xl leading-relaxed">
-              From rough idea to shipped product. I move fast, then harden what earns it.
-            </p>
-
-            <div data-rise="4" class="mt-10 flex flex-wrap gap-3">
-              <a
-                href="mailto:realYushi@gmail.com"
-                class="magnetic-cta inline-flex items-center bg-ink text-canvas px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-colors duration-200 hover:bg-cobalt active:scale-[0.98]"
-              >
-                Get in touch
-              </a>
-              <a
-                href="#projects"
-                class="inline-flex items-center border border-hairline text-ink px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-all duration-200 hover:border-cobalt hover:text-cobalt active:scale-[0.98]"
-              >
-                See work
-              </a>
-              <a
-                href="/yushi-cui-cv.pdf"
-                download="Yushi-Cui-CV.pdf"
-                class="inline-flex items-center gap-1.5 border border-hairline text-ink px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-all duration-200 hover:border-cobalt hover:text-cobalt active:scale-[0.98]"
-              >
-                Download CV
-                <span aria-hidden="true">↓</span>
-              </a>
-            </div>
-          </div>
-
           <!-- Portrait: transparent cutout, floats over the blueprint grid.
                Swaps treatment with the active scheme (clear lens in light, tinted
                in dark); no ground, so it never clashes with the canvas. -->
-          <div data-rise="3" class="order-1 lg:order-2 justify-self-center lg:justify-self-end w-44 sm:w-56 lg:w-72 shrink-0">
+          <div data-rise="3" class="order-1 lg:order-2 justify-self-center lg:justify-self-end w-48 sm:w-56 md:w-64 lg:w-72 shrink-0">
             <img
               src="/profile-light.png"
               alt="Portrait of Yushi Cui"
@@ -98,6 +61,43 @@ const hasEnoughPosts = latestPosts.length >= 2;
               class="portrait-dark w-full h-auto"
             />
           </div>
+
+          <div class="max-w-4xl order-2 lg:order-1">
+            <p data-rise class="font-mono text-xs md:text-sm tracking-[0.22em] text-cobalt uppercase">
+              Full-Stack Product Engineer
+            </p>
+
+            <h1 data-rise="2" class="mt-6 font-display text-[clamp(2.75rem,6vw,5rem)] font-bold leading-[1.02] tracking-[-0.025em] text-balance">
+              I build products <span class="text-cobalt">end to end</span>.
+            </h1>
+
+            <p data-rise="3" class="mt-7 text-lg md:text-xl text-muted max-w-xl leading-relaxed">
+              From rough idea to shipped product. I move fast, then harden what earns it.
+            </p>
+
+            <div data-rise="4" class="mt-10 flex flex-col sm:flex-row flex-wrap gap-3">
+              <a
+                href="mailto:realYushi@gmail.com"
+                class="magnetic-cta inline-flex items-center justify-center bg-ink text-canvas px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-colors duration-200 hover:bg-cobalt active:scale-[0.98] w-full sm:w-auto"
+              >
+                Get in touch
+              </a>
+              <a
+                href="#projects"
+                class="inline-flex items-center justify-center border border-hairline text-ink px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-all duration-200 hover:border-cobalt hover:text-cobalt active:scale-[0.98] w-full sm:w-auto"
+              >
+                See work
+              </a>
+              <a
+                href="/yushi-cui-cv.pdf"
+                download="Yushi-Cui-CV.pdf"
+                class="inline-flex items-center justify-center gap-1.5 border border-hairline text-ink px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-all duration-200 hover:border-cobalt hover:text-cobalt active:scale-[0.98] w-full sm:w-auto"
+              >
+                Download CV
+                <span aria-hidden="true">↓</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -105,16 +105,18 @@ const hasEnoughPosts = latestPosts.length >= 2;
     <!-- Status band: real, current credential facts + outbound authority -->
     <section class="border-y border-hairline" aria-label="At a glance">
       <div class="max-w-6xl mx-auto px-5 md:px-12 lg:px-20 py-5 grid gap-4 md:grid-cols-[1fr_1fr_auto] md:items-center font-mono text-xs tracking-[0.12em] uppercase">
-        {current && current.kind === "role" && (
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4">
+          {current && current.kind === "role" && (
+            <p class="flex items-baseline gap-2">
+              <span class="text-muted shrink-0">Currently</span>
+              <span class="text-ink truncate">{current.org}</span>
+            </p>
+          )}
           <p class="flex items-baseline gap-2">
-            <span class="text-muted">Currently</span>
-            <span class="text-ink truncate">{current.org}</span>
+            <span class="text-muted shrink-0">Based in</span>
+            <span class="text-ink">Auckland, New Zealand</span>
           </p>
-        )}
-        <p class="flex items-baseline gap-2">
-          <span class="text-muted">Based in</span>
-          <span class="text-ink">Auckland, New Zealand</span>
-        </p>
+        </div>
         <nav class="flex gap-5 md:gap-7 md:justify-end" aria-label="Profiles">
           <a href="https://github.com/realYushi" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-cobalt transition-colors">GitHub</a>
           <a href="https://www.linkedin.com/in/yushi-cui/" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-cobalt transition-colors">LinkedIn</a>
@@ -199,9 +201,9 @@ const hasEnoughPosts = latestPosts.length >= 2;
                   {project.data.summary}
                 </p>
 
-                <ul class="mt-6 flex flex-wrap gap-2" aria-label={`${project.data.title} stack`}>
+                <ul class="mt-6 flex flex-wrap gap-x-2 gap-y-1.5" aria-label={`${project.data.title} stack`}>
                   {project.data.stack.map((item) => (
-                    <li class="rounded-[var(--radius-control)] bg-canvas border border-hairline px-3 py-1 font-mono text-[0.625rem] tracking-widest text-muted uppercase">
+                    <li class="rounded-[var(--radius-control)] bg-canvas border border-hairline px-2.5 py-1 font-mono text-[0.625rem] tracking-widest text-muted uppercase">
                       {item}
                     </li>
                   ))}
@@ -277,16 +279,16 @@ const hasEnoughPosts = latestPosts.length >= 2;
         </p>
       </div>
 
-      <ol class="timeline-track mt-12 relative border-l border-hairline pl-6 md:pl-10">
+      <ol class="timeline-track mt-12 relative border-l border-hairline pl-5 sm:pl-6 md:pl-10">
         {experience.map((entry) => (
-          <li data-reveal class="relative pb-12 last:pb-0">
-            <span class="absolute -left-[calc(1.5rem+5px)] md:-left-[calc(2.5rem+5px)] top-2 h-2.5 w-2.5 rounded-full bg-canvas border-2 border-cobalt"></span>
+          <li data-reveal class="relative pb-10 sm:pb-12 last:pb-0">
+            <span class="absolute -left-[calc(1.25rem+5px)] sm:-left-[calc(1.5rem+5px)] md:-left-[calc(2.5rem+5px)] top-2 h-2.5 w-2.5 rounded-full bg-canvas border-2 border-cobalt"></span>
             <div class="grid gap-2 md:grid-cols-[9rem_minmax(0,1fr)] md:items-baseline">
               <p class="font-mono text-xs tracking-widest text-muted uppercase">
                 {formatExperienceDate(entry.data)}
               </p>
               <div>
-                <h3 class="font-display text-xl md:text-2xl font-semibold tracking-tight">
+                <h3 class="font-display text-lg sm:text-xl md:text-2xl font-semibold tracking-tight">
                   {formatExperienceTitle(entry.data)}
                 </h3>
                 <p class="mt-2 text-muted leading-relaxed">
@@ -302,7 +304,7 @@ const hasEnoughPosts = latestPosts.length >= 2;
 
   <!-- Contact band: always-dark closing panel -->
   <footer id="contact" class="bg-dark-band text-on-band" aria-labelledby="contact-heading">
-    <div class="col-grid on-band-grid px-5 md:px-12 lg:px-20 py-24 md:py-28 max-w-6xl mx-auto w-full grid gap-12 lg:grid-cols-2 lg:gap-20">
+    <div class="col-grid on-band-grid px-5 md:px-12 lg:px-20 py-16 md:py-24 lg:py-28 max-w-6xl mx-auto w-full grid gap-12 lg:grid-cols-2 lg:gap-20">
       <div data-reveal>
         <h2 id="contact-heading" class="font-display text-3xl md:text-5xl font-bold tracking-tight">
           Let's build something worth shipping.
@@ -313,7 +315,7 @@ const hasEnoughPosts = latestPosts.length >= 2;
 
         <a
           href="mailto:realYushi@gmail.com"
-          class="mt-7 inline-block font-display font-semibold text-xl hover:text-cobalt transition-colors"
+          class="mt-7 inline-block font-display font-semibold text-xl hover:text-cobalt transition-colors break-all"
         >
           realYushi@gmail.com
         </a>
