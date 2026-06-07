@@ -20,7 +20,7 @@ const goodEducation = {
   kind: "education",
   degree: "B.CompSci",
   institution: "AUT",
-  dates: "2020–2023",
+  dates: "2020-2023",
   summary: "Bachelor of Computer and Information Sciences.",
   ordering: 4,
 };
@@ -76,16 +76,16 @@ describe("experience formatters", () => {
 
   it("renders 'Present' when a role has not ended", () => {
     // An open-ended role must read as current, not as a blank end date.
-    expect(formatExperienceDate({ ...role, end: null })).toBe("2025–Present");
+    expect(formatExperienceDate({ ...role, end: null })).toBe("2025-Present");
   });
 
   it("renders the closed date range when a role has ended", () => {
-    expect(formatExperienceDate({ ...role, start: "2023", end: "2024" })).toBe("2023–2024");
+    expect(formatExperienceDate({ ...role, start: "2023", end: "2024" })).toBe("2023-2024");
   });
 
   it("uses the education's own dates string and never its (absent) start/end", () => {
     // Education has no start/end in the union; the formatter must read `dates`.
-    expect(formatExperienceDate(education)).toBe("2020–2023");
+    expect(formatExperienceDate(education)).toBe("2020-2023");
   });
 
   it("titles a role as 'role · org'", () => {

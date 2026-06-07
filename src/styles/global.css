@@ -1,58 +1,213 @@
 @import "tailwindcss";
 
-@theme {
-  /* Palette */
-  --color-canvas: #ffffff;
-  --color-ink: #17171c;
-  --color-muted: #6b6b75;
-  --color-hairline: #e2e2e5;
-  --color-dark-band: #0c2a26;
-  --color-teal: #0e7c6b;
+/* ── Brand tokens ──────────────────────────────────────────────────────────
+   One locked accent (teal). Dual theme via prefers-color-scheme: light is the
+   neutral default, dark is the primary expression for the AI-native-engineer
+   feel. Semantic vars swap at runtime; `@theme inline` maps utilities to the
+   vars (not their values) so bg-canvas / text-ink react to the active scheme.
+   `--dark-band` and `--on-band` are intentionally fixed: the contact band is
+   always a dark panel in both themes. */
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-hairline: var(--hairline);
+  --color-teal: var(--teal);
+  --color-teal-soft: var(--teal-soft);
+  --color-dark-band: var(--dark-band);
+  --color-on-band: var(--on-band);
+  --color-on-band-muted: var(--on-band-muted);
 
-  /* Radii */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
+  /* Shape system: cards 12px, controls 10px, chips are pill (rounded-full). */
+  --radius-card: 0.75rem;
+  --radius-control: 0.625rem;
 
-  /* Spacing scale */
-  --spacing-page-x: clamp(1.5rem, 5vw, 6rem);
-  --spacing-section-y: clamp(6rem, 14vw, 10rem);
-  --spacing-content: 64rem;
-
-  /* Type scale */
-  --text-eyebrow: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-  --text-lede: clamp(1.125rem, 1rem + 0.45vw, 1.25rem);
-  --text-hero: clamp(2.75rem, 11vw, 5rem);
-
-  /* Font families */
   --font-display: "Space Grotesk", sans-serif;
   --font-body: "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
 
-/* Flagship case study: native markdown body styled to match the site's
-   editorial, mono-label treatment. */
+:root {
+  --canvas: #ffffff;
+  --surface: #f6f8f7;
+  --ink: #11221e;
+  --muted: #5a6b66;
+  --hairline: #e3e7e5;
+  --teal: #0e7c6b;
+  --teal-soft: rgba(14, 124, 107, 0.08);
+
+  /* Fixed across themes: the contact band is always dark. */
+  --dark-band: #0c2a26;
+  --on-band: #eef3f1;
+  --on-band-muted: rgba(238, 243, 241, 0.66);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --canvas: #061d19;
+    --surface: #0c2a26;
+    --ink: #e9efec;
+    --muted: #8ea7a0;
+    --hairline: #1d3b35;
+    --teal: #2ac5aa;
+    --teal-soft: rgba(42, 197, 170, 0.12);
+  }
+}
+
+/* ── Hero aurora ───────────────────────────────────────────────────────────
+   Honest layered radial gradients (not an image, not a fake screenshot). Sits
+   behind the hero only, never on a scrolling container, no pointer events. */
+.hero-aurora {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-aurora::before,
+.hero-aurora::after {
+  content: "";
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(72px);
+  opacity: 0.5;
+}
+
+.hero-aurora::before {
+  width: 38rem;
+  height: 38rem;
+  top: -14rem;
+  right: -10rem;
+  background: radial-gradient(circle, var(--teal) 0%, transparent 68%);
+}
+
+.hero-aurora::after {
+  width: 26rem;
+  height: 26rem;
+  bottom: -12rem;
+  left: -6rem;
+  background: radial-gradient(circle, var(--teal) 0%, transparent 70%);
+  opacity: 0.22;
+}
+
+@media (prefers-color-scheme: dark) {
+  .hero-aurora::before { opacity: 0.28; }
+  .hero-aurora::after { opacity: 0.18; }
+}
+
+/* ── Motion (MOTION_INTENSITY 6) ───────────────────────────────────────────
+   CSS-only. No scroll listeners. Everything is gated behind no-preference, so
+   reduced-motion users (and unsupported browsers) get the static, fully
+   visible layout. `[data-rise]` is an on-load entrance; `[data-reveal]` is a
+   scroll-driven reveal via the view() timeline. */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-rise] {
+    animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  [data-rise="2"] { animation-delay: 0.08s; }
+  [data-rise="3"] { animation-delay: 0.16s; }
+  [data-rise="4"] { animation-delay: 0.24s; }
+  [data-rise="5"] { animation-delay: 0.32s; }
+
+  @supports (animation-timeline: view()) {
+    [data-reveal] {
+      animation: rise both linear;
+      animation-timeline: view();
+      animation-range: entry 0% cover 32%;
+    }
+
+    /* Experience timeline: a teal line draws down the rail as the list scrolls
+       through the viewport, visualizing progression through time. Sits over the
+       static hairline border-l; the milestone dots ride on top of it. */
+    .timeline-track::before {
+      content: "";
+      position: absolute;
+      left: -1px;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      background: var(--teal);
+      transform-origin: top;
+      transform: scaleY(0);
+      animation: draw-line both linear;
+      animation-timeline: view();
+      animation-range: cover 6% cover 70%;
+    }
+  }
+
+  /* Page scroll-progress hairline (wayfinding). scroll(root) tracks document
+     scroll; unsupported browsers simply never show the bar. */
+  @supports (animation-timeline: scroll()) {
+    .scroll-progress {
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: 2px;
+      z-index: 50;
+      background: var(--teal);
+      transform-origin: left;
+      transform: scaleX(0);
+      animation: progress-grow both linear;
+      animation-timeline: scroll(root);
+    }
+  }
+}
+
+@keyframes draw-line {
+  to { transform: scaleY(1); }
+}
+
+@keyframes progress-grow {
+  to { transform: scaleX(1); }
+}
+
+/* ── Flagship case study: editorial long-form body ─────────────────────────
+   Numbered display subheads (Space Grotesk), generous reading measure. */
+.case-study {
+  counter-reset: case-section;
+}
+
 .case-study h2 {
+  counter-increment: case-section;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--ink);
+  border-top: 1px solid var(--hairline);
+  padding-top: 2.5rem;
+  margin-top: 3rem;
+}
+
+.case-study h2::before {
+  content: counter(case-section, decimal-leading-zero);
+  display: block;
   font-family: var(--font-mono);
-  font-size: var(--text-eyebrow);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-  border-top: 1px solid var(--color-hairline);
-  padding-top: 2rem;
-  margin-top: 2rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--teal);
+  margin-bottom: 0.85rem;
 }
 
 .case-study p {
-  max-width: 48rem;
-  margin-top: 1rem;
-  font-size: 1.125rem;
-  line-height: 1.7;
-  color: var(--color-ink);
+  max-width: 42rem;
+  margin-top: 1.1rem;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--ink);
 }
 
 .case-study > p:first-child {
-  font-size: var(--text-lede);
-  color: var(--color-muted);
+  max-width: 46rem;
+  font-size: var(--text-lede, 1.25rem);
+  line-height: 1.6;
+  color: var(--muted);
 }
-
