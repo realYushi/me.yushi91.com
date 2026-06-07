@@ -26,16 +26,31 @@ Connect to Git**.
 - Build output directory: `dist`
 - Framework preset: Astro
 
-## 2. Point the apex at the project
+## 2. Move the zone to Cloudflare first (prerequisite)
+
+`yushi91.com` is **registered at Porkbun and its DNS is authoritative there**
+(`*.ns.porkbun.com`), currently pointing the apex at **GitHub Pages**
+(`185.199.108–111.153`). Adding a "custom domain" in Pages does **not** touch
+DNS that lives at Porkbun, so the apex must be moved onto Cloudflare — this is
+also required for the step-3 Redirect Rule (a zone-level feature).
+
+1. Cloudflare → **Add a site** → `yushi91.com` (Free plan); let it import DNS.
+2. Cloudflare assigns two nameservers (e.g. `x.ns.cloudflare.com`).
+3. Porkbun → `yushi91.com` → **Authoritative Nameservers** → replace the four
+   `*.ns.porkbun.com` entries with Cloudflare's two. Wait for the zone to go
+   "Active" (minutes–hours).
+
+## 3. Point the apex at the project
 
 Pages project → **Custom domains → Set up a custom domain** → `yushi91.com`.
-Cloudflare provisions the CNAME/`A` records and the TLS cert. The apex is
-currently a clean 404, so there is nothing to clobber.
+Now that Cloudflare is authoritative, it creates the record + TLS cert and
+routes the apex to the Pages project. Remove any leftover GitHub Pages `A`/`AAAA`
+records on the apex if the import carried them over.
 
 Do **not** add `me.yushi91.com` as a custom domain on this Pages project — see
-step 3 for why.
+step 4 for why.
 
-## 3. 301-redirect `me.yushi91.com` → apex (preserves the LinkedIn "Featured" link)
+## 4. 301-redirect `me.yushi91.com` → apex (preserves the LinkedIn "Featured" link)
 
 Use a zone-level **Redirect Rule**, *not* a Pages `_redirects` file. Pages
 `_redirects` matches on **path only, not hostname**, and applies to every custom
@@ -73,7 +88,7 @@ curl -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/rulesets" \
   }'
 ```
 
-## 4. Post-deploy verification (maps to the acceptance criteria)
+## 5. Post-deploy verification (maps to the acceptance criteria)
 
 - [ ] `https://yushi91.com` serves the static build (correct fonts/palette).
 - [ ] `curl -sI https://me.yushi91.com` returns `301` with
