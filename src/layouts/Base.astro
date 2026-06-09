@@ -68,13 +68,7 @@ const head = buildHeadMetadata(meta);
       </>
     )}
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fonts (self-hosted via @font-face in global.css) -->
   </head>
   <body class="bg-canvas text-ink font-body antialiased">
     <div class="scroll-progress" aria-hidden="true"></div>
@@ -88,7 +82,7 @@ const head = buildHeadMetadata(meta);
         <nav class="flex items-center gap-4 sm:gap-5 md:gap-8 font-mono text-[0.625rem] sm:text-[0.6875rem] md:text-xs tracking-[0.18em] uppercase">
           <a href="/#projects" class="text-muted hover:text-ink transition-colors">Work</a>
           <a href="/#writing" class="hidden sm:inline text-muted hover:text-ink transition-colors">Writing</a>
-          <a href="/#contact" class="text-muted hover:text-ink transition-colors">Contact</a>
+          <a href="/#contact" class="text-muted hover:text-ink transition-colors">Say hi</a>
           <button
             id="theme-toggle"
             class="theme-toggle -mr-1 w-8 h-8 rounded-full flex items-center justify-center text-muted hover:text-ink transition-colors shrink-0"
