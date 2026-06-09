@@ -91,6 +91,11 @@ describe("Deploy readiness (apex build correctness)", () => {
       .join("\n");
 
     expect(html).toContain("hero-portrait");
+    expect(html).toContain('rel="preload"');
+    expect(html).toContain('as="image"');
+    expect(html).toContain('href="/profile-light-320.webp"');
+    expect(html).toContain('imagesrcset="/profile-light-320.webp 320w, /profile-light-480.webp 480w, /profile-light-720.webp 720w"');
+    expect(html).toContain('fetchpriority="high"');
     expect(html).not.toContain("profile-light.png");
     expect(html).not.toContain("profile-dark.png");
     expect(css).toContain("profile-light-320.webp");
