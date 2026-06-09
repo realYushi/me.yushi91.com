@@ -1,18 +1,18 @@
 export const SITE_URL = "https://yushi91.com";
 
 const HOME_SLUG = "/";
-const DEFAULT_HOME_DESCRIPTION = "Yushi Cui is a full-stack product engineer in Auckland, NZ, building AI-assisted products, typed content systems, and fast Astro/TypeScript apps.";
+const DEFAULT_HOME_DESCRIPTION = "Yushi Cui is a full-stack product engineer in Auckland, NZ, working on AI-assisted products, typed content systems, and Astro/TypeScript apps.";
 const PERSON_ID = `${SITE_URL}/#person`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
 
 export const HOME_FAQ = [
   {
     question: "Who is Yushi Cui?",
-    answer: "Yushi Cui is a full-stack product engineer based in Auckland, New Zealand, building AI-assisted products, typed content systems, and fast web applications.",
+    answer: "Yushi Cui is a full-stack product engineer in Auckland, New Zealand. He works on AI-assisted products, typed content systems, and fast web applications.",
   },
   {
     question: "What does Yushi Cui build?",
-    answer: "Yushi builds end-to-end web products, AI-assisted workflows, Astro and TypeScript applications, React interfaces, and retrieval-augmented generation systems.",
+    answer: "Yushi builds web products, AI-assisted workflows, Astro and TypeScript applications, React interfaces, and retrieval-augmented generation systems.",
   },
   {
     question: "What technologies does Yushi Cui work with?",
@@ -20,7 +20,7 @@ export const HOME_FAQ = [
   },
   {
     question: "Where is Yushi Cui based?",
-    answer: "Yushi Cui is based in Auckland, New Zealand, and works on product engineering, AI-native workflows, and full-stack web applications.",
+    answer: "Yushi Cui is based in Auckland, New Zealand, and works on product engineering, AI workflows, and full-stack web applications.",
   },
 ] as const;
 

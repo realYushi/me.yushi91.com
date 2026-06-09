@@ -1,26 +1,26 @@
 # Yushi Cui - Full-Stack Product Engineer
 
-Yushi Cui is a full-stack product engineer based in Auckland, New Zealand. He builds AI-assisted products, typed content systems, fast Astro/TypeScript web applications, React interfaces, and retrieval-augmented generation workflows.
+Yushi Cui is a full-stack product engineer in Auckland, New Zealand. He works on AI-assisted products, typed content systems, Astro/TypeScript sites, React interfaces, and RAG workflows.
 
 ## Canonical site
 
-- [Homepage and selected work](https://yushi91.com/) - profile, work samples, experience, FAQ, and contact links.
+- [Homepage and selected work](https://yushi91.com/) - profile, work, experience, FAQ, and contact links.
 - [Sitemap](https://yushi91.com/sitemap.xml) - XML sitemap for crawl discovery.
 - [Sitemap index](https://yushi91.com/sitemap-index.xml) - Astro sitemap index.
 - [Robots.txt](https://yushi91.com/robots.txt) - crawl rules for search and AI crawlers.
 
 ## Key pages
 
-- [Profile and selected work](https://yushi91.com/) - Yushi Cui's homepage and portfolio overview.
-- [Truss House case study](https://yushi91.com/projects/truss-house/) - typed Astro, TypeScript, Keystatic, and RAG housing-platform case study.
+- [Profile and selected work](https://yushi91.com/) - Yushi Cui's homepage and portfolio.
+- [Truss House case study](https://yushi91.com/projects/truss-house/) - marketing site rebuild plus a customer-facing RAG chatbot for a housing website.
 - [About](https://yushi91.com/about/) - background, working style, and engineering focus.
 - [Contact](https://yushi91.com/contact/) - direct email and profile links.
-- [Privacy](https://yushi91.com/privacy/) - privacy notes for the static portfolio and contact form.
+- [Privacy](https://yushi91.com/privacy/) - privacy notes for this static site and contact form.
 - [Terms](https://yushi91.com/terms/) - basic site-use terms.
 
 ## Writing
 
-- [Blog](https://blog.yushi91.com/) - notes on engineering, product development, and AI workflows.
+- [Blog](https://blog.yushi91.com/) - notes on engineering, product work, and AI workflows.
 - [RSS feed](https://blog.yushi91.com/index.xml) - latest writing feed.
 
 ## Profiles
@@ -30,11 +30,13 @@ Yushi Cui is a full-stack product engineer based in Auckland, New Zealand. He bu
 
 ## Technology references
 
-- [Astro documentation](https://docs.astro.build/) - static-first web framework used in portfolio and case-study work.
-- [TypeScript documentation](https://www.typescriptlang.org/docs/) - typed JavaScript tooling used across projects.
-- [React documentation](https://react.dev/) - interface library used in selected product work.
+- [Astro documentation](https://docs.astro.build/) - static web framework used in portfolio and case-study work.
+- [TypeScript documentation](https://www.typescriptlang.org/docs/) - typed JavaScript tooling.
+- [Tailwind CSS documentation](https://tailwindcss.com/docs) - utility CSS used in the Truss House rebuild.
+- [Next.js documentation](https://nextjs.org/docs) - React framework used for the separate Truss House chatbot app.
+- [React documentation](https://react.dev/) - interface library used in product work.
 - [Keystatic documentation](https://keystatic.com/docs) - Git-backed content editing referenced in the Truss House case study.
-- [Schema.org FAQPage](https://schema.org/FAQPage) - structured FAQ format used for answer-engine readability.
+- [Schema.org FAQPage](https://schema.org/FAQPage) - structured FAQ format used on the case study.
 
 ## Topics
 

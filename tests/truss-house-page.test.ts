@@ -23,7 +23,7 @@ describe("Truss House case-study page", () => {
 
     const html = readPage();
 
-    expect(html).toContain("Client-facing housing platform rebuilt around typed content");
+    expect(html).toContain("Marketing site rebuild and customer-facing RAG chatbot");
     // Skim-first metadata labels (rendered uppercase via CSS, not literal caps).
     expect(html).toContain("Role</dt>");
     expect(html).toContain("Stack</dt>");
@@ -34,9 +34,15 @@ describe("Truss House case-study page", () => {
     expect(html).toContain("Source links");
     expect(html).toContain("Astro content collections documentation");
     expect(html).toContain("TypeScript documentation");
+    expect(html).toContain("Tailwind CSS documentation");
+    expect(html).toContain("Next.js documentation");
+    expect(html).toContain("Vercel documentation");
     expect(html).toContain("Google Search Central structured data introduction");
     expect(html).toContain("FAQ answers exposed for search and answer engines");
-    expect(html).toContain("Answer first: I made the public housing content available as static, semantic HTML");
+    expect(html).toContain("Short answer: I made the public housing content static, semantic HTML");
+    expect(html).toContain("Customer-facing RAG chatbot");
+    expect(html).toContain("semantic search and embeddings");
+    expect(html).toContain("zero impact on the initial page load for the marketing site");
   });
 
   it("links the landing-page Truss House row to the case study", () => {
@@ -51,7 +57,7 @@ describe("Truss House case-study page", () => {
     expect(html).toContain('rel="canonical" href="https://yushi91.com/projects/truss-house/"');
     expect(html).toContain('property="og:url" content="https://yushi91.com/projects/truss-house/"');
     expect(html).toContain('property="og:title" content="Truss House - Yushi Cui"');
-    expect(html).toContain('property="og:description" content="Client-facing housing platform rebuilt around typed content, fast search, and AI-assisted workflows."');
+    expect(html).toContain('property="og:description" content="Marketing site rebuild and customer-facing RAG chatbot for a housing technology company."');
     expect(html).toContain('"@type":"BreadcrumbList"');
     expect(html).toContain('"citation"');
   });

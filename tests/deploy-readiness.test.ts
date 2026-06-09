@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { beforeAll, describe, expect, it } from "vitest";
 
@@ -67,6 +67,38 @@ describe("Deploy readiness (apex build correctness)", () => {
     expect(html).toContain('href="/contact/"');
     expect(html).toContain('href="/privacy/"');
     expect(html).toContain('href="/terms/"');
+  });
+
+  it("ships Cloudflare headers for baseline browser security", () => {
+    expect(existsSync(dist("_headers"))).toBe(true);
+
+    const headers = readFileSync(dist("_headers"), "utf8");
+
+    expect(headers).toContain("Strict-Transport-Security: max-age=31536000");
+    expect(headers).toContain("X-Frame-Options: DENY");
+    expect(headers).toContain("Cross-Origin-Opener-Policy: same-origin");
+    expect(headers).toContain("frame-ancestors 'none'");
+    expect(headers).toContain("connect-src 'self' https://blog.yushi91.com");
+    expect(headers).toContain("form-action https://api.web3forms.com");
+  });
+
+  it("uses responsive WebP hero portraits instead of the large PNG pair", () => {
+    const html = readFileSync(dist("index.html"), "utf8");
+    const cssFiles = readdirSync(join(root, "dist", "_astro"))
+      .filter((file) => file.endsWith(".css"));
+    const css = cssFiles
+      .map((file) => readFileSync(join(root, "dist", "_astro", file), "utf8"))
+      .join("\n");
+
+    expect(html).toContain("hero-portrait");
+    expect(html).not.toContain("profile-light.png");
+    expect(html).not.toContain("profile-dark.png");
+    expect(css).toContain("profile-light-320.webp");
+    expect(css).toContain("profile-light-480.webp");
+    expect(css).toContain("profile-light-720.webp");
+    expect(css).toContain("profile-dark-320.webp");
+    expect(css).toContain("profile-dark-480.webp");
+    expect(css).toContain("profile-dark-720.webp");
   });
 
   it("serves a homepage canonical pointing at the apex", () => {

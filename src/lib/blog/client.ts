@@ -16,10 +16,10 @@ export { type BlogPost, type BlogPostOptions };
  * Returns null on error.
  */
 export async function fetchBlogPosts(options: BlogPostOptions = {}): Promise<BlogPost[] | null> {
-  const { url = DEFAULT_BLOG_RSS_URL, count = 3 } = options;
+  const { url = DEFAULT_BLOG_RSS_URL, count = 3, timeoutMs } = options;
 
   try {
-    const xmlText = await fetchRSS(url);
+    const xmlText = await fetchRSS(url, timeoutMs);
     const feed = parseRSS(xmlText, decodeWithDOM);
     return filterSortAndSlice(feed.items, { count }, INVALID_YEAR);
   } catch {
@@ -49,10 +49,23 @@ export function updateBlogSection(posts: BlogPost[]): void {
 }
 
 /**
- * Initialize fresh blog posts on page load.
- * Fetches posts from the RSS feed and updates the DOM if successful.
+ * Initialize fresh blog posts when the browser is idle.
+ * The page already has build-time posts, so this is a bounded enhancement.
  */
-export async function initFreshBlogPosts(options?: BlogPostOptions): Promise<void> {
+export function initFreshBlogPosts(options?: BlogPostOptions): void {
+  const refresh = async () => {
+    await refreshBlogPosts(options);
+  };
+
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(refresh, { timeout: options?.timeoutMs ?? 2500 });
+    return;
+  }
+
+  window.setTimeout(refresh, 1200);
+}
+
+async function refreshBlogPosts(options?: BlogPostOptions): Promise<void> {
   const posts = await fetchBlogPosts(options);
   if (posts && posts.length >= 2) {
     updateBlogSection(posts);

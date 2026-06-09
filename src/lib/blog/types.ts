@@ -11,6 +11,7 @@ export interface BlogPost {
 
 export interface BlogPostOptions {
   count?: number;
+  timeoutMs?: number;
   url?: string;
 }
 

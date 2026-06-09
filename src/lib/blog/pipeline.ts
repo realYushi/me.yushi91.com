@@ -65,10 +65,21 @@ export function filterSortAndSlice(
  * Fetch RSS feed from URL.
  * Throws on error — caller decides how to handle failures.
  */
-export async function fetchRSS(url: string): Promise<string> {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+export async function fetchRSS(url: string, timeoutMs?: number): Promise<string> {
+  const controller = timeoutMs ? new AbortController() : null;
+  const timeout = controller
+    ? globalThis.setTimeout(() => controller.abort(), timeoutMs)
+    : null;
+
+  try {
+    const response = await fetch(url, { signal: controller?.signal });
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    return response.text();
+  } finally {
+    if (timeout !== null) {
+      globalThis.clearTimeout(timeout);
+    }
   }
-  return response.text();
 }

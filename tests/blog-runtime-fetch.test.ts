@@ -23,6 +23,14 @@ describe("Runtime fetch for blog preview updates", () => {
     expect(html).toContain("blog.yushi91.com/index.xml");
   });
 
+  it("defers and bounds the runtime refresh so it does not compete with LCP", () => {
+    const html = readFileSync(dist("index.html"), "utf8");
+
+    expect(html).toContain("requestIdleCallback");
+    expect(html).toContain("timeoutMs:2500");
+    expect(html).toContain("AbortController");
+  });
+
   it("script handles fetch failure gracefully", () => {
     const html = readFileSync(dist("index.html"), "utf8");
 

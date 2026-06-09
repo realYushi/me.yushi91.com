@@ -145,17 +145,36 @@
 }
 
 /* ── Hero portrait theme swap ──────────────────────────────────────────────
-   Each portrait variant carries its own ground (paper vs near-black), so it
-   swaps with the active scheme instead of sitting on a clashing canvas. Mirrors
-   the var logic: light is the default; `.dark` (manual) and the no-override
-   media query both flip to the dark portrait. */
-.portrait-dark { display: none; }
-html.dark .portrait-light { display: none; }
-html.dark .portrait-dark { display: block; }
+   Use responsive WebP backgrounds so only the active theme variant downloads.
+   Light is the default; `.dark` and dark system preference flip the image. */
+.hero-portrait {
+  aspect-ratio: 3 / 4;
+  background-image: image-set(
+    url("/profile-light-320.webp") 1x,
+    url("/profile-light-480.webp") 1.5x,
+    url("/profile-light-720.webp") 2x
+  );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+html.dark .hero-portrait {
+  background-image: image-set(
+    url("/profile-dark-320.webp") 1x,
+    url("/profile-dark-480.webp") 1.5x,
+    url("/profile-dark-720.webp") 2x
+  );
+}
 
 @media (prefers-color-scheme: dark) {
-  html:not(.light) .portrait-light { display: none; }
-  html:not(.light) .portrait-dark { display: block; }
+  html:not(.light) .hero-portrait {
+    background-image: image-set(
+      url("/profile-dark-320.webp") 1x,
+      url("/profile-dark-480.webp") 1.5x,
+      url("/profile-dark-720.webp") 2x
+    );
+  }
 }
 
 /* ── Theme toggle button ───────────────────────────────────────────────────── */
