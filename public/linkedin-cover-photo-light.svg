@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1584 396" role="img" aria-label="Yushi Cui — Full-Stack Product Engineer">
+  <!-- Photographic LinkedIn cover, LIGHT variant (1584x396, 4:1). Same composition
+       as og-cover-photo-light: paper ground, subject on the right, light scrim
+       fading left so the ink type stays legible. The 4:1 banner is far wider than
+       the OG, so the portrait is fit by height (xMaxYMid meet — full head-and-
+       shoulders, no crop) and the open left half carries the type. The portrait's
+       own paper ground continues seamlessly into the flat paper fill behind it. -->
+  <defs>
+    <linearGradient id="li-scrim-light" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"    stop-color="#f6f7f8" stop-opacity="0.92" />
+      <stop offset="0.45" stop-color="#f6f7f8" stop-opacity="0.78" />
+      <stop offset="0.68" stop-color="#f6f7f8" stop-opacity="0.30" />
+      <stop offset="1"    stop-color="#f6f7f8" stop-opacity="0" />
+    </linearGradient>
+    <!-- Feathers the portrait's left edge into the flat paper so the meet
+         letterbox seam and the portrait's grid lines dissolve away. -->
+    <linearGradient id="li-edge-fade" gradientUnits="userSpaceOnUse"
+                    x1="840" y1="0" x2="1180" y2="0">
+      <stop offset="0" stop-color="#000" />
+      <stop offset="1" stop-color="#fff" />
+    </linearGradient>
+    <mask id="li-photo-mask">
+      <rect width="1584" height="396" fill="url(#li-edge-fade)" />
+    </mask>
+  </defs>
+
+  <rect width="1584" height="396" fill="#f6f7f8" />
+
+  <image href="og-portrait-light.png" x="0" y="0" width="1584" height="396"
+         preserveAspectRatio="xMaxYMid meet" mask="url(#li-photo-mask)" />
+
+  <rect width="1584" height="396" fill="url(#li-scrim-light)" />
+
+  <text x="424" y="132" font-family="JetBrains Mono" font-size="22" font-weight="500"
+        letter-spacing="4.5" fill="#2038e6">FULL-STACK PRODUCT ENGINEER</text>
+
+  <text x="420" y="232" font-family="Space Grotesk" font-size="72" font-weight="700"
+        letter-spacing="-2.5" fill="#14181d">I build products</text>
+  <text x="420" y="312" font-family="Space Grotesk" font-size="72" font-weight="700"
+        letter-spacing="-2.5" fill="#2038e6">end to end<tspan fill="#14181d">.</tspan></text>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1584 396" role="img" aria-label="Yushi Cui — Full-Stack Product Engineer">
+  <!-- Cobalt Blueprint LinkedIn cover dark variant. Near-black canvas with lighter
+       grid, brighter cobalt, and white ink. Same layout as light, inverted for
+       dark mode contexts. -->
+  <defs>
+    <linearGradient id="li-grid-fade-dark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0" />
+      <stop offset="0.15" stop-color="#000" stop-opacity="1" />
+      <stop offset="0.85" stop-color="#000" stop-opacity="1" />
+      <stop offset="1" stop-color="#000" stop-opacity="0" />
+    </linearGradient>
+    <mask id="li-grid-mask-dark">
+      <rect width="1584" height="396" fill="url(#li-grid-fade-dark)" />
+    </mask>
+    <clipPath id="li-mark-card-dark">
+      <rect x="1384" y="48" width="120" height="120" rx="26" />
+    </clipPath>
+  </defs>
+
+  <rect width="1584" height="396" fill="#0b0e13" />
+
+  <!-- 12-column blueprint guides (grid-line), faded top and bottom. -->
+  <g stroke="#ffffff" stroke-opacity="0.04" stroke-width="1" mask="url(#li-grid-mask-dark)">
+    <line x1="132"  y1="0" x2="132"  y2="396" />
+    <line x1="264"  y1="0" x2="264"  y2="396" />
+    <line x1="396"  y1="0" x2="396"  y2="396" />
+    <line x1="528"  y1="0" x2="528"  y2="396" />
+    <line x1="660"  y1="0" x2="660"  y2="396" />
+    <line x1="792"  y1="0" x2="792"  y2="396" />
+    <line x1="924"  y1="0" x2="924"  y2="396" />
+    <line x1="1056" y1="0" x2="1056" y2="396" />
+    <line x1="1188" y1="0" x2="1188" y2="396" />
+    <line x1="1320" y1="0" x2="1320" y2="396" />
+    <line x1="1452" y1="0" x2="1452" y2="396" />
+  </g>
+
+  <!-- Monogram mark, top-right. -->
+  <g clip-path="url(#li-mark-card-dark)">
+    <rect x="1384" y="48" width="120" height="120" fill="#0a0d12" />
+    <g transform="translate(1384 48) scale(0.6667)">
+      <path d="M39 48h23l28 47 28-47h23l-40 68v28H79v-28L39 48Z" fill="#ffffff" />
+      <path d="M124 120c-9 8-20 12-34 12-29 0-52-23-52-52s23-52 52-52c14 0 25 4 34 12l-15 15c-5-5-12-7-19-7-17 0-30 13-30 32s13 32 30 32c8 0 14-2 20-8l14 16Z" fill="#6e8cff" />
+    </g>
+  </g>
+
+  <!-- Eyebrow -->
+  <text x="72" y="132" font-family="JetBrains Mono" font-size="22" font-weight="500"
+        letter-spacing="4.5" fill="#6e8cff">FULL-STACK PRODUCT ENGINEER</text>
+
+  <!-- Headline (Space Grotesk bold, white ink with bright cobalt accent) -->
+  <text x="72" y="232" font-family="Space Grotesk" font-size="72" font-weight="700"
+        letter-spacing="-2" fill="#e8ebee">I build products</text>
+  <text x="72" y="316" font-family="Space Grotesk" font-size="72" font-weight="700"
+        letter-spacing="-2" fill="#6e8cff">end to end<tspan fill="#e8ebee">.</tspan></text>
+
+  <!-- Bottom identity line -->
+  <line x1="72" y1="352" x2="1512" y2="352" stroke="#232a33" stroke-width="1" />
+  <text x="72" y="380" font-family="Space Grotesk" font-size="20" font-weight="600"
+        fill="#e8ebee">Yushi Cui</text>
+  <text x="1512" y="380" text-anchor="end" font-family="JetBrains Mono" font-size="16"
+        letter-spacing="2" fill="#8b94a0">AUCKLAND, NEW ZEALAND</text>
+</svg>
