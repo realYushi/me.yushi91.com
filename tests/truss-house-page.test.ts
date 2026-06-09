@@ -30,6 +30,10 @@ describe("Truss House case-study page", () => {
     expect(html).toContain("Year</dt>");
     expect(html).toContain("LIVE ↗");
     expect(html).toContain("HTML-first site");
+    expect(html).toContain("Snapshot");
+    expect(html).toContain("Source links");
+    expect(html).toContain("Astro content collections documentation");
+    expect(html).toContain("FAQ answers exposed for search and answer engines");
   });
 
   it("links the landing-page Truss House row to the case study", () => {
@@ -45,5 +49,7 @@ describe("Truss House case-study page", () => {
     expect(html).toContain('property="og:url" content="https://yushi91.com/projects/truss-house/"');
     expect(html).toContain('property="og:title" content="Truss House - Yushi Cui"');
     expect(html).toContain('property="og:description" content="Client-facing housing platform rebuilt around typed content, fast search, and AI-assisted workflows."');
+    expect(html).toContain('"@type":"BreadcrumbList"');
+    expect(html).toContain('"citation"');
   });
 });

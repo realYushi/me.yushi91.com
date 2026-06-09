@@ -7,10 +7,16 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
 Allow: /
 
 User-agent: PerplexityBot
@@ -19,7 +25,19 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
+User-agent: Claude-User
+Allow: /
+
 User-agent: anthropic-ai
 Allow: /
 
+User-agent: Applebot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
 Sitemap: https://yushi91.com/sitemap-index.xml
+Sitemap: https://yushi91.com/sitemap.xml
+
+# AI/agent summary: https://yushi91.com/llms.txt

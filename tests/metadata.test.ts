@@ -117,15 +117,31 @@ describe("buildHeadMetadata", () => {
           answer: "Yushi Cui built a crawlable Astro website with typed content and AI-assisted workflows.",
         },
       ],
+      citations: [
+        {
+          label: "Astro content collections documentation",
+          url: "https://docs.astro.build/en/guides/content-collections/",
+        },
+      ],
+      metrics: [
+        {
+          value: "3",
+          label: "FAQ answers exposed for search and answer engines",
+        },
+      ],
     });
 
     const graph = ld["@graph"] as Array<Record<string, any>>;
     const creativeWork = graph.find((item) => item["@type"] === "CreativeWork");
     const faq = graph.find((item) => item["@type"] === "FAQPage");
+    const breadcrumbs = graph.find((item) => item["@type"] === "BreadcrumbList");
 
     expect(creativeWork?.url).toBe(`${SITE_URL}/projects/truss-house/`);
     expect(creativeWork?.keywords).toContain("Full-stack engineer");
+    expect(creativeWork?.citation[0].url).toBe("https://docs.astro.build/en/guides/content-collections/");
+    expect(creativeWork?.abstract).toContain("3 FAQ answers");
     expect(faq?.mainEntity[0].name).toBe("What did Yushi Cui build for Truss House?");
+    expect(breadcrumbs?.itemListElement[2].item).toBe(`${SITE_URL}/projects/truss-house/`);
   });
 
   it("fails if Person JSON-LD stops identifying Yushi Cui", () => {

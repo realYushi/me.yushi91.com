@@ -10,6 +10,16 @@ const projectFaqSchema = z.object({
   answer: z.string().trim().min(1),
 });
 
+const projectCitationSchema = z.object({
+  label: z.string().trim().min(1),
+  url: z.url(),
+});
+
+const projectMetricSchema = z.object({
+  value: z.string().trim().min(1),
+  label: z.string().trim().min(1),
+});
+
 export const projectSchema = z.object({
   title: z.string().trim().min(1),
   summary: z.string().trim().min(1),
@@ -20,6 +30,8 @@ export const projectSchema = z.object({
   flagship: z.boolean(),
   ordering: z.number().int().min(1),
   faq: z.array(projectFaqSchema).optional(),
+  citations: z.array(projectCitationSchema).optional(),
+  metrics: z.array(projectMetricSchema).optional(),
 });
 
 export type Project = z.infer<typeof projectSchema>;

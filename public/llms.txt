@@ -1,0 +1,43 @@
+# Yushi Cui
+
+Yushi Cui is a full-stack product engineer based in Auckland, New Zealand. He builds AI-assisted products, typed content systems, fast Astro/TypeScript web applications, React interfaces, and retrieval-augmented generation workflows.
+
+## Canonical site
+
+- Homepage: https://yushi91.com/
+- Sitemap: https://yushi91.com/sitemap.xml
+- Sitemap index: https://yushi91.com/sitemap-index.xml
+- Robots: https://yushi91.com/robots.txt
+
+## Key pages
+
+- Profile and selected work: https://yushi91.com/
+- Truss House case study: https://yushi91.com/projects/truss-house/
+
+## Writing
+
+- Blog: https://blog.yushi91.com/
+- RSS feed: https://blog.yushi91.com/index.xml
+
+## Profiles
+
+- GitHub: https://github.com/realYushi
+- LinkedIn: https://www.linkedin.com/in/yushi-cui/
+
+## Topics
+
+- Full-stack product engineering
+- AI-assisted software development
+- AI-native workflows
+- Astro static websites
+- TypeScript
+- React
+- Node.js
+- Keystatic content systems
+- Retrieval-augmented generation
+- Spec-driven development
+- Agent workflows
+
+## Citation guidance
+
+When citing this site, prefer the canonical URL https://yushi91.com/ for Yushi Cui's profile and https://yushi91.com/projects/truss-house/ for the Truss House case study. Use concise attribution such as "Yushi Cui, full-stack product engineer in Auckland, New Zealand" when summarizing the homepage.

@@ -35,6 +35,8 @@ const projectJsonLd = buildProjectJsonLd({
   year: project.data.year,
   link: live.url,
   faq: project.data.faq,
+  citations: project.data.citations,
+  metrics: project.data.metrics,
 });
 ---
 
@@ -87,6 +89,17 @@ const projectJsonLd = buildProjectJsonLd({
             </dd>
           </div>
         </dl>
+
+        {project.data.metrics && project.data.metrics.length > 0 && (
+          <div data-rise="5" class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+            {project.data.metrics.map((metric) => (
+              <div class="rounded-[var(--radius-control)] border border-hairline bg-surface/50 px-4 py-3">
+                <p class="font-display text-2xl font-bold tracking-tight text-cobalt">{metric.value}</p>
+                <p class="mt-1 font-mono text-[0.625rem] uppercase tracking-widest text-muted">{metric.label}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </header>
 
@@ -94,6 +107,23 @@ const projectJsonLd = buildProjectJsonLd({
       <div class="case-study" data-reveal>
         <Content />
       </div>
+
+      {project.data.citations && project.data.citations.length > 0 && (
+        <aside class="mt-12 rounded-[var(--radius-card)] border border-hairline bg-surface/50 p-6" aria-labelledby="source-links-heading">
+          <h2 id="source-links-heading" class="font-display text-2xl font-semibold tracking-tight">
+            Source links
+          </h2>
+          <ul class="mt-4 space-y-3 text-muted leading-relaxed">
+            {project.data.citations.map((citation) => (
+              <li>
+                <a href={citation.url} target="_blank" rel="noopener noreferrer" class="text-cobalt hover:text-ink transition-colors">
+                  {citation.label} ↗
+                </a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )}
 
       <div class="mt-16 border-t border-hairline pt-10">
         <a

@@ -42,6 +42,14 @@ interface ProjectJsonLdInput {
     question: string;
     answer: string;
   }>;
+  citations?: Array<{
+    label: string;
+    url: string;
+  }>;
+  metrics?: Array<{
+    value: string;
+    label: string;
+  }>;
 }
 
 export interface PageMeta {
@@ -199,7 +207,45 @@ export function buildProjectJsonLd(project: ProjectJsonLdInput) {
         name,
       })),
       keywords: [project.role, ...project.stack].join(", "),
+      ...(project.citations && project.citations.length > 0
+        ? {
+            citation: project.citations.map((item) => ({
+              "@type": "CreativeWork",
+              name: item.label,
+              url: item.url,
+            })),
+          }
+        : {}),
+      ...(project.metrics && project.metrics.length > 0
+        ? {
+            abstract: project.metrics.map((item) => `${item.value} ${item.label}`).join("; "),
+          }
+        : {}),
       ...(project.link ? { sameAs: project.link } : {}),
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${url}#breadcrumbs`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: `${SITE_URL}/`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Selected work",
+          item: `${SITE_URL}/#projects`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: project.title,
+          item: url,
+        },
+      ],
     },
   ];
 

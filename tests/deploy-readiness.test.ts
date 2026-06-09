@@ -30,9 +30,27 @@ describe("Deploy readiness (apex build correctness)", () => {
 
   it("emits a sitemap rooted at the apex so search engines index the canonical host", () => {
     expect(existsSync(dist("sitemap-index.xml"))).toBe(true);
+    expect(existsSync(dist("sitemap.xml"))).toBe(true);
     const urls = readFileSync(dist("sitemap-0.xml"), "utf8");
+    const sitemap = readFileSync(dist("sitemap.xml"), "utf8");
     expect(urls).toContain(`${APEX}/`);
+    expect(sitemap).toContain(`${APEX}/sitemap-0.xml`);
     expect(urls).not.toContain("me.yushi91.com");
+  });
+
+  it("ships llms.txt and AI-safe crawl rules", () => {
+    expect(existsSync(dist("llms.txt"))).toBe(true);
+
+    const llms = readFileSync(dist("llms.txt"), "utf8");
+    const robots = readFileSync(dist("robots.txt"), "utf8");
+
+    expect(llms).toContain("Yushi Cui");
+    expect(llms).toContain(`${APEX}/projects/truss-house/`);
+    expect(robots).toContain("User-agent: GPTBot");
+    expect(robots).toContain("User-agent: OAI-SearchBot");
+    expect(robots).toContain("User-agent: PerplexityBot");
+    expect(robots).toContain("User-agent: ClaudeBot");
+    expect(robots).toContain(`${APEX}/llms.txt`);
   });
 
   it("serves a homepage canonical pointing at the apex", () => {
