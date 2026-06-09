@@ -35,14 +35,14 @@ describe("Truss House case-study page", () => {
   it("links the landing-page Truss House row to the case study", () => {
     const html = readFileSync(join(process.cwd(), "dist/index.html"), "utf8");
 
-    expect(html).toContain('href="/projects/truss-house"');
+    expect(html).toContain('href="/projects/truss-house/"');
   });
 
   it("emits per-page canonical and Open Graph metadata", () => {
     const html = readPage();
 
-    expect(html).toContain('rel="canonical" href="https://yushi91.com/projects/truss-house"');
-    expect(html).toContain('property="og:url" content="https://yushi91.com/projects/truss-house"');
+    expect(html).toContain('rel="canonical" href="https://yushi91.com/projects/truss-house/"');
+    expect(html).toContain('property="og:url" content="https://yushi91.com/projects/truss-house/"');
     expect(html).toContain('property="og:title" content="Truss House - Yushi Cui"');
     expect(html).toContain('property="og:description" content="Client-facing housing platform rebuilt around typed content, fast search, and AI-assisted workflows."');
   });

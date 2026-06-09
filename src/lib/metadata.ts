@@ -1,9 +1,28 @@
 export const SITE_URL = "https://yushi91.com";
 
 const HOME_SLUG = "/";
-const DEFAULT_HOME_DESCRIPTION = "Yushi Cui is a full-stack product engineer in Auckland, NZ, building AI-assisted products, typed content systems, and fast web applications.";
+const DEFAULT_HOME_DESCRIPTION = "Yushi Cui is a full-stack product engineer in Auckland, NZ, building AI-assisted products, typed content systems, and fast Astro/TypeScript apps.";
 const PERSON_ID = `${SITE_URL}/#person`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
+
+export const HOME_FAQ = [
+  {
+    question: "Who is Yushi Cui?",
+    answer: "Yushi Cui is a full-stack product engineer based in Auckland, New Zealand, building AI-assisted products, typed content systems, and fast web applications.",
+  },
+  {
+    question: "What does Yushi Cui build?",
+    answer: "Yushi builds end-to-end web products, AI-assisted workflows, Astro and TypeScript applications, React interfaces, and retrieval-augmented generation systems.",
+  },
+  {
+    question: "What technologies does Yushi Cui work with?",
+    answer: "Yushi works with Astro, TypeScript, React, Node.js, Keystatic, static site delivery, AI agents, and retrieval-augmented generation workflows.",
+  },
+  {
+    question: "Where is Yushi Cui based?",
+    answer: "Yushi Cui is based in Auckland, New Zealand, and works on product engineering, AI-native workflows, and full-stack web applications.",
+  },
+] as const;
 
 const PROFILE_LINKS = [
   "https://github.com/realYushi",
@@ -58,7 +77,13 @@ export interface HeadMetadata {
 }
 
 function absoluteUrl(slug: string): string {
-  return new URL(slug, SITE_URL).toString();
+  const url = new URL(slug, SITE_URL);
+
+  if (!url.pathname.endsWith("/") && !url.pathname.includes(".")) {
+    url.pathname = `${url.pathname}/`;
+  }
+
+  return url.toString();
 }
 
 function personSchema() {
@@ -69,11 +94,20 @@ function personSchema() {
     url: SITE_URL,
     image: `${SITE_URL}/avatar-photo-800.png`,
     jobTitle: "Full-Stack Product Engineer",
+    worksFor: {
+      "@type": "Organization",
+      name: "GrowLab Technologies",
+    },
+    alumniOf: {
+      "@type": "EducationalOrganization",
+      name: "Auckland University of Technology",
+    },
     address: {
       "@type": "PostalAddress",
       addressLocality: "Auckland",
       addressCountry: "NZ",
     },
+    knowsLanguage: ["English", "Chinese"],
     knowsAbout: [
       "Full-stack product engineering",
       "AI-assisted software development",
@@ -117,6 +151,21 @@ function buildHomeAdditionalJsonLd(description: string) {
       inLanguage: "en-NZ",
       isPartOf: { "@id": WEBSITE_ID },
       mainEntity: { "@id": PERSON_ID },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": `${SITE_URL}/#faq`,
+      url: `${SITE_URL}/`,
+      inLanguage: "en-NZ",
+      mainEntity: HOME_FAQ.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
     },
   ];
 }

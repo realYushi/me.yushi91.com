@@ -24,7 +24,7 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 const live = primaryLink(project.data);
 const stack = project.data.stack.join(" / ");
-const projectSlug = `/projects/${project.id}`;
+const projectSlug = `/projects/${project.id}/`;
 const projectDescription = project.data.summary;
 const projectJsonLd = buildProjectJsonLd({
   slug: projectSlug,

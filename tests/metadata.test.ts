@@ -20,7 +20,7 @@ describe("buildHeadMetadata", () => {
       slug: "/projects/truss-house",
       title: "Truss House",
     });
-    expect(meta.canonical).toBe(SITE_URL + "/projects/truss-house");
+    expect(meta.canonical).toBe(SITE_URL + "/projects/truss-house/");
   });
 
   it("includes Open Graph tags with title, url, and type", () => {
@@ -72,6 +72,8 @@ describe("buildHeadMetadata", () => {
     expect(ld.name).toBe("Yushi Cui");
     expect(ld.url).toBe(SITE_URL);
     expect(ld.jobTitle).toBe("Full-Stack Product Engineer");
+    expect(ld.worksFor.name).toBe("GrowLab Technologies");
+    expect(ld.alumniOf.name).toBe("Auckland University of Technology");
   });
 
   it("does not produce Person JSON-LD on non-homepage slugs", () => {
@@ -82,7 +84,7 @@ describe("buildHeadMetadata", () => {
     expect(meta.jsonLd).toBeNull();
   });
 
-  it("adds WebSite and ProfilePage JSON-LD on the homepage", () => {
+  it("adds WebSite, ProfilePage, and FAQPage JSON-LD on the homepage", () => {
     const meta = buildHeadMetadata({
       slug: "/",
       title: "Home",
@@ -91,11 +93,13 @@ describe("buildHeadMetadata", () => {
 
     const schemas = meta.additionalJsonLd.map((jsonLd) => JSON.parse(jsonLd));
 
-    expect(schemas).toHaveLength(2);
+    expect(schemas).toHaveLength(3);
     expect(schemas[0]["@type"]).toBe("WebSite");
     expect(schemas[0].author["@id"]).toBe(`${SITE_URL}/#person`);
     expect(schemas[1]["@type"]).toBe("ProfilePage");
     expect(schemas[1].mainEntity["@id"]).toBe(`${SITE_URL}/#person`);
+    expect(schemas[2]["@type"]).toBe("FAQPage");
+    expect(schemas[2].mainEntity[0].name).toBe("Who is Yushi Cui?");
   });
 
   it("builds project CreativeWork and FAQPage JSON-LD", () => {
@@ -119,7 +123,7 @@ describe("buildHeadMetadata", () => {
     const creativeWork = graph.find((item) => item["@type"] === "CreativeWork");
     const faq = graph.find((item) => item["@type"] === "FAQPage");
 
-    expect(creativeWork?.url).toBe(`${SITE_URL}/projects/truss-house`);
+    expect(creativeWork?.url).toBe(`${SITE_URL}/projects/truss-house/`);
     expect(creativeWork?.keywords).toContain("Full-stack engineer");
     expect(faq?.mainEntity[0].name).toBe("What did Yushi Cui build for Truss House?");
   });
