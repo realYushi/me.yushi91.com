@@ -1,0 +1,37 @@
+---
+import Base from "../layouts/Base.astro";
+
+const description = "Contact Yushi Cui for full-stack product engineering, AI-assisted product work, Astro, TypeScript, React, and agent workflow projects.";
+---
+
+<Base
+  meta={{
+    slug: "/contact/",
+    title: "Contact Yushi Cui - Product Engineering",
+    description,
+  }}
+>
+  <main class="px-5 md:px-12 lg:px-20 py-16 md:py-24 max-w-5xl mx-auto w-full">
+    <a href="/" class="font-mono text-xs tracking-widest uppercase text-muted hover:text-cobalt transition-colors">
+      ← Home
+    </a>
+
+    <h1 class="mt-10 font-display text-[clamp(2.75rem,7vw,5rem)] font-bold leading-[1.02] tracking-[-0.025em]">
+      Contact Yushi Cui
+    </h1>
+
+    <p class="mt-6 text-xl md:text-2xl text-muted leading-relaxed max-w-3xl font-medium">
+      Email me about product engineering, AI-assisted workflows, Astro/TypeScript builds, or practical full-stack product work.
+    </p>
+
+    <div class="mt-10 rounded-[var(--radius-card)] border border-hairline bg-surface/50 p-6">
+      <h2 class="font-display text-2xl font-semibold tracking-tight">Direct links</h2>
+      <ul class="mt-5 space-y-3 text-muted leading-relaxed">
+        <li><a href="mailto:realYushi@gmail.com" class="text-cobalt hover:text-ink transition-colors">realYushi@gmail.com</a></li>
+        <li><a href="https://github.com/realYushi" target="_blank" rel="noopener noreferrer" class="text-cobalt hover:text-ink transition-colors">GitHub ↗</a></li>
+        <li><a href="https://www.linkedin.com/in/yushi-cui/" target="_blank" rel="noopener noreferrer" class="text-cobalt hover:text-ink transition-colors">LinkedIn ↗</a></li>
+        <li><a href="https://blog.yushi91.com" target="_blank" rel="noopener noreferrer" class="text-cobalt hover:text-ink transition-colors">Blog ↗</a></li>
+      </ul>
+    </div>
+  </main>
+</Base>

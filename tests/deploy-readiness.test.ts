@@ -45,12 +45,28 @@ describe("Deploy readiness (apex build correctness)", () => {
     const robots = readFileSync(dist("robots.txt"), "utf8");
 
     expect(llms).toContain("Yushi Cui");
+    expect(llms).toContain("# Yushi Cui - Full-Stack Product Engineer");
+    expect(llms).toContain("[Truss House case study](https://yushi91.com/projects/truss-house/)");
     expect(llms).toContain(`${APEX}/projects/truss-house/`);
+    expect(llms).toContain("[Astro documentation](https://docs.astro.build/)");
     expect(robots).toContain("User-agent: GPTBot");
     expect(robots).toContain("User-agent: OAI-SearchBot");
     expect(robots).toContain("User-agent: PerplexityBot");
     expect(robots).toContain("User-agent: ClaudeBot");
     expect(robots).toContain(`${APEX}/llms.txt`);
+  });
+
+  it("ships and links trust pages from the homepage", () => {
+    for (const page of ["about", "contact", "privacy", "terms"]) {
+      expect(existsSync(dist(`${page}/index.html`))).toBe(true);
+    }
+
+    const html = readFileSync(dist("index.html"), "utf8");
+
+    expect(html).toContain('href="/about/"');
+    expect(html).toContain('href="/contact/"');
+    expect(html).toContain('href="/privacy/"');
+    expect(html).toContain('href="/terms/"');
   });
 
   it("serves a homepage canonical pointing at the apex", () => {

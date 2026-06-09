@@ -33,7 +33,10 @@ describe("Truss House case-study page", () => {
     expect(html).toContain("Snapshot");
     expect(html).toContain("Source links");
     expect(html).toContain("Astro content collections documentation");
+    expect(html).toContain("TypeScript documentation");
+    expect(html).toContain("Google Search Central structured data introduction");
     expect(html).toContain("FAQ answers exposed for search and answer engines");
+    expect(html).toContain("Answer first: I made the public housing content available as static, semantic HTML");
   });
 
   it("links the landing-page Truss House row to the case study", () => {

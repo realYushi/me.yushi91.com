@@ -31,9 +31,19 @@ describe("Contact band", () => {
     const html = readPage();
 
     expect(html).toContain("mailto:realYushi@gmail.com");
+    expect(html).toContain('href="/about/"');
+    expect(html).toContain('href="/contact/"');
     expect(html).toContain("https://github.com/realYushi");
     expect(html).toContain("https://www.linkedin.com/in/yushi-cui/");
     expect(html).toContain("https://blog.yushi91.com");
+  });
+
+  it("links privacy and terms from the footer trust navigation", () => {
+    const html = readPage();
+
+    expect(html).toContain('aria-label="Trust pages"');
+    expect(html).toContain('href="/privacy/"');
+    expect(html).toContain('href="/terms/"');
   });
 
   it("posts the form to Web3Forms client-side with no backend of our own", () => {
