@@ -30,7 +30,8 @@ describe("Truss House case-study page", () => {
     expect(html).toContain("Year</dt>");
     expect(html).toContain("LIVE ↗");
     expect(html).toContain("HTML-first site");
-    expect(html).toContain("Snapshot");
+    // Flagship case study leads with a real screenshot of the live site.
+    expect(html).toContain("/projects/truss-house-1600.webp");
     expect(html).toContain("Source links");
     expect(html).toContain("Astro content collections documentation");
     expect(html).toContain("TypeScript documentation");
@@ -38,11 +39,10 @@ describe("Truss House case-study page", () => {
     expect(html).toContain("Next.js documentation");
     expect(html).toContain("Vercel documentation");
     expect(html).toContain("Google Search Central structured data introduction");
-    expect(html).toContain("FAQ answers exposed for search and answer engines");
-    expect(html).toContain("Short answer: I made the public housing content static, semantic HTML");
+    expect(html).toContain("I made the public housing content plain semantic HTML");
     expect(html).toContain("Customer-facing RAG chatbot");
     expect(html).toContain("semantic search and embeddings");
-    expect(html).toContain("zero impact on the initial page load for the marketing site");
+    expect(html).toContain("it adds nothing to the first page load");
   });
 
   it("links the landing-page Truss House row to the case study", () => {

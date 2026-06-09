@@ -77,14 +77,6 @@ const homeDescription = "Yushi Cui is a full-stack product engineer in Auckland,
               >
                 See work
               </a>
-              <a
-                href="/yushi-cui-cv.pdf"
-                download="Yushi-Cui-CV.pdf"
-                class="inline-flex items-center justify-center gap-1.5 border border-hairline text-ink px-6 py-3 font-display font-semibold text-sm tracking-wide rounded-[var(--radius-control)] transition-all duration-200 hover:border-cobalt hover:text-cobalt active:scale-[0.98] w-full sm:w-auto"
-              >
-                Download CV
-                <span aria-hidden="true">↓</span>
-              </a>
             </div>
           </div>
         </div>
@@ -110,6 +102,7 @@ const homeDescription = "Yushi Cui is a full-stack product engineer in Auckland,
           <a href="https://github.com/realYushi" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-cobalt transition-colors">GitHub</a>
           <a href="https://www.linkedin.com/in/yushi-cui/" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-cobalt transition-colors">LinkedIn</a>
           <a href="https://blog.yushi91.com" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-cobalt transition-colors">Blog</a>
+          <a href="/yushi-cui-cv.pdf" download="Yushi-Cui-CV.pdf" class="text-muted hover:text-cobalt transition-colors inline-flex items-center gap-1">CV<span aria-hidden="true">↓</span></a>
         </nav>
       </div>
     </section>
@@ -151,17 +144,19 @@ const homeDescription = "Yushi Cui is a full-stack product engineer in Auckland,
                 project.data.flagship ? "bg-cobalt-soft md:flex-row md:gap-10" : "bg-surface/50",
               ]}
             >
-              <span
-                aria-hidden="true"
-                class:list={[
-                  "card-index pointer-events-none absolute",
-                  project.data.flagship
-                    ? "top-6 right-7 text-[5rem] md:text-[8rem]"
-                    : "top-5 right-6 text-[3.5rem] md:text-[4.5rem]",
-                ]}
-              >
-                {ordinal}
-              </span>
+              {!(project.data.flagship && project.data.image) && (
+                <span
+                  aria-hidden="true"
+                  class:list={[
+                    "card-index pointer-events-none absolute",
+                    project.data.flagship
+                      ? "top-6 right-7 text-[5rem] md:text-[8rem]"
+                      : "top-5 right-6 text-[3.5rem] md:text-[4.5rem]",
+                  ]}
+                >
+                  {ordinal}
+                </span>
+              )}
 
               <div class="relative flex flex-col flex-1">
                 {project.data.flagship && (
@@ -219,6 +214,22 @@ const homeDescription = "Yushi Cui is a full-stack product engineer in Auckland,
                   </a>
                 </div>
               </div>
+
+              {project.data.image && (
+                <div class="relative mt-7 md:mt-0 md:self-center md:w-[42%] md:shrink-0">
+                  <img
+                    src={`${project.data.image}-960.webp`}
+                    srcset={`${project.data.image}-640.webp 640w, ${project.data.image}-960.webp 960w`}
+                    sizes="(min-width: 768px) 26rem, 100vw"
+                    width="960"
+                    height="600"
+                    loading="lazy"
+                    decoding="async"
+                    alt={`Screenshot of the ${project.data.title} live site`}
+                    class="w-full rounded-[var(--radius-card)] border border-hairline"
+                  />
+                </div>
+              )}
             </article>
           );
         })}

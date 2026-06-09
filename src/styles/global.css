@@ -245,6 +245,7 @@ html.dark .moon-icon {
   [data-rise="3"] { animation-delay: 0.18s; }
   [data-rise="4"] { animation-delay: 0.26s; }
   [data-rise="5"] { animation-delay: 0.34s; }
+  [data-rise="6"] { animation-delay: 0.42s; }
 
   @supports (animation-timeline: view()) {
     [data-reveal] {

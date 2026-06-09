@@ -27,6 +27,11 @@ export const projectSchema = z.object({
   stack: z.array(z.string().trim().min(1)).min(1),
   year: z.number().int().min(2000).max(2100),
   links: z.array(projectLinkSchema).min(1),
+  // Optional card thumbnail. Value is a public path base without size/extension
+  // (e.g. "/projects/truss-house"); the card builds `${image}-640.webp` and
+  // `${image}-960.webp` for a responsive srcset. Only set it for live projects
+  // with a real screenshot.
+  image: z.string().trim().min(1).optional(),
   flagship: z.boolean(),
   ordering: z.number().int().min(1),
   faq: z.array(projectFaqSchema).optional(),

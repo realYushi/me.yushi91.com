@@ -52,7 +52,7 @@ const projectJsonLd = buildProjectJsonLd({
   <main>
     <!-- Header: editorial title block -->
     <header>
-      <div class="max-w-5xl mx-auto w-full px-5 md:px-12 lg:px-20 pt-10 pb-10 md:pt-14 md:pb-12">
+      <div class="col-grid max-w-5xl mx-auto w-full px-5 md:px-12 lg:px-20 pt-10 pb-10 md:pt-14 md:pb-12">
         <a href="/#projects" class="font-mono text-xs tracking-widest uppercase text-muted hover:text-cobalt transition-colors">
           ← Selected work
         </a>
@@ -90,15 +90,21 @@ const projectJsonLd = buildProjectJsonLd({
           </div>
         </dl>
 
-        {project.data.metrics && project.data.metrics.length > 0 && (
-          <div data-rise="5" class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-            {project.data.metrics.map((metric) => (
-              <div class="rounded-[var(--radius-control)] border border-hairline bg-surface/50 px-4 py-3">
-                <p class="font-display text-2xl font-bold tracking-tight text-cobalt">{metric.value}</p>
-                <p class="mt-1 font-mono text-[0.625rem] uppercase tracking-widest text-muted">{metric.label}</p>
-              </div>
-            ))}
-          </div>
+        {project.data.image && (
+          <figure data-rise="5" class="mt-10 md:mt-12">
+            <img
+              src={`${project.data.image}-1600.webp`}
+              srcset={`${project.data.image}-960.webp 960w, ${project.data.image}-1600.webp 1600w`}
+              sizes="(min-width: 1024px) 64rem, 100vw"
+              width="1600"
+              height="1000"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              alt={`Screenshot of the ${project.data.title} live site`}
+              class="w-full rounded-[var(--radius-card)] border border-hairline"
+            />
+          </figure>
         )}
       </div>
     </header>
@@ -113,7 +119,7 @@ const projectJsonLd = buildProjectJsonLd({
           <h2 id="source-links-heading" class="font-display text-2xl font-semibold tracking-tight">
             Source links
           </h2>
-          <ul class="mt-4 space-y-3 text-muted leading-relaxed">
+          <ul class="mt-4 grid gap-x-10 gap-y-3 sm:grid-cols-2 text-muted leading-relaxed">
             {project.data.citations.map((citation) => (
               <li>
                 <a href={citation.url} target="_blank" rel="noopener noreferrer" class="text-cobalt hover:text-ink transition-colors">

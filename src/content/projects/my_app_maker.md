@@ -9,8 +9,8 @@ stack:
   - LLM
 year: 2025
 links:
-  - label: Live demo
-    url: https://my-app-maker.yushi91.com/
+  - label: GitHub
+    url: https://github.com/realYushi/my_app_maker
 flagship: false
 ordering: 3
 ---
