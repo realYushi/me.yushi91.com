@@ -5,6 +5,11 @@ const projectLinkSchema = z.object({
   url: z.url(),
 });
 
+const projectFaqSchema = z.object({
+  question: z.string().trim().min(1),
+  answer: z.string().trim().min(1),
+});
+
 export const projectSchema = z.object({
   title: z.string().trim().min(1),
   summary: z.string().trim().min(1),
@@ -14,6 +19,7 @@ export const projectSchema = z.object({
   links: z.array(projectLinkSchema).min(1),
   flagship: z.boolean(),
   ordering: z.number().int().min(1),
+  faq: z.array(projectFaqSchema).optional(),
 });
 
 export type Project = z.infer<typeof projectSchema>;

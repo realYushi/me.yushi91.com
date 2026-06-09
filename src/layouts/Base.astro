@@ -41,6 +41,9 @@ const head = buildHeadMetadata(meta);
 
     <!-- JSON-LD -->
     {head.jsonLd && <script is:inline type="application/ld+json" set:html={head.jsonLd} />}
+    {head.additionalJsonLd.map((jsonLd) => (
+      <script is:inline type="application/ld+json" set:html={jsonLd} />
+    ))}
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

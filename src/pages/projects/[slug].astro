@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import Base from "../../layouts/Base.astro";
+import { buildProjectJsonLd } from "../../lib/metadata";
 import { primaryLink } from "../../lib/project";
 
 export async function getStaticPaths() {
@@ -23,13 +24,27 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 const live = primaryLink(project.data);
 const stack = project.data.stack.join(" / ");
+const projectSlug = `/projects/${project.id}`;
+const projectDescription = project.data.summary;
+const projectJsonLd = buildProjectJsonLd({
+  slug: projectSlug,
+  title: project.data.title,
+  description: projectDescription,
+  role: project.data.role,
+  stack: project.data.stack,
+  year: project.data.year,
+  link: live.url,
+  faq: project.data.faq,
+});
 ---
 
 <Base
   meta={{
-    slug: `/projects/${project.id}`,
+    slug: projectSlug,
     title: `${project.data.title} - Yushi Cui`,
-    description: project.data.summary,
+    description: projectDescription,
+    ogType: "article",
+    jsonLd: projectJsonLd,
   }}
 >
   <main>

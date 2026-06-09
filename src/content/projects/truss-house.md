@@ -13,26 +13,55 @@ links:
     url: https://www.trusshouse.org/
 flagship: true
 ordering: 1
+faq:
+  - question: What did Yushi Cui build for Truss House?
+    answer: Yushi Cui built the production Truss House website as a typed, content-driven Astro application with semantic HTML, per-page metadata, fast static delivery, and AI-assisted workflows around housing content.
+  - question: What technology stack did the Truss House project use?
+    answer: The Truss House project used Astro, TypeScript, Keystatic, and retrieval-augmented generation workflows to support a static-first public website and grounded AI assistance.
+  - question: How was the Truss House site optimized for search and answer engines?
+    answer: The Truss House site was built with crawlable HTML, direct page copy, structured content, per-page metadata, and content designed to be discoverable by both traditional search engines and answer engines.
 ---
 
-Built the production Truss House site as a typed, content-driven Astro application with AI-native support around the workflow.
+Truss House is a client-facing housing platform rebuilt as a typed Astro website with Keystatic-managed content, crawlable HTML, and AI-assisted workflows. I built the production site end to end, focusing on fast static delivery, safer content operations, and search-friendly housing information.
 
 ## HTML-first site
 
 I rebuilt Truss House as a fast, static-first public surface: semantic pages, direct copy, and no decorative app shell getting between a visitor and the housing information they needed.
 
+The site uses Astro so public pages render as crawlable HTML by default. That made the core housing content easier for visitors, search engines, and answer engines to parse without depending on client-side application state.
+
 ## Typed content + CMS
 
 I kept the content model typed so missing fields, malformed links, and half-filled project data fail before they reach production.
+
+Keystatic gave the team a content workflow without turning the site into a fragile custom CMS. The important constraint was simple: content editors should be able to update the site, while TypeScript keeps the shape of project and page data predictable.
 
 ## Grounded RAG assistant
 
 I shaped the assistant around grounded retrieval instead of loose generation, so answers stayed tied to the organisation's own housing content and support workflow.
 
+For this project, the goal of retrieval-augmented generation was not to make the assistant sound creative. The goal was to keep answers anchored to source content that Truss House controlled.
+
 ## SEO/AEO + delivery
 
 I treated delivery as part of the product: crawlable HTML, per-page metadata, fast loads, and content that could be found by both search engines and answer engines.
 
+The implementation focused on the basics that matter for search visibility: semantic document structure, direct headings, readable page copy, stable URLs, and metadata generated from typed content.
+
 ## Outcome
 
 The result was a client-facing housing platform with a clearer public site, safer content operations, and AI-assisted workflows around the support journey.
+
+## FAQ
+
+### What did Yushi Cui build for Truss House?
+
+I built the production Truss House website as a typed, content-driven Astro application with semantic HTML, per-page metadata, fast static delivery, and AI-assisted workflows around housing content.
+
+### What technology stack did the Truss House project use?
+
+The project used Astro, TypeScript, Keystatic, and retrieval-augmented generation workflows to support a static-first public website and grounded AI assistance.
+
+### How was the Truss House site optimized for search and answer engines?
+
+The site was built with crawlable HTML, direct page copy, structured content, per-page metadata, and content designed to be discoverable by both traditional search engines and answer engines.

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { SITE_URL, buildHeadMetadata } from "../src/lib/metadata";
+import { SITE_URL, buildHeadMetadata, buildProjectJsonLd } from "../src/lib/metadata";
 
 function parseJsonLd(jsonLd: string | null) {
   if (jsonLd === null) {
@@ -33,6 +33,16 @@ describe("buildHeadMetadata", () => {
     expect(meta.og.url).toBe(SITE_URL + "/");
     expect(meta.og.type).toBe("website");
     expect(meta.og.description).toBe("Personal site for Yushi Cui.");
+  });
+
+  it("allows article Open Graph type for case-study pages", () => {
+    const meta = buildHeadMetadata({
+      slug: "/projects/truss-house",
+      title: "Truss House - Yushi Cui",
+      ogType: "article",
+    });
+
+    expect(meta.og.type).toBe("article");
   });
 
   it("includes Twitter card tags", () => {
@@ -70,6 +80,48 @@ describe("buildHeadMetadata", () => {
       title: "Truss House",
     });
     expect(meta.jsonLd).toBeNull();
+  });
+
+  it("adds WebSite and ProfilePage JSON-LD on the homepage", () => {
+    const meta = buildHeadMetadata({
+      slug: "/",
+      title: "Home",
+      description: "Yushi Cui is a full-stack product engineer in Auckland, NZ.",
+    });
+
+    const schemas = meta.additionalJsonLd.map((jsonLd) => JSON.parse(jsonLd));
+
+    expect(schemas).toHaveLength(2);
+    expect(schemas[0]["@type"]).toBe("WebSite");
+    expect(schemas[0].author["@id"]).toBe(`${SITE_URL}/#person`);
+    expect(schemas[1]["@type"]).toBe("ProfilePage");
+    expect(schemas[1].mainEntity["@id"]).toBe(`${SITE_URL}/#person`);
+  });
+
+  it("builds project CreativeWork and FAQPage JSON-LD", () => {
+    const ld = buildProjectJsonLd({
+      slug: "/projects/truss-house",
+      title: "Truss House",
+      description: "Typed content platform for housing information.",
+      role: "Full-stack engineer",
+      stack: ["Astro", "TypeScript", "RAG"],
+      year: 2026,
+      link: "https://www.trusshouse.org/",
+      faq: [
+        {
+          question: "What did Yushi Cui build for Truss House?",
+          answer: "Yushi Cui built a crawlable Astro website with typed content and AI-assisted workflows.",
+        },
+      ],
+    });
+
+    const graph = ld["@graph"] as Array<Record<string, any>>;
+    const creativeWork = graph.find((item) => item["@type"] === "CreativeWork");
+    const faq = graph.find((item) => item["@type"] === "FAQPage");
+
+    expect(creativeWork?.url).toBe(`${SITE_URL}/projects/truss-house`);
+    expect(creativeWork?.keywords).toContain("Full-stack engineer");
+    expect(faq?.mainEntity[0].name).toBe("What did Yushi Cui build for Truss House?");
   });
 
   it("fails if Person JSON-LD stops identifying Yushi Cui", () => {
